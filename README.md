@@ -1,118 +1,99 @@
-<h1 align="center">
-  <img alt="Fastfeet" title="Fastfeet" src=".github/logo.png" width="300px" />
-</h1>
-
-<h3 align="center">
-  Desafio 2: FastFeet, o início
-</h3>
-
-<h3 align="center">
-  :warning: Etapa 1/4 do Desafio Final :warning:
-</h3>
-
-<p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack, por isso é fundamental que ele seja feito com muito empenho!</p>
-
-<blockquote align="center">“Não espere para plantar, apenas tenha paciência para colher”!</blockquote>
-
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-02?color=%2304D361">
-
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361">
-  </a>
-
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
-
-  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-02/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat/bootcamp-gostack-desafio-02?style=social">
-  </a>
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
-</p>
+<h3 align="center">bootcamp-gostack-desafio-02</h3>
 
-## :rocket: Sobre o desafio
+<div align="center">
 
-A aplicação que iremos dar início ao desenvolvimento a partir de agora é um app para uma transportadora fictícia, o FastFeet.
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-Nesse primeiro desafio vamos criar algumas funcionalidades básicas que aprendemos ao longo das aulas até aqui. Esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**, então, bora pro código!
-
-### **Um pouco sobre as ferramentas**
-
-Você deverá criar a aplicação do zero utilizando o [Express](https://expressjs.com/), além de precisar configurar as seguintes ferramentas:
-
-- Sucrase + Nodemon;
-- ESLint + Prettier + EditorConfig;
-- Sequelize (Utilize PostgreSQL ou MySQL);
-
-### **Funcionalidades**
-
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação.
-
-### **1. Autenticação**
-
-Permita que um usuário se autentique em sua aplicação utilizando e-mail e uma senha.
-
-Crie um usuário administrador utilizando a funcionalidade de [seeds do sequelize](https://sequelize.org/master/manual/migrations.html#creating-first-seed), essa funcionalidade serve para criarmos registros na base de dados de forma automatizada.
-
-Para criar um seed utilize o comando:
-
-    yarn sequelize seed:generate --name admin-user
-
-No arquivo gerado na pasta `src/database/seeds` adicione o código referente à criação de um usuário administrador:
-
-    const bcrypt = require("bcryptjs");
-
-    module.exports = {
-      up: QueryInterface => {
-        return QueryInterface.bulkInsert(
-          "users",
-          [
-            {
-              name: "Distribuidora FastFeet",
-              email: "admin@fastfeet.com",
-              password_hash: bcrypt.hashSync("123456", 8),
-              created_at: new Date(),
-              updated_at: new Date()
-            }
-          ],
-          {}
-        );
-      },
-
-      down: () => {}
-    };
-
-Agora execute:
-
-    yarn sequelize db:seed:all
-
-Agora você tem um usuário na sua base de dados, utilize esse usuário para todos os logins que você fizer.
-
-- A autenticação deve ser feita utilizando JWT.
-- Realize a validação dos dados de entrada;
-
-### 2. Gestão de destinatários
-
-Você agora precisa permitir que destinatários sejam mantidos (cadastrados/atualizados) na aplicação, e esses devem ter o **nome** do destinatário e campos de endereço: **rua**, **número**, **complemento**, **estado**, **cidade** e **CEP**.
-
-Utilize uma nova tabela no banco de dados chamada `recipient` para guardar informações do destinatário.
-
-O cadastro de destinatários só pode ser feito por administradores autenticados na aplicação.
-
-O destinatário não pode se autenticar no sistema, ou seja, não possui senha.
-
-## 📅 Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+</div>
 
 ---
 
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+<p align="center"> Few lines describing your project.
+    <br>
+</p>
+
+## 📝 Table of Contents
+
+-   [About](#about)
+-   [Getting Started](#getting_started)
+-   [Deployment](#deployment)
+-   [Usage](#usage)
+-   [Built Using](#built_using)
+-   [TODO](../TODO.md)
+-   [Contributing](../CONTRIBUTING.md)
+-   [Authors](#authors)
+-   [Acknowledgments](#acknowledgement)
+
+## 🧐 About <a name = "about"></a>
+
+Write about 1-2 paragraphs describing the purpose of your project.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+Apenas `yarn install`para instalar todas as dependências do projeto assim que cloná-lo.
+
+Em seguida, você precisa usar o Docker para inicializar um container com postgres, da seguinte maneira:
+
+```
+docker run --name fastfeetDatabase -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+```
+
+Se você já fez esse container antes, você pode startar ele com `docker start fasfeetDatabase`
+
+OBS: Eu recomendo usar o postbird para visualizar o postgres, só precisa colocar o usuário como postgres e a senha que foi definida como docker no comando acima. Depois de conectado, crie uma database com o nome `fastfeet`
+
+O postbird não precisa ser usado para criar tabelas. Isso é lidado pela própria aplicação usando o sequelize.
+
+O arquivo .sequelizerc tem os caminhos de todos os diretórios importantes para o sequelize.
+
+Depois que você criar as tabelas com `yarn sequelize migration:create --name=create-recipient` você pode acrescentar elas to container com `yarn sequelize db:migrate`.
+Também é possível rermover migrations com `yarn db:migrate:undo:all`
+
+## 🔧 Debugging <a name = "debugging"></a>
+
+Existe arquivo de debug na pasta .vscode
+Para utulizar opção de debug, execute o comando:
+
+```
+yarn dev:debug
+```
+
+## 🎈 Usage <a name="usage"></a>
+
+Add notes about how to use the system.
+
+## 🚀 Deployment <a name = "deployment"></a>
+
+Add additional notes about how to deploy this on a live system.
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+-   [Sucrase](qqwe) - Builder de desenvolvimento
+-   [Postgres](https://www.postgresql.org) - Banco de dados
+-   [Express](https://expressjs.com/) - framework de servidor
+-   [NodeJs](https://nodejs.org/en/) - Ambiente de servidor
+-   [Nodemon](qeqwe) - Ambiente de servidor só que para desenvolvimento
+-   [Docker](a) - Cria containers para o backend.
+-   [Sequelize](b) - ORM para Nodejs.
+-   [Eslint](c) - define o padrão para código.
+-   [Prettier](d) - deixa o código mais bonitão.
+
+## ✍️ Authors <a name = "authors"></a>
+
+-   [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+
+See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+-   Hat tip to anyone whose code was used
+-   Inspiration
+-   References
