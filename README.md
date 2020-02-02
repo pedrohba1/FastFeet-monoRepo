@@ -57,6 +57,8 @@ O arquivo .sequelizerc tem os caminhos de todos os diretórios importantes para 
 Depois que você criar as tabelas com `yarn sequelize migration:create --name=create-recipient` você pode acrescentar elas to container com `yarn sequelize db:migrate`.
 Também é possível rermover migrations com `yarn db:migrate:undo:all`
 
+Depois de feitas as migrations, é preciso adicionar as seeds, com `yarn sequelize db:seed:all`
+
 ## 🔧 Debugging <a name = "debugging"></a>
 
 Existe arquivo de debug na pasta .vscode
