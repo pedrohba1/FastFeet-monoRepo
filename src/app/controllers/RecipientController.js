@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
-import axios from 'axios';
 
 class RecipientController {
     async store(req, res) {
         const schema = Yup.object().shape({
+            name: Yup.string().required(),
             address: Yup.string().required(),
             address_number: Yup.string().required(),
             address_complement: Yup.string(),
@@ -18,7 +18,14 @@ class RecipientController {
             });
         }
 
-        return res.json({ msg: 'deubom' });
+        const data = await Recipient.create(req.body);
+        return res.json(data);
+    }
+
+    async update(req, res) {
+        //fica pra depois como eu vou fazer a atualização desse campo
+
+        return res.json({ msg: 'teste' });
     }
 }
 
