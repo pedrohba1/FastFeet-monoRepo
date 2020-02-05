@@ -14,7 +14,7 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Essa aplicação é o trabalho final do curso goStack, ofertado pela RocketSeat.
     <br>
 </p>
 
