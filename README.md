@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="https://github.com/pedrohba1/bootcamp-gostack-desafio-02/blob/master/readme%20stuff/logo.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">bootcamp-gostack-desafio-02</h3>
