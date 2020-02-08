@@ -23,7 +23,7 @@ class RecipientController {
     }
 
     async update(req, res) {
-        //fica pra depois como eu vou fazer a atualização desse campo
+        // 'fica pra depois como eu vou fazer a atualização desse campo
 
         return res.json({ msg: 'teste' });
     }
