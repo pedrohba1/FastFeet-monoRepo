@@ -33,8 +33,7 @@ routes.delete('/couriers/:id', CourierController.destroy);
 routes.get('/couriers', CourierController.index);
 routes.put('/couriers/:id', CourierController.update);
 
-// a visualização de encomendas é feita separadamente pra cada um dos entregadores
-routes.get('/courier/:courierId/packages', PackageController.index);
+routes.get('/packages', PackageController.index);
 routes.post('/packages', PackageController.store);
 
 export default routes;
