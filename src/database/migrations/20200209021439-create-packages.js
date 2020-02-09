@@ -14,6 +14,8 @@ module.exports = {
                     model: 'recipients',
                     key: 'id',
                 },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
             },
             courier_id: {
                 type: Sequelize.INTEGER,
@@ -22,6 +24,8 @@ module.exports = {
                     model: 'couriers',
                     key: 'id',
                 },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
             },
             signature_id: {
                 type: Sequelize.INTEGER,
@@ -30,6 +34,8 @@ module.exports = {
                     model: 'files',
                     key: 'id',
                 },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
             },
             product: {
                 type: Sequelize.STRING,

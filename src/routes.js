@@ -35,5 +35,7 @@ routes.put('/couriers/:id', CourierController.update);
 
 routes.get('/packages', PackageController.index);
 routes.post('/packages', PackageController.store);
+routes.put('/packages/:id', PackageController.update);
+routes.delete('/packages/:id', PackageController.destroy);
 
 export default routes;
