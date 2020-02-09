@@ -26,6 +26,8 @@ routes.put('/recipients', RecipientController.update);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/couriers', Courier.store);
+routes.delete('/couriers/:id', Courier.destroy);
 routes.get('/couriers', Courier.index);
+routes.put('/couriers/:id', Courier.update);
 
 export default routes;

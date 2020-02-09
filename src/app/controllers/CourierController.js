@@ -60,7 +60,49 @@ class CourierController {
     }
 
     async update(req, res) {
-        res.json();
+        const schema = Yup.object().shape({
+            name: Yup.string(),
+            avatar_id: Yup.number()
+                .positive()
+                .integer(),
+            email: Yup.string().email(),
+        });
+
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({
+                error: 'invalid json',
+            });
+        }
+
+        const pk = req.params.id;
+
+        const courier = await Courier.findByPk(pk);
+        if (!courier) {
+            return res.status(400).json({ error: 'courier does not exist' });
+        }
+
+        const avatarExists = await File.findByPk(req.body.avatar_id);
+
+        if (!avatarExists) {
+            return res.status(400).json({ error: 'avatar does not exist' });
+        }
+
+        const { id, name, avatar_id, email } = await courier.update(req.body);
+
+        return res.json({ id, name, avatar_id, email });
+    }
+
+    async destroy(req, res) {
+        const pk = req.params.id;
+
+        const courierExists = await Courier.findByPk(pk);
+
+        if (!courierExists) {
+            return res.status(400).json({ error: 'courier does not exist' });
+        }
+
+        const courierDestroyed = await Courier.destroy({ where: { id: pk } });
+        return res.json(courierDestroyed);
     }
 }
 
