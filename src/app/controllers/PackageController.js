@@ -3,6 +3,7 @@ import Package from '../models/Package';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
 import File from '../models/File';
+import Mail from '../../lib/Mail';
 
 class PackageController {
     async index(req, res) {
@@ -70,17 +71,34 @@ class PackageController {
             });
         }
 
-        const courierExists = await Courier.findByPk(req.body.courier_id);
-        if (!courierExists) {
+        const courier = await Courier.findByPk(req.body.courier_id);
+        if (!courier) {
             return res.status(400).json({ error: 'courier does no exist' });
         }
 
-        const recipientExists = await Recipient.findByPk(req.body.recipient_id);
-        if (!recipientExists) {
+        const recipient = await Recipient.findByPk(req.body.recipient_id);
+        if (!recipient) {
             return res.status(400).json({ error: 'recipient does no exist' });
         }
 
         const delivery = await Package.create(req.body);
+
+        // envia um email para o entregador responsável.
+
+        await Mail.sendMail({
+            to: `${courier.name} <${courier.email}>`,
+            subject: 'Você tem uma nova encomenda',
+            template: 'newPackage',
+            context: {
+                dest: recipient.name,
+                address: recipient.address,
+                address_number: recipient.address_number,
+                address_complement: recipient.address_complement,
+                city: recipient.city,
+                state: recipient.state,
+                cep: recipient.cep,
+            },
+        });
 
         return res.json(delivery);
     }
