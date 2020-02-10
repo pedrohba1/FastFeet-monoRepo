@@ -3,7 +3,8 @@ import Package from '../models/Package';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
 import File from '../models/File';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import newPackageMail from '../jobs/NewPackageMail';
 
 class PackageController {
     async index(req, res) {
@@ -85,19 +86,24 @@ class PackageController {
 
         // envia um email para o entregador responsável.
 
-        await Mail.sendMail({
-            to: `${courier.name} <${courier.email}>`,
-            subject: 'Você tem uma nova encomenda',
-            template: 'newPackage',
-            context: {
-                dest: recipient.name,
-                address: recipient.address,
-                address_number: recipient.address_number,
-                address_complement: recipient.address_complement,
-                city: recipient.city,
-                state: recipient.state,
-                cep: recipient.cep,
-            },
+        // await Mail.sendMail({
+        //     to: `${courier.name} <${courier.email}>`,
+        //     subject: 'Você tem uma nova encomenda',
+        //     template: 'newPackage',
+        //     context: {
+        //         dest: recipient.name,
+        //         address: recipient.address,
+        //         address_number: recipient.address_number,
+        //         address_complement: recipient.address_complement,
+        //         city: recipient.city,
+        //         state: recipient.state,
+        //         cep: recipient.cep,
+        //     },
+        // });
+
+        await Queue.add(newPackageMail.key, {
+            courier,
+            recipient,
         });
 
         return res.json(delivery);
