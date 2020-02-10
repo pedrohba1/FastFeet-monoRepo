@@ -2,6 +2,7 @@
 import * as Yup from 'yup';
 import Courier from '../models/Courier';
 import File from '../models/File';
+import Package from '../models/Package';
 
 class CourierController {
     async index(req, res) {
@@ -22,6 +23,20 @@ class CourierController {
         });
 
         return res.json(couriers);
+    }
+
+    async indexPackages(req, res) {
+        const { id } = req.params;
+
+        const packages = await Package.findAll({
+            where: {
+                courier_id: id,
+                end_date: null,
+                canceled_at: null,
+            },
+        });
+
+        return res.json(packages);
     }
 
     async store(req, res) {
