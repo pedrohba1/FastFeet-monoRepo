@@ -1,5 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+
 import Courier from '../models/Courier';
 import File from '../models/File';
 import Package from '../models/Package';
@@ -25,7 +27,7 @@ class CourierController {
         return res.json(couriers);
     }
 
-    async indexPackages(req, res) {
+    async listPackages(req, res) {
         const { id } = req.params;
 
         const packages = await Package.findAll({
@@ -33,6 +35,19 @@ class CourierController {
                 courier_id: id,
                 end_date: null,
                 canceled_at: null,
+            },
+        });
+
+        return res.json(packages);
+    }
+
+    async deliveredPackages(req, res) {
+        const { id } = req.params;
+
+        const packages = await Package.findAll({
+            where: {
+                courier_id: id,
+                end_date: { [Op.ne]: null },
             },
         });
 

@@ -6,10 +6,13 @@ import UserController from './app/controllers/UserController';
 import RecipientController from './app/controllers/RecipientController';
 import CepController from './app/controllers/CepController';
 import SessionController from './app/controllers/SessionController';
-import authMiddleware from './app/middlewares/auth';
 import FileController from './app/controllers/FileController';
 import CourierController from './app/controllers/CourierController';
 import PackageController from './app/controllers/PackageController';
+import DeliveryController from './app/controllers/DeliveryController';
+
+import courierExists from './app/middlewares/courierExists';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -20,7 +23,22 @@ routes.put('/users', UserController.update);
 routes.get('/cep', CepController.show);
 
 routes.post('/sessions', SessionController.store);
-routes.get('/courier/:id/packages', CourierController.indexPackages);
+
+// precisa de um middleware pra ver se o id do Courier existe
+// e então parar de usar ele antes do authMiddleware
+
+routes.get(
+    '/courier/:id/delivered',
+    courierExists,
+    CourierController.deliveredPackages
+);
+routes.get(
+    '/courier/:id/packages',
+    courierExists,
+    CourierController.listPackages
+);
+routes.post('/courier/take', courierExists, DeliveryController.addStart);
+routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
 
 routes.use(authMiddleware);
 
