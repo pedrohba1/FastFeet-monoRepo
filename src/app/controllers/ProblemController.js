@@ -10,6 +10,9 @@ class ProblemController {
             });
         }
 
+        if (await DeliveryProblem.findOne({ where: { package_id } })) {
+            return res.json({ error: 'this package already has a problem' });
+        }
         const problem = await DeliveryProblem.create({
             package_id,
             description,
@@ -19,34 +22,40 @@ class ProblemController {
     }
 
     async destroy(req, res) {
-        return res.json();
+        //TODO: recebe um delivery problem nos params
+        // e marca como canceled_at o package que teve problema
+        const { delivery_problem_id } = req.params;
+
+        const problem = await DeliveryProblem.findByPk(delivery_problem_id);
+
+        if (!problem) {
+            return res.json({ error: 'package does not have a problem' });
+        }
+
+        const { package_id } = problem;
+        const delivery = await Package.findByPk(package_id);
+        await delivery.update({ canceled_at: new Date() });
+
+        return res.json(delivery);
     }
 
     async index(req, res) {
-        const { packageId } = req.params;
-
-        const delivery = await Package.findByPk(packageId);
-        if (!delivery) {
-            return res.json({ error: 'package does not exist' });
-        }
-
-        const problem = await DeliveryProblem.findOne({
-            where: {
-                package_id: packageId,
-            },
-        });
-
-        if (!problem) {
-            return res.json({
-                error: `no problems with package from id = ${packageId}`,
-            });
-        }
-
-        return res.json(problem);
+        const problems = await DeliveryProblem.findAll();
+        return res.json(problems);
     }
 
     async show(req, res) {
-        return res.json();
+        const { package_id } = req.params;
+
+        const problem = await DeliveryProblem.findOne({
+            where: { package_id },
+        });
+
+        if (!problem) {
+            return res.json({ error: 'package does not have a problem' });
+        }
+
+        return res.json(problem);
     }
 }
 

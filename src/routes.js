@@ -33,8 +33,13 @@ routes.get('/courier/:id/packages', CourierController.listPackages);
 routes.post('/courier/take', courierExists, DeliveryController.addStart);
 routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
 
-routes.get('/delivery/:packageId/problems', ProblemController.index);
+routes.get('/delivery/:package_id/problems', ProblemController.show);
+routes.get('/delivery/problems', ProblemController.index);
 routes.post('/delivery/problems', ProblemController.store);
+routes.delete(
+    '/problem/:delivery_problem_id/cancel-delivery',
+    ProblemController.destroy
+);
 
 routes.use(authMiddleware);
 

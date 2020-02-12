@@ -10,6 +10,7 @@ module.exports = {
             package_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                unique: true,
                 references: {
                     model: 'packages',
                     key: 'id',
