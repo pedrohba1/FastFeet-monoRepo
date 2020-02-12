@@ -30,6 +30,12 @@ class CourierController {
     async listPackages(req, res) {
         const { id } = req.params;
 
+        if (!(await Courier.findByPk(id))) {
+            return res.status(400).json({
+                error: 'courier does not exist',
+            });
+        }
+
         const packages = await Package.findAll({
             where: {
                 courier_id: id,
@@ -43,6 +49,11 @@ class CourierController {
 
     async deliveredPackages(req, res) {
         const { id } = req.params;
+        if (!(await Courier.findByPk(id))) {
+            return res.status(400).json({
+                error: 'courier does not exist',
+            });
+        }
 
         const packages = await Package.findAll({
             where: {

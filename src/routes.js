@@ -27,16 +27,8 @@ routes.post('/sessions', SessionController.store);
 // precisa de um middleware pra ver se o id do Courier existe
 // e então parar de usar ele antes do authMiddleware
 
-routes.get(
-    '/courier/:id/delivered',
-    courierExists,
-    CourierController.deliveredPackages
-);
-routes.get(
-    '/courier/:id/packages',
-    courierExists,
-    CourierController.listPackages
-);
+routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
+routes.get('/courier/:id/packages', CourierController.listPackages);
 routes.post('/courier/take', courierExists, DeliveryController.addStart);
 routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
 
