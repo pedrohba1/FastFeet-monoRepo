@@ -10,6 +10,7 @@ import FileController from './app/controllers/FileController';
 import CourierController from './app/controllers/CourierController';
 import PackageController from './app/controllers/PackageController';
 import DeliveryController from './app/controllers/DeliveryController';
+import ProblemController from './app/controllers/ProblemController';
 
 import courierExists from './app/middlewares/courierExists';
 import authMiddleware from './app/middlewares/auth';
@@ -31,6 +32,9 @@ routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
 routes.get('/courier/:id/packages', CourierController.listPackages);
 routes.post('/courier/take', courierExists, DeliveryController.addStart);
 routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
+
+routes.get('/delivery/:courierId/problems', ProblemController.index);
+routes.post('/delivery/problems', ProblemController.store);
 
 routes.use(authMiddleware);
 
