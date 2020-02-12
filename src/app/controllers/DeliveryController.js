@@ -60,7 +60,22 @@ class DeliveryController {
     }
 
     async addEnd(req, res) {
-        return res.json();
+        const { package_id, courier_id } = req.body;
+        const delivery = await Package.findByPk(package_id);
+
+        if (delivery.courier_id !== courier_id) {
+            return res.json({
+                error: `this package doesn't belong to this courier`,
+            });
+        }
+        if (delivery.end_date !== null) {
+            return res.json({
+                error: 'this package has already been delivered',
+            });
+        }
+
+        await delivery.update({ end_date: new Date() });
+        return res.json(delivery);
     }
 }
 
