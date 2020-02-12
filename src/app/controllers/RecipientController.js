@@ -18,12 +18,20 @@ class RecipientController {
             });
         }
 
-        const data = await Recipient.create(req.body);
-        return res.json(data);
+        const recipient = await Recipient.create(req.body);
+        return res.json(recipient);
     }
 
     async update(req, res) {
-        // 'fica pra depois como eu vou fazer a atualização desse campo
+        const schema = Yup.object().shape({
+            name: Yup.string(),
+            address: Yup.string(),
+            address_number: Yup.string(),
+            address_complement: Yup.string(),
+            state: Yup.string(),
+            city: Yup.string(),
+            cep: Yup.string(),
+        });
 
         return res.json({ msg: 'teste' });
     }

@@ -1,4 +1,4 @@
-import DeliveryProblem from '../models/DeliveryProblem.js';
+import DeliveryProblem from '../models/DeliveryProblem';
 import Package from '../models/Package';
 
 class ProblemController {
@@ -22,8 +22,6 @@ class ProblemController {
     }
 
     async destroy(req, res) {
-        //TODO: recebe um delivery problem nos params
-        // e marca como canceled_at o package que teve problema
         const { delivery_problem_id } = req.params;
 
         const problem = await DeliveryProblem.findByPk(delivery_problem_id);
