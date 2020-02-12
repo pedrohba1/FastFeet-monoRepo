@@ -1,4 +1,3 @@
-import Courier from '../models/Courier';
 import DeliveryProblem from '../models/DeliveryProblem.js';
 import Package from '../models/Package';
 
@@ -24,7 +23,26 @@ class ProblemController {
     }
 
     async index(req, res) {
-        return res.json();
+        const { packageId } = req.params;
+
+        const delivery = await Package.findByPk(packageId);
+        if (!delivery) {
+            return res.json({ error: 'package does not exist' });
+        }
+
+        const problem = await DeliveryProblem.findOne({
+            where: {
+                package_id: packageId,
+            },
+        });
+
+        if (!problem) {
+            return res.json({
+                error: `no problems with package from id = ${packageId}`,
+            });
+        }
+
+        return res.json(problem);
     }
 
     async show(req, res) {

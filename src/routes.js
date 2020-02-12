@@ -33,7 +33,7 @@ routes.get('/courier/:id/packages', CourierController.listPackages);
 routes.post('/courier/take', courierExists, DeliveryController.addStart);
 routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
 
-routes.get('/delivery/:courierId/problems', ProblemController.index);
+routes.get('/delivery/:packageId/problems', ProblemController.index);
 routes.post('/delivery/problems', ProblemController.store);
 
 routes.use(authMiddleware);
