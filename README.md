@@ -42,16 +42,14 @@ Em seguida, você precisa usar o Docker para inicializar um container com postgr
 
 ```
 #postgres
-docker run --name fastFeetDatabase -e  POSTGRES_USER=fastfeet  -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres 
+docker run --name fastFeetDatabase -e  POSTGRES_USER=fastFeet -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
 #mongo
 docker run --name fastFeetMongo -p 27017:27017 -d -t mongo
+#redis
+docker run --name redisFastFeet -p 6379:6379 -d -t redis:alpine
 ```
 
-No windows o IP não vai para o localhost no docker, e não vai dar para conectar no postbird então pode ser necessário fazer algo assim:
-```
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
-```
-e esse comando vai retornar o IP para você passar no postbird (no meu era 172.17.0.2)
+Veja que no windows eu tive que mudar a porta de listening para 5433.
 
 Se você já fez esse container antes, você pode startar ele com `docker start fastFeetDatabase`
 
@@ -77,7 +75,7 @@ yarn dev:debug
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+O Redis é utilizado para o enviar emails de deleção pelo mailtrap.io.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
