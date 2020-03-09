@@ -19,6 +19,9 @@ class App {
     routes() {
         this.server.use(routes);
     }
+
+    //TODO: Configurar o Sentry da aula de exception handlers.
+
 }
 
 export default new App().server;

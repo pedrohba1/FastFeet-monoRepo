@@ -38,13 +38,22 @@ Write about 1-2 paragraphs describing the purpose of your project.
 
 Apenas `yarn install`para instalar todas as dependências do projeto assim que cloná-lo.
 
-Em seguida, você precisa usar o Docker para inicializar um container com postgres, da seguinte maneira:
+Em seguida, você precisa usar o Docker para inicializar um container com postgres e um com mongo, da seguinte maneira:
 
 ```
-docker run --name fastfeetDatabase -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+#postgres
+docker run --name fastFeetDatabase -e  POSTGRES_USER=fastfeet  -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres 
+#mongo
+docker run --name fastFeetMongo -p 27017:27017 -d -t mongo
 ```
 
-Se você já fez esse container antes, você pode startar ele com `docker start fasfeetDatabase`
+No windows o IP não vai para o localhost no docker, e não vai dar para conectar no postbird então pode ser necessário fazer algo assim:
+```
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+```
+e esse comando vai retornar o IP para você passar no postbird (no meu era 172.17.0.2)
+
+Se você já fez esse container antes, você pode startar ele com `docker start fastFeetDatabase`
 
 OBS: Eu recomendo usar o postbird para visualizar o postgres, só precisa colocar o usuário como postgres e a senha que foi definida como docker no comando acima. Depois de conectado, crie uma database com o nome `fastfeet`
 
