@@ -42,11 +42,11 @@ Em seguida, você precisa usar o Docker para inicializar um container com postgr
 
 ```
 #postgres
-docker run --name fastFeetDatabase -e  POSTGRES_USER=fastFeet -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
+docker run --name fastFeetPostgres -e  POSTGRES_USER=fastFeet -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
 #mongo
 docker run --name fastFeetMongo -p 27017:27017 -d -t mongo
 #redis
-docker run --name redisFastFeet -p 6379:6379 -d -t redis:alpine
+docker run --name fastFeetRedis -p 6379:6379 -d -t redis:alpine
 ```
 
 Veja que no windows eu tive que mudar a porta de listening para 5433.
