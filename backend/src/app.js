@@ -29,8 +29,6 @@ class App {
         this.server.use(Sentry.Handlers.errorHandler());
     }
 
-    // TODO: Configurar o Sentry da aula de exception handlers.
-
     exceptionHandler() {
         this.server.use(async (err, req, res, next) => {
             const errors = await new Youch(err, req).toJSON();

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Package from '../models/Package';
 import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
@@ -7,11 +8,21 @@ import Queue from '../../lib/Queue';
 import newPackageMail from '../jobs/NewPackageMail';
 
 class PackageController {
+    // Tem que colocar aqui no package controller um
+    // query param para pegar só os packages que foram entregues
     async index(req, res) {
-        const { page = 1 } = req.query;
+        const {
+            page = 1,
+            product = null,
+            courier_name = null,
+            recipient_name = null,
+        } = req.query;
 
         const packages = await Package.findAll({
-            where: { canceled_at: null },
+            where: {
+                canceled_at: null,
+                product: { [Op.like]: `%${product}` },
+            },
             order: ['start_date'],
             limit: 20,
             offset: (page - 1) * 20,
@@ -28,6 +39,9 @@ class PackageController {
                             attributes: ['id', 'url', 'path'],
                         },
                     ],
+                    where: {
+                        name: { [Op.like]: `%${courier_name}` },
+                    },
                 },
                 {
                     model: File,
@@ -46,6 +60,9 @@ class PackageController {
                         'city',
                         'cep',
                     ],
+                    where: {
+                        name: { [Op.like]: `%${recipient_name}%` },
+                    },
                 },
             ],
         });

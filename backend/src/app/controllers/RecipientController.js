@@ -23,6 +23,7 @@ class RecipientController {
     }
 
     async update(req, res) {
+        // TODO Você precisa terminar o update de recipient
         const schema = Yup.object().shape({
             name: Yup.string(),
             address: Yup.string(),

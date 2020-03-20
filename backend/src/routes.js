@@ -27,15 +27,18 @@ routes.post('/sessions', SessionController.store);
 
 // precisa de um middleware pra ver se o id do Courier existe
 // e então parar de usar ele antes do authMiddleware
-
+/* TODO: posteriormente, remover essas rotas que não fazem sentido e suas
+         funcionalidades vão ser incluídas no packageController.index
 routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
-routes.get('/courier/:id/packages', CourierController.listPackages);
+routes.get('/courier/:id/packages', CourierController.listPackages); */
 routes.post('/courier/take', courierExists, DeliveryController.addStart);
 routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
 
 routes.get('/delivery/:package_id/problems', ProblemController.show);
 routes.get('/delivery/problems', ProblemController.index);
 routes.post('/delivery/problems', ProblemController.store);
+
+// TODO: essa rota aqui também poderia ser mais curta, removendo esse cancel-delivery do link
 routes.delete(
     '/problem/:delivery_problem_id/cancel-delivery',
     ProblemController.destroy

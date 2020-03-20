@@ -27,7 +27,10 @@ class CourierController {
         return res.json(couriers);
     }
 
-    async listPackages(req, res) {
+    // TODO: essas duas rotas podem ser convertidas em um simples index no packageController,
+    // passando no req.query e algum parametro para checar se end_date não é nula
+
+    /*  async listPackages(req, res) {
         const { id } = req.params;
 
         if (!(await Courier.findByPk(id))) {
@@ -64,7 +67,7 @@ class CourierController {
 
         return res.json(packages);
     }
-
+ */
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
