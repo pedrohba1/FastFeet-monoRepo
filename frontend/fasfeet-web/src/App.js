@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router } from 'react-router-dom';
+import history from './services/history';
+
+import Routes from './routes';
 
 function App() {
     return (
-        <div className="App">
-            <h1> aaaa</h1>
-        </div>
+        <Router history={history}>
+            <Routes />
+        </Router>
     );
 }
 
