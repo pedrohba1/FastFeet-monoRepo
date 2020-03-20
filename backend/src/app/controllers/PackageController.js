@@ -84,23 +84,7 @@ class PackageController {
 
         const delivery = await Package.create(req.body);
 
-        // envia um email para o entregador responsável.
-
-        // await Mail.sendMail({
-        //     to: `${courier.name} <${courier.email}>`,
-        //     subject: 'Você tem uma nova encomenda',
-        //     template: 'newPackage',
-        //     context: {
-        //         dest: recipient.name,
-        //         address: recipient.address,
-        //         address_number: recipient.address_number,
-        //         address_complement: recipient.address_complement,
-        //         city: recipient.city,
-        //         state: recipient.state,
-        //         cep: recipient.cep,
-        //     },
-        // });
-
+        // usa a Queue pra enviar os emails para o entregador:
         await Queue.add(newPackageMail.key, {
             courier,
             recipient,
