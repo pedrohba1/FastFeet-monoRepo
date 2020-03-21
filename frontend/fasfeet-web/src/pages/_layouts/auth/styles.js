@@ -25,13 +25,14 @@ export const Content = styled.div`
     h4 {
         color: #444;
         align-self: flex-start;
+        font-size: 15px;
         margin: 0 0 10px;
         margin-top: 10px;
         font-weight: bold;
     }
 
     span {
-        color: #fb6f91;
+        color: #d8343f;
         align-self: flex-start;
         margin: 0 0 10px;
         font-weight: bold;
@@ -57,7 +58,7 @@ export const Content = styled.div`
     }
 
     button {
-        margin-top: 20px;
+        margin-top: 10px;
         height: 44px;
         background: #7d40e7;
         font-weight: bold;
