@@ -8,9 +8,12 @@ import Package from '../models/Package';
 
 class CourierController {
     async index(req, res) {
-        const { page = 1 } = req.query;
+        const { page = 1, name = '' } = req.query;
 
         const couriers = await Courier.findAll({
+            where: {
+                name: { [Op.like]: `${name}%` },
+            },
             order: ['name'],
             limit: 20,
             offset: (page - 1) * 20,
