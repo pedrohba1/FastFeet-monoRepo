@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
 import logo from '~/assets/fastfeet-logo@2x.png';
@@ -15,6 +15,7 @@ const schema = Yup.object().shape({
 
 export default function SignIn() {
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.auth.loading);
 
     function handleSubmit({ email, password }) {
         dispatch(signInRequest(email, password));
@@ -36,9 +37,7 @@ export default function SignIn() {
                 />
 
                 <button type="submit">
-                    {/*                     {loading ? 'Carregando...' : 'Acessar'}
-                     */}
-                    Entrar no sistema
+                    {loading ? 'Carregando...' : 'Entrar no sistema'}
                 </button>
             </Form>
         </>
