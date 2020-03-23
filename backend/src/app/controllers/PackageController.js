@@ -13,9 +13,9 @@ class PackageController {
     async index(req, res) {
         const {
             page = 1,
-            product = null,
-            courier_name = null,
-            recipient_name = null,
+            product = '',
+            courier_name = '',
+            recipient_name = '',
         } = req.query;
 
         const packages = await Package.findAll({
