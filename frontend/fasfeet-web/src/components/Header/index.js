@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Container, Content, Option, Right, Left, Logout } from './styles';
 import logo from '~/assets/fastfeet-logo.png';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 export default function Header() {
     const [tab, setTab] = useState('couriers');
+    const dispatch = useDispatch();
 
     function handleTabChange(newTab) {
         switch (newTab) {
@@ -23,6 +27,10 @@ export default function Header() {
             default:
                 break;
         }
+    }
+
+    function handleSignOut() {
+        dispatch(signOut());
     }
 
     return (
@@ -61,7 +69,7 @@ export default function Header() {
                 </Left>
                 <Right>
                     <strong>Admin fastFeet</strong>
-                    <Logout>Sair do sistema</Logout>
+                    <Logout onClick={handleSignOut}>Sair do sistema</Logout>
                 </Right>
             </Content>
         </Container>
