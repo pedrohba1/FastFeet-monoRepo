@@ -4,13 +4,17 @@ import { Container, Content, Option, Right, Left, Logout } from './styles';
 import logo from '~/assets/fastfeet-logo.png';
 
 export default function Header() {
+    function handleNavigation() {
+        console.log('navegando');
+    }
+
     return (
         <Container>
             <Content>
                 <Left>
                     <img src={logo} alt="fastFeet" />
 
-                    <Option>
+                    <Option onClick={handleNavigation}>
                         <strong>ENCOMENDAS</strong>
                     </Option>
                     <Option>
