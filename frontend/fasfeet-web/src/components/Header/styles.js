@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
     background-color: #ffffff;
@@ -30,6 +31,12 @@ export const Option = styled.div`
         padding-left: 5px;
     }
 
+    &:hover {
+        color: ${darken(1, '#444444')};
+
+        cursor: pointer;
+    }
+
     display: flex;
     color: #444444;
     margin: 10px;
@@ -38,6 +45,10 @@ export const Option = styled.div`
 export const Right = styled.div`
     strong:first-of-type {
         color: #666666;
+    }
+    strong:first-of-type:hover {
+        cursor: pointer;
+        color: ${darken(0.6, '#666666')};
     }
 
     strong {
@@ -51,4 +62,9 @@ export const Right = styled.div`
 
 export const Logout = styled.strong`
     color: #de3b3b;
+
+    &:hover {
+        cursor: pointer;
+        color: ${darken(0.1, '#de3b3b')};
+    }
 `;
