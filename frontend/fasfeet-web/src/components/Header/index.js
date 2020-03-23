@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
 import { Container, Content, Option, Right, Left, Logout } from './styles';
 import logo from '~/assets/fastfeet-logo.png';
 
 export default function Header() {
-    function handleNavigation() {
-        console.log('navegando');
+    const [tab, setTab] = useState('couriers');
+
+    function handleTabChange(newTab) {
+        switch (newTab) {
+            case 'couriers':
+                setTab('couriers');
+                break;
+            case 'packages':
+                setTab('packages');
+                break;
+            case 'recipients':
+                setTab('recipients');
+                break;
+            case 'problems':
+                setTab('problems');
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -14,17 +30,32 @@ export default function Header() {
             <Content>
                 <Left>
                     <img src={logo} alt="fastFeet" />
-
-                    <Option to="/packages" onClick={handleNavigation}>
+                    <Option
+                        onClick={() => handleTabChange('packages')}
+                        to="/packages"
+                        isSelected={tab === 'packages'}
+                    >
                         <strong>ENCOMENDAS</strong>
                     </Option>
-                    <Option to="/couriers">
+                    <Option
+                        onClick={() => handleTabChange('couriers')}
+                        to="/couriers"
+                        isSelected={tab === 'couriers'}
+                    >
                         <strong>ENTREGADORES</strong>
                     </Option>
-                    <Option to="/recipients">
+                    <Option
+                        onClick={() => handleTabChange('recipients')}
+                        to="/recipients"
+                        isSelected={tab === 'recipients'}
+                    >
                         <strong>DESTINATÁRIOS</strong>
                     </Option>
-                    <Option to="/problems">
+                    <Option
+                        onClick={() => handleTabChange('problems')}
+                        to="/problems"
+                        isSelected={tab === 'problems'}
+                    >
                         <strong>PROBLEMAS</strong>
                     </Option>
                 </Left>

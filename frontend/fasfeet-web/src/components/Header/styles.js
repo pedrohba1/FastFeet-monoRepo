@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
     img {
-        width: 200px;
+        width: 250px;
         height: auto;
         padding-right: 15px;
         border-right: 1px solid #dddddd;
@@ -27,7 +27,12 @@ export const Left = styled.div`
     display: flex;
 `;
 
-export const Option = styled(Link)`
+export const Option = styled(Link).attrs({})`
+    strong {
+        border-bottom: ${props =>
+            props.isSelected ? '2px solid #444444' : 'none'};
+    }
+
     font-size: 20px;
     border: 0;
     background: none;
