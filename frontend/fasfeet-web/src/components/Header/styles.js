@@ -1,0 +1,54 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+    background-color: #ffffff;
+    padding: 0 30px;
+`;
+
+export const Content = styled.div`
+    img {
+        width: 200px;
+        height: auto;
+        padding-right: 15px;
+        border-right: 1px solid #dddddd;
+    }
+
+    justify-content: space-between;
+    height: 64px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export const Left = styled.div`
+    display: flex;
+`;
+
+export const Option = styled.div`
+    &:first-of-type {
+        padding-left: 5px;
+    }
+
+    display: flex;
+    color: #444444;
+    margin: 10px;
+`;
+
+export const Right = styled.div`
+    strong:first-of-type {
+        color: #666666;
+    }
+
+    strong {
+        padding: 5px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+export const Logout = styled.strong`
+    color: #de3b3b;
+`;
