@@ -4,6 +4,7 @@ import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import 'express-async-errors';
 import cors from 'cors';
+import path from 'path';
 import routes from './routes';
 
 import sentryConfig from './config/sentry';
@@ -23,6 +24,10 @@ class App {
         // TODO: no momento do deploy, é importante mudar isso para aceitar só
         // o ednereço da aplicação
         this.server.use(cors());
+        this.server.use(
+            '/files',
+            express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+        );
         this.server.use(Sentry.Handlers.requestHandler());
         this.server.use(express.json());
     }
