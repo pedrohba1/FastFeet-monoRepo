@@ -7,6 +7,7 @@ import './config/ReactotronConfig';
 import { ToastContainer } from 'react-toastify';
 import history from './services/history';
 import GlobalStyle from './styles/global';
+import 'semantic-ui-css/semantic.min.css';
 import Routes from './routes';
 import { store, persistor } from './store';
 

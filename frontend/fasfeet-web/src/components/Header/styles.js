@@ -30,7 +30,8 @@ export const Left = styled.div`
 export const Option = styled(Link).attrs({})`
     strong {
         border-bottom: ${props =>
-            props.isSelected ? '2px solid #444444' : 'none'};
+            props.isSelected ? `2px solid ${darken(1, '#444444')}` : 'none'};
+        color: ${props => props.isSelected && darken(1, '#444444')};
     }
 
     font-size: 20px;

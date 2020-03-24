@@ -32,7 +32,8 @@ module.exports = {
         {extensions: ['.jsx', '.js']}
     ],
     'import/prefer-default-export': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'no-param-reassign':'off'
 },
 settings:{
     'import/resolver':{
