@@ -35,6 +35,7 @@ export const List = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-row-gap: 20px;
+    margin-bottom: 150px;
 `;
 
 export const ListHeader = styled.div`
@@ -59,6 +60,7 @@ export const ListMain = styled.main`
     background: #ffffff;
     height: 57px;
     display: flex;
+
     span {
         display: flex;
         align-self: center;
@@ -96,6 +98,7 @@ export const RegisterButton = styled.button`
     &:hover {
         background: ${darken(0.1, '#7d40e7')};
     }
+
     color: #ffffff;
     background: #7d40e7;
     border: 0;
@@ -132,9 +135,7 @@ export const DefaultPic = styled.div`
     background: #f4effc;
     align-self: center;
     justify-content: center;
-    font-weight: bold;
     span {
         color: ${props => props.color};
-        text-transform: uppercase;
     }
 `;

@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import {
     Title,
     Search,
@@ -9,8 +8,6 @@ import {
     Buttons,
     RegisterButton,
     SearchIcon,
-    ActionButton,
-    ActionIcon,
     ListActions,
     Picture,
     DefaultPic,
@@ -19,6 +16,7 @@ import {
 
 import getInitials from '~/utils/getInitials';
 import api from '~/services/api';
+import DropdownMenu from '~/components/DropdownMenu';
 
 export default function Couriers() {
     const [couriers, setCouriers] = useState([]);
@@ -116,9 +114,7 @@ export default function Couriers() {
                             <span>{courier.email}</span>
                         </ListMain>
                         <ListActions>
-                            <ActionButton>
-                                <ActionIcon />
-                            </ActionButton>
+                            <DropdownMenu />
                         </ListActions>
                     </>
                 ))}
