@@ -6,21 +6,16 @@ import {
     RegisterButton,
     SearchIcon,
     Search,
-} from '~/styles/default';
-
-import {
-    List,
     ListHeader,
     ListMain,
     ListActions,
-    Picture,
-    DefaultPic,
-    colors,
-} from './styles';
+} from '~/styles/default';
 
-import getInitials from '~/utils/getInitials';
+import { List } from './styles';
+
 import api from '~/services/api';
 import DropdownMenu from '~/components/DropdownMenu';
+import Picture from '~/components/Picture';
 
 export default function Couriers() {
     const [couriers, setCouriers] = useState([]);
@@ -37,10 +32,10 @@ export default function Couriers() {
             },
         });
 
-        response.data.map(
-            // eslint-disable-next-line no-return-assign
-            courier => courier.id < 10 && (courier.id = `0${courier.id}`)
-        );
+        response.data.map(courier => {
+            courier.id = courier.id < 10 ? `0${courier.id}` : courier.id;
+            return courier;
+        });
         setCouriers(response.data);
         setLoading(false);
     }
@@ -95,24 +90,10 @@ export default function Couriers() {
                             <span>#{courier.id}</span>
                         </ListMain>
                         <ListMain>
-                            <span>
-                                {courier.avatar !== null ? (
-                                    <Picture src={courier.avatar.url} />
-                                ) : (
-                                    <DefaultPic
-                                        color={
-                                            colors[
-                                                Math.floor(
-                                                    Math.random() *
-                                                        colors.length
-                                                )
-                                            ]
-                                        }
-                                    >
-                                        <span>{getInitials(courier.name)}</span>
-                                    </DefaultPic>
-                                )}
-                            </span>
+                            <Picture
+                                name={courier.name}
+                                src={courier.avatar && courier.avatar.url}
+                            />
                         </ListMain>
                         <ListMain>
                             <span> {courier.name}</span>

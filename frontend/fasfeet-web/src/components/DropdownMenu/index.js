@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
+import { IoMdEye } from 'react-icons/io';
+
 import {
     Container,
     ActionButton,
@@ -8,7 +10,7 @@ import {
     Option,
 } from './styles';
 
-export default function DropdownMenu() {
+export default function DropdownMenu({ inPackages }) {
     const [visible, setVisible] = useState(false);
 
     function handleToggleVisible() {
@@ -31,6 +33,13 @@ export default function DropdownMenu() {
                     <MdDeleteForever color="#DE3B3B" />
                     <button type="button"> Excluir</button>
                 </Option>
+
+                {inPackages && (
+                    <Option>
+                        <IoMdEye color="#8E5BE8 " />
+                        <button type="button"> Excluir</button>
+                    </Option>
+                )}
             </OptionList>
         </Container>
     );
