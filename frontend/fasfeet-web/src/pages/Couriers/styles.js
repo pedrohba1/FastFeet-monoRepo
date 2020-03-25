@@ -76,14 +76,13 @@ export const ListMain = styled.main`
 `;
 
 export const ListActions = styled.main`
+    display: flex;
     border-radius: 4px;
     padding: 10px;
-
-    vertical-align: center;
+    align-content: center;
     background: #ffffff;
     justify-content: flex-end;
     height: 57px;
-    display: flex;
 `;
 
 export const RegisterButton = styled.button`
@@ -118,7 +117,6 @@ export const ActionButton = styled.button`
 export const ActionIcon = styled(MdMoreHoriz).attrs({
     size: 25,
 })`
-    margin-right: 2px;
     color: #c6c6c6;
 `;
 

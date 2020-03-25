@@ -4,8 +4,9 @@ import { MdMoreHoriz } from 'react-icons/md';
 import { darken } from 'polished';
 
 export const Container = styled.div`
+    align-self: center;
+    display: flex;
     position: relative;
-    padding: 20px;
     background: #ffffff;
 `;
 
