@@ -16,7 +16,9 @@ export const colors = [
     '#CCCC8B',
 ];
 
-export const Search = styled(Input)``;
+export const Search = styled(Input).attrs({
+    icon: { name: 'search' },
+})``;
 
 export const SearchIcon = styled(MdAdd).attrs({
     size: 20,
@@ -35,7 +37,6 @@ export const List = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-row-gap: 20px;
-    margin-bottom: 150px;
 `;
 
 export const ListHeader = styled.div`

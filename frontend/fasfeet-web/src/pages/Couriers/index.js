@@ -31,12 +31,17 @@ export default function Couriers() {
                 name: input,
             },
         });
+
+        response.data.map(
+            // eslint-disable-next-line no-return-assign
+            courier => courier.id < 10 && (courier.id = `0${courier.id}`)
+        );
         setCouriers(response.data);
         setLoading(false);
     }
     useEffect(() => {
         searchCouriers();
-    }, []);
+    }, [page]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
@@ -56,7 +61,6 @@ export default function Couriers() {
                     onKeyUp={handleEnterPress}
                     placeholder="buscar por entregadores"
                     iconPosition="left"
-                    icon={{ name: 'search' }}
                 />
                 <RegisterButton>
                     <SearchIcon />
