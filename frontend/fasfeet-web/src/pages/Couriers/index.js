@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
+
 import {
     Title,
-    Search,
-    List,
-    ListHeader,
-    ListMain,
     Buttons,
     RegisterButton,
     SearchIcon,
+    Search,
+} from '~/styles/default';
+
+import {
+    List,
+    ListHeader,
+    ListMain,
     ListActions,
     Picture,
     DefaultPic,
@@ -25,6 +29,7 @@ export default function Couriers() {
     const [loading, setLoading] = useState(false);
 
     async function searchCouriers() {
+        setLoading(true);
         const response = await api.get('couriers', {
             params: {
                 page,
@@ -45,7 +50,6 @@ export default function Couriers() {
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            setLoading(true);
             searchCouriers();
         }
     }

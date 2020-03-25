@@ -1,33 +1,36 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, Content, Option, Right, Left, Logout } from './styles';
 import logo from '~/assets/fastfeet-logo.png';
 
+import { changeTab } from '~/store/modules/user/actions';
 import { signOut } from '~/store/modules/auth/actions';
 
 export default function Header() {
-    const [tab, setTab] = useState('couriers');
+    const currentTab = useSelector(state => state.user.currentTab);
     const dispatch = useDispatch();
 
     function handleTabChange(newTab) {
         switch (newTab) {
             case 'couriers':
-                setTab('couriers');
+                dispatch(changeTab('couriers'));
                 break;
             case 'packages':
-                setTab('packages');
+                dispatch(changeTab('packages'));
                 break;
             case 'recipients':
-                setTab('recipients');
+                dispatch(changeTab('recipients'));
                 break;
             case 'problems':
-                setTab('problems');
+                dispatch(changeTab('problems'));
                 break;
             default:
                 break;
         }
     }
+
+    useEffect(() => {}, []);
 
     function handleSignOut() {
         dispatch(signOut());
@@ -41,28 +44,28 @@ export default function Header() {
                     <Option
                         onClick={() => handleTabChange('packages')}
                         to="/packages"
-                        isSelected={tab === 'packages'}
+                        isSelected={currentTab === 'packages'}
                     >
                         <strong>ENCOMENDAS</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('couriers')}
                         to="/couriers"
-                        isSelected={tab === 'couriers'}
+                        isSelected={currentTab === 'couriers'}
                     >
                         <strong>ENTREGADORES</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('recipients')}
                         to="/recipients"
-                        isSelected={tab === 'recipients'}
+                        isSelected={currentTab === 'recipients'}
                     >
                         <strong>DESTINATÁRIOS</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('problems')}
                         to="/problems"
-                        isSelected={tab === 'problems'}
+                        isSelected={currentTab === 'problems'}
                     >
                         <strong>PROBLEMAS</strong>
                     </Option>
