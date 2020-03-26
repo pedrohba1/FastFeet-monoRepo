@@ -1,80 +1,88 @@
-import { format, parseISO } from 'date-fns';
+import {
+    format,
+    parseISO,
+    isEqual,
+    setHours,
+    setMinutes,
+    setSeconds,
+    setMilliseconds,
+} from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 import PackageLimit from '../schemas/PackageLimit';
 import Package from '../models/Package';
 
 class DeliveryController {
-    async addStart(req, res) {
+    async store(req, res) {
         const { package_id, courier_id } = req.body;
+        const { type } = req.params;
         const delivery = await Package.findByPk(package_id);
+        let { req_date } = req.body;
 
-        let { reqDate } = req.body;
-        // essa linha abaixo é só para propósitos de teste,
-        // remover quando for para a aplicação
-        reqDate = reqDate ? parseISO(reqDate) : new Date();
+        // Se o carteiro não colocar uma data no dispositivo, ele usa a data
+        // do dia
+        req_date = req_date ? parseISO(req_date) : new Date();
+        req_date = setMilliseconds(
+            setSeconds(setMinutes(setHours(req_date, 0), 0), 0),
+            0.0
+        );
+        const { timezone } = Intl.DateTimeFormat().resolvedOptions();
+        req_date = utcToZonedTime(req_date, timezone);
 
+        if (!delivery) {
+            return res.status(400).json({
+                error: 'this package does not exist',
+            });
+        }
         if (delivery.courier_id !== courier_id) {
-            return res.json({
+            return res.status(400).json({
                 error: `this package doesn't belong to this courier`,
             });
         }
-        if (delivery.start_date !== null) {
-            return res.json({
+        if (delivery.start_date !== null && type === 'start') {
+            return res.status(400).json({
                 error: 'this delivery already has a start date',
             });
         }
-
-        let limiter = await PackageLimit.findOne({ courierId: courier_id });
-        if (!limiter) {
-            limiter = await PackageLimit.create({
-                courierId: courier_id,
-                packagesTakenIds: [],
-                takenDate: reqDate,
-            });
-        }
-
-        const date1 = format(reqDate, 'dd/MM/yyyy');
-        const date2 = format(limiter.takenDate, 'dd/MM/yyyy');
-
-        if (date1 === date2) {
-            if (limiter.packagesTakenIds.length === 5) {
-                return res.json({
-                    error: 'this courier is trying to exceed the limit',
-                });
-            }
-            const array = limiter.packagesTakenIds;
-            array.push(package_id);
-            await limiter.update({
-                packagesTakenIds: array,
-            });
-        } else {
-            await limiter.update({
-                packagesTakenIds: [package_id],
-                takenDate: reqDate,
-            });
-        }
-
-        await delivery.update({ start_date: reqDate });
-
-        return res.json(delivery);
-    }
-
-    async addEnd(req, res) {
-        const { package_id, courier_id } = req.body;
-        const delivery = await Package.findByPk(package_id);
-
-        if (delivery.courier_id !== courier_id) {
-            return res.json({
-                error: `this package doesn't belong to this courier`,
-            });
-        }
         if (delivery.end_date !== null) {
-            return res.json({
+            return res.status(400).json({
                 error: 'this package has already been delivered',
             });
         }
 
-        await delivery.update({ end_date: new Date() });
+        let limiter = await PackageLimit.findOne({
+            courierId: courier_id,
+            takenDate: req_date,
+        });
+
+        if (!limiter) {
+            limiter = await PackageLimit.create({
+                courierId: courier_id,
+                packagesTaken: [],
+                takenDate: req_date,
+            });
+        }
+
+        if (isEqual(limiter.takenDate, req_date)) {
+            if (limiter.packagesTaken.length === 5) {
+                return res.json({
+                    error: 'this courier is trying to exceed the limit',
+                });
+            }
+            const takenList = limiter.packagesTaken;
+            takenList.push(package_id);
+            await limiter.update({
+                packagesTaken: takenList,
+            });
+        }
+
+        if (type === 'start') {
+            await delivery.update({ start_date: req_date });
+        }
+        if (type === 'end') {
+            await delivery.update({ end_date: req_date });
+        }
+
         return res.json(delivery);
     }
 }

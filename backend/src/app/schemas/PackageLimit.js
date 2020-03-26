@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const PackageLimitSchema = new mongoose.Schema({
     courierId: Number,
-    packagesTakenIds: [Number],
+    packagesTaken: [Number],
     takenDate: Date,
 });
 

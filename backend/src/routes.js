@@ -31,8 +31,9 @@ routes.post('/sessions', SessionController.store);
          funcionalidades vão ser incluídas no packageController.index
 routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
 routes.get('/courier/:id/packages', CourierController.listPackages); */
-routes.post('/courier/take', courierExists, DeliveryController.addStart);
-routes.post('/courier/deliver', courierExists, DeliveryController.addEnd);
+
+routes.post('/courier/:type', courierExists, DeliveryController.store);
+routes.post('/courier/:type', courierExists, DeliveryController.store);
 
 routes.get('/delivery/:package_id/problems', ProblemController.show);
 routes.get('/delivery/problems', ProblemController.index);
