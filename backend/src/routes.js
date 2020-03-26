@@ -25,20 +25,12 @@ routes.get('/cep', CepController.show);
 
 routes.post('/sessions', SessionController.store);
 
-// precisa de um middleware pra ver se o id do Courier existe
-// e então parar de usar ele antes do authMiddleware
-/* TODO: posteriormente, remover essas rotas que não fazem sentido e suas
-         funcionalidades vão ser incluídas no packageController.index
-routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
-routes.get('/courier/:id/packages', CourierController.listPackages); */
-
 routes.post('/courier/:type', courierExists, DeliveryController.store);
 
-routes.get('/delivery/:package_id/problems', ProblemController.show);
-routes.get('/delivery/problems', ProblemController.index);
-routes.post('/delivery/problems', ProblemController.store);
-
-routes.delete('/problem/:delivery_problem_id', ProblemController.destroy);
+routes.get('/problems/:package_id', ProblemController.show);
+routes.get('/problems', ProblemController.index);
+routes.post('/problems', ProblemController.store);
+routes.delete('/problems/:delivery_problem_id', ProblemController.destroy);
 
 routes.use(authMiddleware);
 

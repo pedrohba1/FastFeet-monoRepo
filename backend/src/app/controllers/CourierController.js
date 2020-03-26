@@ -30,47 +30,6 @@ class CourierController {
         return res.json(couriers);
     }
 
-    // TODO: essas duas rotas podem ser convertidas em um simples index no packageController,
-    // passando no req.query e algum parametro para checar se end_date não é nula
-
-    /*  async listPackages(req, res) {
-        const { id } = req.params;
-
-        if (!(await Courier.findByPk(id))) {
-            return res.status(400).json({
-                error: 'courier does not exist',
-            });
-        }
-
-        const packages = await Package.findAll({
-            where: {
-                courier_id: id,
-                end_date: null,
-                canceled_at: null,
-            },
-        });
-
-        return res.json(packages);
-    }
-
-    async deliveredPackages(req, res) {
-        const { id } = req.params;
-        if (!(await Courier.findByPk(id))) {
-            return res.status(400).json({
-                error: 'courier does not exist',
-            });
-        }
-
-        const packages = await Package.findAll({
-            where: {
-                courier_id: id,
-                end_date: { [Op.ne]: null },
-            },
-        });
-
-        return res.json(packages);
-    }
- */
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
