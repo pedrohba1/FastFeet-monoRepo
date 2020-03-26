@@ -22,6 +22,7 @@ export default function Packages() {
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({});
     const [loading, setLoading] = useState(false);
 
     async function searchPackages() {
@@ -67,13 +68,19 @@ export default function Packages() {
         setModalOpen(false);
     }
 
-    function handleRequestOpen() {
+    function handleRequestOpen(pack) {
         setModalOpen(true);
+        setModalContent(pack);
+        console.tron.log(pack);
     }
 
     return (
         <>
-            <Modal closeFunc={handleRequestClose} isOpen={isModalOpen} />
+            <Modal
+                closeFunc={handleRequestClose}
+                isOpen={isModalOpen}
+                content={modalContent}
+            />
             <Title>Gerenciando encomendas</Title>
 
             <Buttons>
@@ -149,6 +156,7 @@ export default function Packages() {
 
                         <ListActions>
                             <DropdownMenu
+                                pack={pack}
                                 inPackages
                                 openModalFunction={handleRequestOpen}
                             />

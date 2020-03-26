@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 
-// import { Container } from './styles';
+import { Container, Bold, Text } from './styles';
 
-export default function Modal({ closeFunc, isOpen }) {
+export default function Modal({ closeFunc, isOpen, content }) {
+    console.tron.log(content);
+
     return (
         <ReactModal
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
+            data={content}
             isOpen={isOpen}
             onRequestClose={closeFunc}
             style={{
@@ -30,12 +33,21 @@ export default function Modal({ closeFunc, isOpen }) {
                 },
             }}
         >
-            <span> teste</span>
+            <Container>
+                <Bold>Informações da encomenda</Bold>
+            </Container>
+
+            <Container>
+                <Bold>Datas</Bold>
+                <Text>{data.recipient.address}</Text>
+
+                <Bold>Retirada:</Bold>
+                <Bold>Entrega</Bold>
+            </Container>
+
+            <Container>
+                <Bold>Assinatura do destinatário</Bold>
+            </Container>
         </ReactModal>
     );
 }
-
-Modal.propTypes = {
-    closeFunc: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-};

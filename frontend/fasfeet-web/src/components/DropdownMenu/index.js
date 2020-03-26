@@ -11,7 +11,7 @@ import {
     Option,
 } from './styles';
 
-export default function DropdownMenu({ inPackages, openModalFunction }) {
+export default function DropdownMenu({ inPackages, openModalFunction, pack }) {
     const [visible, setVisible] = useState(false);
 
     function handleToggleVisible() {
@@ -38,7 +38,10 @@ export default function DropdownMenu({ inPackages, openModalFunction }) {
                 {inPackages && (
                     <Option>
                         <IoMdEye color="#8E5BE8 " />
-                        <button onClick={openModalFunction} type="button">
+                        <button
+                            onClick={() => openModalFunction(pack)}
+                            type="button"
+                        >
                             Visualizar
                         </button>
                     </Option>
