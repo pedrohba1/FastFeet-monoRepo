@@ -16,7 +16,6 @@ export default function user(state = INITIAL_STATE, action) {
                 draft.profile = null;
                 break;
             }
-
             case '@user/CHANGE_TAB': {
                 draft.currentTab = action.payload.newTab;
                 break;

@@ -48,15 +48,11 @@ export const ListMain = styled.main`
 
     span {
         display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
         align-self: center;
     }
-
-    span:last-of-type {
-        text-align: right;
-        justify-content: flex-end;
-    }
-
-    vertical-align: center;
 `;
 
 export const RegisterButton = styled.button`

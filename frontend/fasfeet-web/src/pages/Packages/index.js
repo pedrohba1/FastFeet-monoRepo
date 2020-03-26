@@ -11,7 +11,7 @@ import {
     ListMain,
     ListActions,
 } from '~/styles/default';
-import { List, Status } from './styles';
+import { List, Status, HorizontalContainer } from './styles';
 
 import Picture from '~/components/Picture';
 import DropdownMenu from '~/components/DropdownMenu';
@@ -114,14 +114,16 @@ export default function Packages() {
                             <span>{pack.recipient.name}</span>
                         </ListMain>
                         <ListMain>
-                            <Picture
-                                name={pack.name}
-                                src={
-                                    pack.courier.avatar &&
-                                    pack.courier.avatar.url
-                                }
-                            />
-                            <span>{pack.courier.name}</span>
+                            <HorizontalContainer>
+                                <Picture
+                                    name={pack.courier.name}
+                                    src={
+                                        pack.courier.avatar &&
+                                        pack.courier.avatar.url
+                                    }
+                                />
+                                <span>{pack.courier.name}</span>
+                            </HorizontalContainer>
                         </ListMain>
                         <ListMain>
                             <span>{pack.recipient.city}</span>

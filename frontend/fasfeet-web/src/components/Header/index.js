@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, Content, Option, Right, Left, Logout } from './styles';
@@ -30,7 +30,9 @@ export default function Header() {
         }
     }
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        dispatch(changeTab('couriers'));
+    }, []);
 
     function handleSignOut() {
         dispatch(signOut());

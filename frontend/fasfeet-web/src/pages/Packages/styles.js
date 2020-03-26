@@ -7,6 +7,15 @@ export const List = styled.div`
     grid-row-gap: 20px;
 `;
 
+export const HorizontalContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    span {
+        align-self: center;
+    }
+`;
+
 export const Status = styled.span`
     display: flex;
     font-weight: bold;
@@ -29,7 +38,7 @@ export const Status = styled.span`
                 color: #2ca42b;
                 background: #dff0df;
                 figure{
-                    background: #2ca42b;
+                    background-color: #2ca42b;
                 };
                 `;
             case 'PENDENTE':

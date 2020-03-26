@@ -96,9 +96,8 @@ export default function Couriers() {
                             />
                         </ListMain>
                         <ListMain>
-                            <span> {courier.name}</span>
+                            <span>{courier.name}</span>
                         </ListMain>
-
                         <ListMain>
                             <span>{courier.email}</span>
                         </ListMain>

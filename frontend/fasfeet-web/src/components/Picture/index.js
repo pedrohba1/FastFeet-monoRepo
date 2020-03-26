@@ -12,7 +12,7 @@ export default function Picture({ src, name }) {
                 <Default
                     color={colors[Math.floor(Math.random() * colors.length)]}
                 >
-                    <span>{getInitials(name)}</span>
+                    <span>{name && getInitials(name)}</span>
                 </Default>
             )}
         </Container>
