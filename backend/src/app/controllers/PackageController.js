@@ -54,6 +54,7 @@ class PackageController {
                     attributes: [
                         'id',
                         'name',
+                        'address',
                         'address_number',
                         'address_complement',
                         'state',
