@@ -34,6 +34,12 @@ class RecipientController {
             cep: Yup.string(),
         });
 
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({
+                error: 'validation fail, invalid json',
+            });
+        }
+
         return res.json({ msg: 'teste' });
     }
 }

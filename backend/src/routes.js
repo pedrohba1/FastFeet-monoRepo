@@ -33,17 +33,12 @@ routes.get('/courier/:id/delivered', CourierController.deliveredPackages);
 routes.get('/courier/:id/packages', CourierController.listPackages); */
 
 routes.post('/courier/:type', courierExists, DeliveryController.store);
-routes.post('/courier/:type', courierExists, DeliveryController.store);
 
 routes.get('/delivery/:package_id/problems', ProblemController.show);
 routes.get('/delivery/problems', ProblemController.index);
 routes.post('/delivery/problems', ProblemController.store);
 
-// TODO: essa rota aqui também poderia ser mais curta, removendo esse cancel-delivery do link
-routes.delete(
-    '/problem/:delivery_problem_id/cancel-delivery',
-    ProblemController.destroy
-);
+routes.delete('/problem/:delivery_problem_id', ProblemController.destroy);
 
 routes.use(authMiddleware);
 
