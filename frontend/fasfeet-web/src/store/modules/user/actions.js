@@ -1,6 +1,6 @@
-export function changeTab(newTab) {
+export function changeTab(tab) {
     return {
         type: '@user/CHANGE_TAB',
-        payload: { newTab },
+        payload: { tab },
     };
 }

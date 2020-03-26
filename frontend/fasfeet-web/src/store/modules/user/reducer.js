@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
     profile: null,
-    currentTab: 'couriers',
+    tab: 'couriers',
 };
 
 export default function user(state = INITIAL_STATE, action) {
@@ -17,7 +17,7 @@ export default function user(state = INITIAL_STATE, action) {
                 break;
             }
             case '@user/CHANGE_TAB': {
-                draft.currentTab = action.payload.newTab;
+                draft.tab = action.payload.tab;
                 break;
             }
             default:

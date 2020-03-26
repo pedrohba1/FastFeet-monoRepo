@@ -29,8 +29,6 @@ export default function Packages() {
             params: {
                 page,
                 product: input,
-                courierName: input,
-                recipientName: input,
             },
         });
 

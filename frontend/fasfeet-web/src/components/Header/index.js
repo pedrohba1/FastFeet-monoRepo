@@ -8,7 +8,7 @@ import { changeTab } from '~/store/modules/user/actions';
 import { signOut } from '~/store/modules/auth/actions';
 
 export default function Header() {
-    const currentTab = useSelector(state => state.user.currentTab);
+    const currentTab = useSelector(state => state.user.tab);
     const dispatch = useDispatch();
 
     function handleTabChange(newTab) {
@@ -45,28 +45,24 @@ export default function Header() {
                     <img src={logo} alt="fastFeet" />
                     <Option
                         onClick={() => handleTabChange('packages')}
-                        to="/packages"
                         isSelected={currentTab === 'packages'}
                     >
                         <strong>ENCOMENDAS</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('couriers')}
-                        to="/couriers"
                         isSelected={currentTab === 'couriers'}
                     >
                         <strong>ENTREGADORES</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('recipients')}
-                        to="/recipients"
                         isSelected={currentTab === 'recipients'}
                     >
                         <strong>DESTINATÁRIOS</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('problems')}
-                        to="/problems"
                         isSelected={currentTab === 'problems'}
                     >
                         <strong>PROBLEMAS</strong>

@@ -13,7 +13,7 @@ import Package from '../models/Package';
 
 class DeliveryController {
     async store(req, res) {
-        const { package_id, courier_id } = req.body;
+        const { package_id, courier_id, signature_id } = req.body;
         const { type } = req.params;
         const delivery = await Package.findByPk(package_id);
         let { req_date } = req.body;
@@ -28,6 +28,11 @@ class DeliveryController {
         const { timezone } = Intl.DateTimeFormat().resolvedOptions();
         req_date = utcToZonedTime(req_date, timezone);
 
+        if (type === 'end' && !signature_id) {
+            return res.status(400).json({
+                error: 'signature id not provided',
+            });
+        }
         if (!delivery) {
             return res.status(400).json({
                 error: 'this package does not exist',
