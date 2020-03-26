@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 import { IoMdEye } from 'react-icons/io';
 
@@ -10,7 +11,7 @@ import {
     Option,
 } from './styles';
 
-export default function DropdownMenu({ inPackages }) {
+export default function DropdownMenu({ inPackages, openModalFunction }) {
     const [visible, setVisible] = useState(false);
 
     function handleToggleVisible() {
@@ -26,21 +27,33 @@ export default function DropdownMenu({ inPackages }) {
             <OptionList visible={visible} onMouseLeave={handleToggleVisible}>
                 <Option>
                     <MdEdit color="#4D85EE" />
-                    <button type="button"> Editar</button>
+                    <button type="button">Editar</button>
                 </Option>
 
                 <Option>
                     <MdDeleteForever color="#DE3B3B" />
-                    <button type="button"> Excluir</button>
+                    <button type="button">Excluir</button>
                 </Option>
 
                 {inPackages && (
                     <Option>
                         <IoMdEye color="#8E5BE8 " />
-                        <button type="button"> Excluir</button>
+                        <button onClick={openModalFunction} type="button">
+                            Visualizar
+                        </button>
                     </Option>
                 )}
             </OptionList>
         </Container>
     );
 }
+
+DropdownMenu.defaultProps = {
+    inPackages: false,
+    openModalFunction: null,
+};
+
+DropdownMenu.propTypes = {
+    inPackages: PropTypes.bool,
+    openModalFunction: PropTypes.func,
+};

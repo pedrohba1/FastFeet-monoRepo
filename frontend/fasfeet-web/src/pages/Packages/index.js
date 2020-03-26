@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '~/services/api';
 
+import Modal from '~/components/Modal';
 import {
     Title,
     Buttons,
@@ -20,6 +21,7 @@ export default function Packages() {
     const [packages, setPackages] = useState([]);
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
+    const [isModalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
     async function searchPackages() {
@@ -61,8 +63,17 @@ export default function Packages() {
         }
     }
 
+    function handleRequestClose() {
+        setModalOpen(false);
+    }
+
+    function handleRequestOpen() {
+        setModalOpen(true);
+    }
+
     return (
         <>
+            <Modal closeFunc={handleRequestClose} isOpen={isModalOpen} />
             <Title>Gerenciando encomendas</Title>
 
             <Buttons>
@@ -137,7 +148,10 @@ export default function Packages() {
                         </ListMain>
 
                         <ListActions>
-                            <DropdownMenu inPackages />
+                            <DropdownMenu
+                                inPackages
+                                openModalFunction={handleRequestOpen}
+                            />
                         </ListActions>
                     </>
                 ))}
