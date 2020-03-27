@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import api from '~/services/api';
 
 import Modal from '~/components/Modal';
@@ -70,8 +71,24 @@ export default function Packages() {
 
     function handleRequestOpen(pack) {
         setModalOpen(true);
-        setModalContent(pack);
+
         console.tron.log(pack);
+        const { recipient, end_date, start_date, signature } = pack;
+
+        const packData = {
+            state: recipient.state,
+            city: recipient.city,
+            address: recipient.address,
+            address_number: recipient.address_number,
+            address_complement: recipient.address_complement,
+            cep: recipient.cep,
+            start_date,
+            end_date,
+            signatureUrl: signature === null ? null : signature.url,
+        };
+
+        console.tron.log(packData);
+        setModalContent({ ...packData });
     }
 
     return (
@@ -79,7 +96,7 @@ export default function Packages() {
             <Modal
                 closeFunc={handleRequestClose}
                 isOpen={isModalOpen}
-                content={modalContent}
+                packData={modalContent}
             />
             <Title>Gerenciando encomendas</Title>
 

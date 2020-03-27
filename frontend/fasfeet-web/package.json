@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "babel-plugin-root-import": "^6.5.0",
+    "date-fns": "^2.11.1",
+    "date-fns-tz": "^1.0.10",
     "history": "^4.10.1",
     "immer": "^6.0.2",
     "polished": "^3.5.0",
