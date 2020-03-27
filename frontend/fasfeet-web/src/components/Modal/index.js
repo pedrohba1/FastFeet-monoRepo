@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { utcToZonedTime, format } from 'date-fns-tz';
+
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 import ReactModal from 'react-modal';
 
 import { Container, Text, Bold } from './styles';
 
 export default function Modal({ closeFunc, isOpen, packData }) {
     console.tron.log(packData);
+
+    /*     const { timezone } = Intl.DateTimeFormat().resolvedOptions();
+     */
+
     return (
         <ReactModal
             shouldCloseOnOverlayClick
@@ -49,11 +56,11 @@ export default function Modal({ closeFunc, isOpen, packData }) {
 
                 <Text>
                     <Bold>Retirada: </Bold>
-                    {packData.start_date}
+                    <Moment format="DD/MM/YYYY" date={packData.start_date} />
                 </Text>
                 <Text>
                     <Bold>Entrega: </Bold>
-                    {packData.end_date}
+                    <Moment format="DD/MM/YYYY" date={packData.end_date} />
                 </Text>
             </Container>
 
