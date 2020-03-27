@@ -46,7 +46,7 @@ class PackageController {
                 {
                     model: File,
                     as: 'signature',
-                    attributes: ['name', 'path'],
+                    attributes: ['name', 'path', 'url'],
                 },
                 {
                     model: Recipient,
