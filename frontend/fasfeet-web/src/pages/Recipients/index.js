@@ -5,7 +5,14 @@ import {
     RegisterButton,
     SearchIcon,
     Search,
+    ListHeader,
+    ListMain,
+    ListActions,
 } from '~/styles/default';
+import { List } from './styles';
+
+import DropdownMenu from '~/components/DropdownMenu';
+
 import api from '~/services/api';
 
 export default function Recipients() {
@@ -17,20 +24,13 @@ export default function Recipients() {
     async function searchPackages() {
         setLoading(true);
 
-        /*      const response = await api.get('recipients', {
+        const response = await api.get('recipients', {
             params: {
                 page,
-                product: input,
-                courierName: input,
-                recipientName: input,
+                name: input,
             },
         });
-
-        response.data.map(
-            // eslint-disable-next-line no-return-assign
-            pack => pack.id < 10 && (pack.id = `0${pack.id}`)
-        );
-        setRecipients(response.data); */
+        setRecipients(response.data);
         setLoading(false);
     }
     useEffect(() => {
@@ -61,6 +61,46 @@ export default function Recipients() {
                     <span>CADASTRAR</span>
                 </RegisterButton>
             </Buttons>
+
+            <List>
+                <ListHeader>
+                    <span>ID</span>
+                </ListHeader>
+                <ListHeader>
+                    <span>Nome</span>
+                </ListHeader>
+                <ListHeader>
+                    <span>Endereço</span>
+                </ListHeader>
+                <ListHeader>
+                    <span>Ações</span>
+                </ListHeader>
+
+                {recipients.map(recipient => (
+                    <>
+                        <ListMain>
+                            <span>#{recipient.id}</span>
+                        </ListMain>
+                        <ListMain>
+                            <span>{recipient.name}</span>
+                        </ListMain>
+                        <ListMain>
+                            <span>
+                                {recipient.address}
+                                {', '}
+                                {recipient.address_complement}
+                                {', '}
+                                {recipient.city}
+                                {', '}
+                                {recipient.state}
+                            </span>
+                        </ListMain>
+                        <ListActions>
+                            <DropdownMenu />
+                        </ListActions>
+                    </>
+                ))}
+            </List>
         </>
     );
 }
