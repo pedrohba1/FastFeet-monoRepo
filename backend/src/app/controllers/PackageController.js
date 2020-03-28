@@ -14,8 +14,8 @@ class PackageController {
         const {
             page = 1,
             product = '',
-            courierName = '',
-            recipientName = '',
+            courier_name = '',
+            recipient_name = '',
         } = req.query;
 
         const packages = await Package.findAll({
@@ -23,7 +23,7 @@ class PackageController {
                 canceled_at: null,
                 product: { [Op.like]: `${product}%` },
             },
-            order: ['start_date'],
+            order: ['id'],
             limit: 20,
             offset: (page - 1) * 20,
             attributes: ['id', 'product', 'start_date', 'end_date'],
@@ -40,7 +40,7 @@ class PackageController {
                         },
                     ],
                     where: {
-                        name: { [Op.like]: `${courierName}%` },
+                        name: { [Op.like]: `${courier_name}%` },
                     },
                 },
                 {
@@ -62,7 +62,7 @@ class PackageController {
                         'cep',
                     ],
                     where: {
-                        name: { [Op.like]: `${recipientName}%` },
+                        name: { [Op.like]: `${recipient_name}%` },
                     },
                 },
             ],

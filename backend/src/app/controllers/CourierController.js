@@ -14,7 +14,7 @@ class CourierController {
             where: {
                 name: { [Op.like]: `${name}%` },
             },
-            order: ['name'],
+            order: ['id'],
             limit: 20,
             offset: (page - 1) * 20,
             attributes: ['id', 'name', 'email'],
