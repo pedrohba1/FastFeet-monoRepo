@@ -2,6 +2,31 @@ import DeliveryProblem from '../models/DeliveryProblem';
 import Package from '../models/Package';
 
 class ProblemController {
+    async show(req, res) {
+        const { package_id } = req.params;
+
+        const problem = await DeliveryProblem.findOne({
+            where: { package_id },
+        });
+
+        if (!problem) {
+            return res.json({ error: 'package does not have a problem' });
+        }
+
+        return res.json(problem);
+    }
+
+    async index(req, res) {
+        const { page = 1 } = req.query;
+
+        const problems = await DeliveryProblem.findAll({
+            order: ['id'],
+            limit: 20,
+            offset: (page - 1) * 20,
+        });
+        return res.json(problems);
+    }
+
     async store(req, res) {
         const { package_id, description } = req.body;
         if (!(await Package.findByPk(package_id))) {
@@ -35,25 +60,6 @@ class ProblemController {
         await delivery.update({ canceled_at: new Date() });
 
         return res.json(delivery);
-    }
-
-    async index(req, res) {
-        const problems = await DeliveryProblem.findAll();
-        return res.json(problems);
-    }
-
-    async show(req, res) {
-        const { package_id } = req.params;
-
-        const problem = await DeliveryProblem.findOne({
-            where: { package_id },
-        });
-
-        if (!problem) {
-            return res.json({ error: 'package does not have a problem' });
-        }
-
-        return res.json(problem);
     }
 }
 
