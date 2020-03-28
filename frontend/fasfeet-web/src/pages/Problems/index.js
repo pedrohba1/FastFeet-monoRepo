@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {
     Title,
     Buttons,
-    RegisterButton,
-    SearchIcon,
     Search,
+    ListHeader,
+    ListMain,
+    ListActions,
 } from '~/styles/default';
+import DropdownMenu from '~/components/DropdownMenu';
+
+import { List } from './styles';
 import api from '~/services/api';
 
 export default function Problems() {
@@ -16,21 +20,13 @@ export default function Problems() {
 
     async function searchPackages() {
         setLoading(true);
+        const response = await api.get('problems');
 
-        /*     const response = await api.get('recipients', {
-            params: {
-                page,
-                product: input,
-                courierName: input,
-                recipientName: input,
-            },
+        response.data.map(courier => {
+            courier.id = courier.id < 10 ? `0${courier.id}` : courier.id;
+            return courier;
         });
-
-        response.data.map(
-            // eslint-disable-next-line no-return-assign
-            pack => pack.id < 10 && (pack.id = `0${pack.id}`)
-        );
-        setProblems(response.data); */
+        setProblems(response.data);
         setLoading(false);
     }
     useEffect(() => {
@@ -57,6 +53,32 @@ export default function Problems() {
                     iconPosition="left"
                 />
             </Buttons>
+
+            <List>
+                <ListHeader>
+                    <span>Encomenda</span>
+                </ListHeader>
+                <ListHeader>
+                    <span>Problema</span>
+                </ListHeader>
+                <ListHeader>
+                    <span>Ações</span>
+                </ListHeader>
+
+                {problems.map(problem => (
+                    <>
+                        <ListMain>
+                            <span>#{problem.id}</span>
+                        </ListMain>
+                        <ListMain>
+                            <span>{problem.description}</span>
+                        </ListMain>
+                        <ListActions>
+                            <DropdownMenu />
+                        </ListActions>
+                    </>
+                ))}
+            </List>
         </>
     );
 }

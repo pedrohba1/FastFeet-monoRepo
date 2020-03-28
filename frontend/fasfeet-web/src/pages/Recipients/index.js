@@ -30,6 +30,11 @@ export default function Recipients() {
                 name: input,
             },
         });
+        response.data.map(recipient => {
+            recipient.id =
+                recipient.id < 10 ? `0${recipient.id}` : recipient.id;
+            return recipient;
+        });
         setRecipients(response.data);
         setLoading(false);
     }
