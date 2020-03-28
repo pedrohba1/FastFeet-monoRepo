@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import {
     Title,
     Buttons,
@@ -8,7 +9,9 @@ import {
     ListHeader,
     ListMain,
     ListActions,
+    Footer,
 } from '~/styles/default';
+
 import { List } from './styles';
 
 import DropdownMenu from '~/components/DropdownMenu';
@@ -20,6 +23,14 @@ export default function Recipients() {
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+
+    function handleAddPage() {
+        setPage(page + 1);
+    }
+
+    function handleSubtractPage() {
+        setPage(page - 1);
+    }
 
     async function searchPackages() {
         setLoading(true);
@@ -38,6 +49,7 @@ export default function Recipients() {
         setRecipients(response.data);
         setLoading(false);
     }
+
     useEffect(() => {
         searchPackages();
     }, [page]);
@@ -106,6 +118,22 @@ export default function Recipients() {
                     </>
                 ))}
             </List>
+
+            <Footer>
+                <button
+                    disabled={page === 1}
+                    type="button"
+                    onClick={handleSubtractPage}
+                >
+                    <MdChevronLeft size={36} color="#444" />
+                </button>
+
+                <span>{page}</span>
+
+                <button type="button" onClick={handleAddPage}>
+                    <MdChevronRight size={36} color="#444" />
+                </button>
+            </Footer>
         </>
     );
 }

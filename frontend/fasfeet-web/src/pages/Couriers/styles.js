@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { Input } from 'semantic-ui-react';
-import { MdAdd, MdMoreHoriz } from 'react-icons/md';
-import { darken } from 'polished';
 
 export const colors = [
     '#A28FD0',

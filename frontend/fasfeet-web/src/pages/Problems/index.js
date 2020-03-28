@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import {
     Title,
     Buttons,
@@ -6,6 +7,7 @@ import {
     ListHeader,
     ListMain,
     ListActions,
+    Footer,
 } from '~/styles/default';
 import DropdownMenu from '~/components/DropdownMenu';
 
@@ -18,9 +20,21 @@ export default function Problems() {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
+    function handleAddPage() {
+        setPage(page + 1);
+    }
+
+    function handleSubtractPage() {
+        setPage(page - 1);
+    }
+
     async function searchPackages() {
         setLoading(true);
-        const response = await api.get('problems');
+        const response = await api.get('problems', {
+            params: {
+                page,
+            },
+        });
 
         response.data.map(courier => {
             courier.id = courier.id < 10 ? `0${courier.id}` : courier.id;
@@ -29,6 +43,7 @@ export default function Problems() {
         setProblems(response.data);
         setLoading(false);
     }
+
     useEffect(() => {
         searchPackages();
     }, [page]);
@@ -79,6 +94,22 @@ export default function Problems() {
                     </>
                 ))}
             </List>
+
+            <Footer>
+                <button
+                    disabled={page === 1}
+                    type="button"
+                    onClick={handleSubtractPage}
+                >
+                    <MdChevronLeft size={36} color="#444" />
+                </button>
+
+                <span>{page}</span>
+
+                <button type="button" onClick={handleAddPage}>
+                    <MdChevronRight size={36} color="#444" />
+                </button>
+            </Footer>
         </>
     );
 }

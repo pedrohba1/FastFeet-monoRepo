@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import {
     Title,
@@ -9,6 +10,7 @@ import {
     ListHeader,
     ListMain,
     ListActions,
+    Footer,
 } from '~/styles/default';
 
 import { List } from './styles';
@@ -47,6 +49,14 @@ export default function Couriers() {
         if (e.which === 13 || e.keyCode === 13) {
             searchCouriers();
         }
+    }
+
+    function handleAddPage() {
+        setPage(page + 1);
+    }
+
+    function handleSubtractPage() {
+        setPage(page - 1);
     }
 
     return (
@@ -107,6 +117,22 @@ export default function Couriers() {
                     </>
                 ))}
             </List>
+
+            <Footer>
+                <button
+                    disabled={page === 1}
+                    type="button"
+                    onClick={handleSubtractPage}
+                >
+                    <MdChevronLeft size={36} color="#444" />
+                </button>
+
+                <span>{page}</span>
+
+                <button type="button" onClick={handleAddPage}>
+                    <MdChevronRight size={36} color="#444" />
+                </button>
+            </Footer>
         </>
     );
 }

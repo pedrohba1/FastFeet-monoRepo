@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import api from '~/services/api';
-
 import Modal from '~/components/Modal';
 import {
     Title,
@@ -12,6 +11,7 @@ import {
     ListHeader,
     ListMain,
     ListActions,
+    Footer,
 } from '~/styles/default';
 import { List, Status, HorizontalContainer } from './styles';
 
@@ -25,6 +25,14 @@ export default function Packages() {
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({});
     const [loading, setLoading] = useState(false);
+
+    function handleAddPage() {
+        setPage(page + 1);
+    }
+
+    function handleSubtractPage() {
+        setPage(page - 1);
+    }
 
     async function searchPackages() {
         setLoading(true);
@@ -181,6 +189,22 @@ export default function Packages() {
                     </>
                 ))}
             </List>
+
+            <Footer>
+                <button
+                    disabled={page === 1}
+                    type="button"
+                    onClick={handleSubtractPage}
+                >
+                    <MdChevronLeft size={36} color="#444" />
+                </button>
+
+                <span>{page}</span>
+
+                <button type="button" onClick={handleAddPage}>
+                    <MdChevronRight size={36} color="#444" />
+                </button>
+            </Footer>
         </>
     );
 }

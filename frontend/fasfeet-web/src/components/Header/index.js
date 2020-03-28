@@ -32,7 +32,7 @@ export default function Header() {
 
     useEffect(() => {
         dispatch(changeTab('couriers'));
-    }, []);
+    }, [dispatch]);
 
     function handleSignOut() {
         dispatch(signOut());

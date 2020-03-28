@@ -23,6 +23,13 @@ export const Buttons = styled.div`
     justify-content: space-between;
 `;
 
+export const NoData = styled.div`
+    margin-top: 20px;
+    display: grid;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr;
+`;
+
 export const ListHeader = styled.div`
     padding: 10px;
 
@@ -116,5 +123,23 @@ export const DefaultPic = styled.div`
     justify-content: center;
     span {
         color: ${props => props.color};
+    }
+`;
+
+export const Footer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    button {
+        padding: 20px;
+        border: none;
+        background: none;
+    }
+
+    span {
+        font-size: 30px;
+        color: #444;
+        align-self: center;
     }
 `;
