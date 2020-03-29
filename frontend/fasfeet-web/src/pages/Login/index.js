@@ -5,6 +5,7 @@ import { Form, Input } from '@rocketseat/unform';
 
 import logo from '~/assets/fastfeet-logo@2x.png';
 import { signInRequest } from '~/store/modules/auth/actions';
+import { changeTab } from '~/store/modules/user/actions';
 
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -17,8 +18,9 @@ export default function SignIn() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.auth.loading);
 
-    function handleSubmit({ email, password }) {
+    async function handleSubmit({ email, password }) {
         dispatch(signInRequest(email, password));
+        dispatch(changeTab('couriers'));
     }
 
     return (

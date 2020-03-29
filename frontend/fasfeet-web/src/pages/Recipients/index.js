@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import {
     Title,
     Buttons,
@@ -15,6 +16,7 @@ import {
 import { List } from './styles';
 
 import DropdownMenu from '~/components/DropdownMenu';
+import { changeTab } from '~/store/modules/user/actions';
 
 import api from '~/services/api';
 
@@ -23,6 +25,8 @@ export default function Recipients() {
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+
+    const dispatch = useDispatch();
 
     function handleAddPage() {
         setPage(page + 1);
@@ -73,7 +77,11 @@ export default function Recipients() {
                     placeholder="buscar por destinatários"
                     iconPosition="left"
                 />
-                <RegisterButton>
+                <RegisterButton
+                    onClick={() => {
+                        dispatch(changeTab('register/recipient'));
+                    }}
+                >
                     <SearchIcon />
                     <span>CADASTRAR</span>
                 </RegisterButton>

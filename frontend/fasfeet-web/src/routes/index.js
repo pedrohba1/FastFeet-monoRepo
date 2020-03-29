@@ -3,10 +3,12 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 import Login from '../pages/Login';
 
-import Couriers from '../pages/Couriers';
-import Packages from '../pages/Packages';
-import Problems from '../pages/Problems';
-import Recipients from '../pages/Recipients';
+import Couriers from '~/pages/Couriers';
+import Packages from '~/pages/Packages';
+import Problems from '~/pages/Problems';
+import Recipients from '~/pages/Recipients';
+import RegisterCourier from '~/pages/RegisterCourier';
+import RegisterRecipient from '~/pages/RegisterRecipient';
 
 export default function Routes() {
     return (
@@ -16,6 +18,16 @@ export default function Routes() {
             <Route path="/packages" isPrivate component={Packages} />
             <Route path="/problems" isPrivate component={Problems} />
             <Route path="/recipients" isPrivate component={Recipients} />
+            <Route
+                path="/register/courier"
+                isPrivate
+                component={RegisterCourier}
+            />
+            <Route
+                path="/register/recipient"
+                isPrivate
+                component={RegisterRecipient}
+            />
         </Switch>
     );
 }

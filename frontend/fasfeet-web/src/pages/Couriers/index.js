@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 import {
     Title,
@@ -13,6 +14,8 @@ import {
     Footer,
 } from '~/styles/default';
 
+import { changeTab } from '~/store/modules/user/actions';
+
 import { List } from './styles';
 
 import api from '~/services/api';
@@ -24,6 +27,8 @@ export default function Couriers() {
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+
+    const dispatch = useDispatch();
 
     async function searchCouriers() {
         setLoading(true);
@@ -71,7 +76,11 @@ export default function Couriers() {
                     placeholder="buscar por entregadores"
                     iconPosition="left"
                 />
-                <RegisterButton>
+                <RegisterButton
+                    onClick={() => {
+                        dispatch(changeTab('register/courier'));
+                    }}
+                >
                     <SearchIcon />
                     <span>CADASTRAR</span>
                 </RegisterButton>

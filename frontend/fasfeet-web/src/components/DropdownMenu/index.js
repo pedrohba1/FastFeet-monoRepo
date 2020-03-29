@@ -11,7 +11,12 @@ import {
     Option,
 } from './styles';
 
-export default function DropdownMenu({ inPackages, openModalFunction, pack }) {
+export default function DropdownMenu({
+    inPackages,
+    inProblems,
+    openModalFunction,
+    data,
+}) {
     const [visible, setVisible] = useState(false);
 
     function handleToggleVisible() {
@@ -24,22 +29,30 @@ export default function DropdownMenu({ inPackages, openModalFunction, pack }) {
                 <ActionIcon />
             </ActionButton>
 
-            <OptionList visible={visible} onMouseLeave={handleToggleVisible}>
-                <Option>
-                    <MdEdit color="#4D85EE" />
-                    <button type="button">Editar</button>
-                </Option>
+            <OptionList
+                inProblems={inProblems}
+                visible={visible}
+                onMouseLeave={handleToggleVisible}
+            >
+                {!inProblems && (
+                    <Option>
+                        <MdEdit color="#4D85EE" />
+                        <button type="button">Editar</button>
+                    </Option>
+                )}
 
                 <Option>
                     <MdDeleteForever color="#DE3B3B" />
-                    <button type="button">Excluir</button>
+                    <button type="button">
+                        {inProblems ? 'Cancelar encomenda' : 'Excluir'}
+                    </button>
                 </Option>
 
-                {inPackages && (
+                {(inPackages || inProblems) && (
                     <Option>
-                        <IoMdEye color="#8E5BE8 " />
+                        <IoMdEye color="#8E5BE8" />
                         <button
-                            onClick={() => openModalFunction(pack)}
+                            onClick={() => openModalFunction(data)}
                             type="button"
                         >
                             Visualizar
@@ -53,11 +66,13 @@ export default function DropdownMenu({ inPackages, openModalFunction, pack }) {
 
 DropdownMenu.defaultProps = {
     inPackages: false,
+    inProblems: false,
     openModalFunction: null,
 };
 
 DropdownMenu.propTypes = {
+    inProblems: PropTypes.bool,
     inPackages: PropTypes.bool,
     openModalFunction: PropTypes.func,
-    pack: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
 };

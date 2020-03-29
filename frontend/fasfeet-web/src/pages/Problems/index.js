@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import ProblemModal from '~/components/ProblemModal';
+
 import {
     Title,
     Buttons,
@@ -19,6 +21,8 @@ export default function Problems() {
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [modalContent, setModalContent] = useState({});
+    const [isModalOpen, setModalOpen] = useState(false);
 
     function handleAddPage() {
         setPage(page + 1);
@@ -54,8 +58,22 @@ export default function Problems() {
         }
     }
 
+    function handleRequestOpen(problem) {
+        setModalOpen(true);
+        setModalContent({ description: problem.description });
+    }
+
+    function handleRequestClose() {
+        setModalOpen(false);
+    }
     return (
         <>
+            <ProblemModal
+                closeFunc={handleRequestClose}
+                isOpen={isModalOpen}
+                problemData={modalContent}
+            />
+
             <Title>Problemas na entrega</Title>
 
             <Buttons>
@@ -64,7 +82,7 @@ export default function Problems() {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyUp={handleEnterPress}
-                    placeholder="buscar por destinatários"
+                    placeholder="buscar por problemas"
                     iconPosition="left"
                 />
             </Buttons>
@@ -89,7 +107,11 @@ export default function Problems() {
                             <span>{problem.description}</span>
                         </ListMain>
                         <ListActions>
-                            <DropdownMenu />
+                            <DropdownMenu
+                                inProblems
+                                data={problem}
+                                openModalFunction={handleRequestOpen}
+                            />
                         </ListActions>
                     </>
                 ))}

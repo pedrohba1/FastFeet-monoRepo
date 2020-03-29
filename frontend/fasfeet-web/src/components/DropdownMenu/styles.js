@@ -26,8 +26,9 @@ export const ActionIcon = styled(MdMoreHoriz).attrs({
 
 export const OptionList = styled.div`
     position: absolute;
-    width: 150px;
-    left: calc(50% - 75px);
+    width: ${props => (props.inProblems ? '200px' : '150px')};
+    left: ${props =>
+        props.inProblems ? 'calc(50% - 100px)' : 'calc(50% - 75px)'};
     top: calc(100% + 30px);
     border-radius: 4px;
     background: #ffffff;

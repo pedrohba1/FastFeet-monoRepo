@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import api from '~/services/api';
-import Modal from '~/components/Modal';
+import PackageModal from '~/components/PackageModal';
 import {
     Title,
     Buttons,
@@ -101,7 +101,7 @@ export default function Packages() {
 
     return (
         <>
-            <Modal
+            <PackageModal
                 closeFunc={handleRequestClose}
                 isOpen={isModalOpen}
                 packData={modalContent}
@@ -181,7 +181,7 @@ export default function Packages() {
 
                         <ListActions>
                             <DropdownMenu
-                                pack={pack}
+                                data={pack}
                                 inPackages
                                 openModalFunction={handleRequestOpen}
                             />

@@ -8,8 +8,8 @@ import ReactModal from 'react-modal';
 
 import { Container, Text, Bold } from './styles';
 
-export default function Modal({ closeFunc, isOpen, packData }) {
-    console.tron.log(packData);
+export default function ProblemModal({ closeFunc, isOpen, problemData }) {
+    console.tron.log(problemData);
 
     /*     const { timezone } = Intl.DateTimeFormat().resolvedOptions();
      */
@@ -19,7 +19,7 @@ export default function Modal({ closeFunc, isOpen, packData }) {
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
             isOpen={isOpen}
-            data={packData}
+            data={problemData}
             onRequestClose={closeFunc}
             style={{
                 overlay: {
@@ -41,39 +41,15 @@ export default function Modal({ closeFunc, isOpen, packData }) {
             }}
         >
             <Container>
-                <Bold>Informações da encomenda</Bold>
-                <Text>
-                    {packData.address}, {packData.address_number}
-                </Text>
-                <Text>
-                    {packData.city} - {packData.state}
-                </Text>
-                <Text>{packData.cep}</Text>
-            </Container>
-
-            <Container>
-                <Bold>Datas</Bold>
-
-                <Text>
-                    <Bold>Retirada: </Bold>
-                    <Moment format="DD/MM/YYYY" date={packData.start_date} />
-                </Text>
-                <Text>
-                    <Bold>Entrega: </Bold>
-                    <Moment format="DD/MM/YYYY" date={packData.end_date} />
-                </Text>
-            </Container>
-
-            <Container>
-                <Bold>Assinatura do destinatário</Bold>
-                <img src={packData.signatureUrl} alt="" />
+                <Bold>VISUALIZAR PROBLEMA</Bold>
+                <Text>{problemData.description}</Text>
             </Container>
         </ReactModal>
     );
 }
 
-Modal.propTypes = {
+ProblemModal.propTypes = {
     closeFunc: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
-    packData: PropTypes.object.isRequired,
+    problemData: PropTypes.object.isRequired,
 };
