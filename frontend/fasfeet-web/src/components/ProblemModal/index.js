@@ -30,13 +30,12 @@ export default function ProblemModal({ closeFunc, isOpen, problemData }) {
                     bottom: 0,
                 },
                 content: {
-                    position: 'absolute',
-                    top: '175px',
-                    left: '600px',
-                    right: '600px',
-                    bottom: '175px',
+                    maxWidth: '600px',
+                    maxHeight: '500px',
                     border: '1px solid #ccc',
                     background: '#fff',
+                    margin: 'auto',
+                    alignSelf: 'center',
                 },
             }}
         >

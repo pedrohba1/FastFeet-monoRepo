@@ -27,7 +27,7 @@ export const Left = styled.div`
     display: flex;
 `;
 
-export const Option = styled(Link).attrs({})`
+export const Option = styled.div`
     strong {
         border-bottom: ${props =>
             props.isSelected ? `2px solid ${darken(1, '#444444')}` : 'none'};
