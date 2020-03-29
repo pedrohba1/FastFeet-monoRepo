@@ -30,10 +30,6 @@ export default function Header() {
         }
     }
 
-    useEffect(() => {
-        dispatch(changeTab('couriers'));
-    }, [dispatch]);
-
     function handleSignOut() {
         dispatch(signOut());
     }
@@ -51,13 +47,19 @@ export default function Header() {
                     </Option>
                     <Option
                         onClick={() => handleTabChange('couriers')}
-                        isSelected={currentTab === 'couriers'}
+                        isSelected={
+                            currentTab === 'couriers' ||
+                            currentTab === 'register/courier'
+                        }
                     >
                         <strong>ENTREGADORES</strong>
                     </Option>
                     <Option
                         onClick={() => handleTabChange('recipients')}
-                        isSelected={currentTab === 'recipients'}
+                        isSelected={
+                            currentTab === 'recipients' ||
+                            currentTab === 'register/recipient'
+                        }
                     >
                         <strong>DESTINATÁRIOS</strong>
                     </Option>

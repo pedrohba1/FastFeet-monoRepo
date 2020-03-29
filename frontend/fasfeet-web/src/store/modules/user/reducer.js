@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
     profile: null,
-    tab: 'couriers',
+    tab: null,
 };
 
 export default function user(state = INITIAL_STATE, action) {
@@ -14,6 +14,7 @@ export default function user(state = INITIAL_STATE, action) {
             }
             case '@auth/SIGN_OUT': {
                 draft.profile = null;
+                draft.tab = null;
                 break;
             }
             case '@user/CHANGE_TAB': {
