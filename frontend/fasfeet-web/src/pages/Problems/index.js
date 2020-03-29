@@ -100,10 +100,10 @@ export default function Problems() {
 
                 {problems.map(problem => (
                     <>
-                        <ListMain>
+                        <ListMain key={String(problem.id)}>
                             <span>#{problem.id}</span>
                         </ListMain>
-                        <ListMain numberOfLines={2}>
+                        <ListMain>
                             <Description>{problem.description}</Description>
                         </ListMain>
                         <ListActions>
