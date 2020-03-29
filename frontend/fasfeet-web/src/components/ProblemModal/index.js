@@ -49,5 +49,7 @@ export default function ProblemModal({ closeFunc, isOpen, problemData }) {
 ProblemModal.propTypes = {
     closeFunc: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
-    problemData: PropTypes.object.isRequired,
+    problemData: PropTypes.shape({
+        description: PropTypes.string,
+    }).isRequired,
 };

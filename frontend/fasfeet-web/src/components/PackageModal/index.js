@@ -73,5 +73,14 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
 PackageModal.propTypes = {
     closeFunc: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
-    packData: PropTypes.object.isRequired,
+    packData: PropTypes.shape({
+        address: PropTypes.string,
+        address_number: PropTypes.number,
+        city: PropTypes.string,
+        state: PropTypes.string,
+        cep: PropTypes.number,
+        start_date: PropTypes.string,
+        end_date: PropTypes.string,
+        signatureUrl: PropTypes.string,
+    }).isRequired,
 };
