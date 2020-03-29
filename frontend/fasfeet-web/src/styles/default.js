@@ -49,13 +49,17 @@ export const ListMain = styled.main`
     border-radius: 4px;
     padding: 10px;
 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     background: #ffffff;
     height: 57px;
     display: flex;
 
     span {
         display: flex;
-        flex-direction: row;
+        overflow: hidden;
+        text-overflow: ellipsis;
         justify-content: flex-start;
         text-align: left;
         align-self: center;

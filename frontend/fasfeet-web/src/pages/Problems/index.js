@@ -13,7 +13,7 @@ import {
 } from '~/styles/default';
 import DropdownMenu from '~/components/DropdownMenu';
 
-import { List } from './styles';
+import { List, Description } from './styles';
 import api from '~/services/api';
 
 export default function Problems() {
@@ -103,8 +103,8 @@ export default function Problems() {
                         <ListMain>
                             <span>#{problem.id}</span>
                         </ListMain>
-                        <ListMain>
-                            <span>{problem.description}</span>
+                        <ListMain numberOfLines={2}>
+                            <Description>{problem.description}</Description>
                         </ListMain>
                         <ListActions>
                             <DropdownMenu

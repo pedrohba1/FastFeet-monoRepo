@@ -6,3 +6,10 @@ export const List = styled.div`
     grid-template-columns: 1fr 3fr 1fr;
     grid-row-gap: 20px;
 `;
+
+export const Description = styled.p.attrs({})`
+    justify-content: flex-start;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
