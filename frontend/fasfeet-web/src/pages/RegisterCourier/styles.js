@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: auto;
+    max-width: 1200px;
+`;
 
 export const Header = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 `;
 
 export const Buttons = styled.div`
@@ -14,7 +20,23 @@ export const Buttons = styled.div`
     flex-direction: row;
 `;
 
-export const DataContainer = styled.div``;
+export const TextInputs = styled.div`
+    input {
+        padding: 0 15px;
+
+        height: 45px;
+        border-radius: 4px;
+        border: 1px solid #dddddd;
+        display: flex;
+        width: 100%;
+    }
+`;
+
+export const FormContainer = styled.div`
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px;
+`;
 
 export const BackButton = styled.button`
     display: flex;
