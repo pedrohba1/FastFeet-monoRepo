@@ -80,21 +80,23 @@ class CourierController {
         }
 
         const pk = req.params.id;
+        const { avatar_id } = req.body;
 
         const courier = await Courier.findByPk(pk);
         if (!courier) {
             return res.status(400).json({ error: 'courier does not exist' });
         }
 
-        const avatarExists = await File.findByPk(req.body.avatar_id);
-
-        if (!avatarExists) {
-            return res.status(400).json({ error: 'avatar does not exist' });
+        if (avatar_id) {
+            const avatarExists = await File.findByPk(req.body.avatar_id);
+            if (!avatarExists) {
+                return res.status(400).json({ error: 'avatar does not exist' });
+            }
         }
 
-        const { id, name, avatar_id, email } = await courier.update(req.body);
+        const response = await courier.update(req.body);
 
-        return res.json({ id, name, avatar_id, email });
+        return res.json(response);
     }
 
     async destroy(req, res) {
