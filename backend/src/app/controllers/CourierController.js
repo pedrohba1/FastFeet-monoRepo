@@ -4,7 +4,6 @@ import { Op } from 'sequelize';
 
 import Courier from '../models/Courier';
 import File from '../models/File';
-import Package from '../models/Package';
 
 class CourierController {
     async index(req, res) {
