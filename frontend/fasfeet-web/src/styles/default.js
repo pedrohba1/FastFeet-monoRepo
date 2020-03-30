@@ -32,6 +32,7 @@ export const NoData = styled.div`
 
 export const ListHeader = styled.div`
     padding: 10px;
+    padding-bottom: 0px;
 
     span {
         color: #444444;
