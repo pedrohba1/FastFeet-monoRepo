@@ -103,30 +103,30 @@ export default function Couriers() {
                 <ListHeader>
                     <span>Ações</span>
                 </ListHeader>
-
-                {couriers.map(courier => (
-                    <>
-                        <ListMain>
-                            <span>#{courier.id}</span>
-                        </ListMain>
-                        <ListMain>
-                            <Picture
-                                name={courier.name}
-                                src={courier.avatar && courier.avatar.url}
-                            />
-                        </ListMain>
-                        <ListMain>
-                            <span>{courier.name}</span>
-                        </ListMain>
-                        <ListMain>
-                            <span>{courier.email}</span>
-                        </ListMain>
-                        <ListActions>
-                            <DropdownMenu />
-                        </ListActions>
-                    </>
-                ))}
             </List>
+
+            {couriers.map(courier => (
+                <List key={String(courier.id)}>
+                    <ListMain>
+                        <span>#{courier.id}</span>
+                    </ListMain>
+                    <ListMain>
+                        <Picture
+                            name={courier.name}
+                            src={courier.avatar && courier.avatar.url}
+                        />
+                    </ListMain>
+                    <ListMain>
+                        <span>{courier.name}</span>
+                    </ListMain>
+                    <ListMain>
+                        <span>{courier.email}</span>
+                    </ListMain>
+                    <ListActions>
+                        <DropdownMenu />
+                    </ListActions>
+                </List>
+            ))}
 
             <Footer>
                 <button

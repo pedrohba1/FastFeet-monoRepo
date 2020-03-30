@@ -101,32 +101,32 @@ export default function Recipients() {
                 <ListHeader>
                     <span>Ações</span>
                 </ListHeader>
-
-                {recipients.map(recipient => (
-                    <>
-                        <ListMain>
-                            <span>#{recipient.id}</span>
-                        </ListMain>
-                        <ListMain>
-                            <span>{recipient.name}</span>
-                        </ListMain>
-                        <ListMain>
-                            <span>
-                                {recipient.address}
-                                {', '}
-                                {recipient.address_complement}
-                                {', '}
-                                {recipient.city}
-                                {', '}
-                                {recipient.state}
-                            </span>
-                        </ListMain>
-                        <ListActions>
-                            <DropdownMenu />
-                        </ListActions>
-                    </>
-                ))}
             </List>
+
+            {recipients.map(recipient => (
+                <List key={String(recipient.id)}>
+                    <ListMain>
+                        <span>#{recipient.id}</span>
+                    </ListMain>
+                    <ListMain>
+                        <span>{recipient.name}</span>
+                    </ListMain>
+                    <ListMain>
+                        <span>
+                            {recipient.address}
+                            {', '}
+                            {recipient.address_complement}
+                            {', '}
+                            {recipient.city}
+                            {', '}
+                            {recipient.state}
+                        </span>
+                    </ListMain>
+                    <ListActions>
+                        <DropdownMenu />
+                    </ListActions>
+                </List>
+            ))}
 
             <Footer>
                 <button

@@ -145,50 +145,50 @@ export default function Packages() {
                 <ListHeader>
                     <span>Ações</span>
                 </ListHeader>
-
-                {packages.map(pack => (
-                    <>
-                        <ListMain>
-                            <span>#{pack.id}</span>
-                        </ListMain>
-                        <ListMain>
-                            <span>{pack.recipient.name}</span>
-                        </ListMain>
-                        <ListMain>
-                            <HorizontalContainer>
-                                <Picture
-                                    name={pack.courier.name}
-                                    src={
-                                        pack.courier.avatar &&
-                                        pack.courier.avatar.url
-                                    }
-                                />
-                                <span>{pack.courier.name}</span>
-                            </HorizontalContainer>
-                        </ListMain>
-                        <ListMain>
-                            <span>{pack.recipient.city}</span>
-                        </ListMain>
-                        <ListMain>
-                            <span>{pack.recipient.state}</span>
-                        </ListMain>
-                        <ListMain>
-                            <Status status={pack.status}>
-                                <figure />
-                                {pack.status}
-                            </Status>
-                        </ListMain>
-
-                        <ListActions>
-                            <DropdownMenu
-                                data={pack}
-                                inPackages
-                                openModalFunction={handleRequestOpen}
-                            />
-                        </ListActions>
-                    </>
-                ))}
             </List>
+
+            {packages.map(pack => (
+                <List key={String(pack.id)}>
+                    <ListMain>
+                        <span>#{pack.id}</span>
+                    </ListMain>
+                    <ListMain>
+                        <span>{pack.recipient.name}</span>
+                    </ListMain>
+                    <ListMain>
+                        <HorizontalContainer>
+                            <Picture
+                                name={pack.courier.name}
+                                src={
+                                    pack.courier.avatar &&
+                                    pack.courier.avatar.url
+                                }
+                            />
+                            <span>{pack.courier.name}</span>
+                        </HorizontalContainer>
+                    </ListMain>
+                    <ListMain>
+                        <span>{pack.recipient.city}</span>
+                    </ListMain>
+                    <ListMain>
+                        <span>{pack.recipient.state}</span>
+                    </ListMain>
+                    <ListMain>
+                        <Status status={pack.status}>
+                            <figure />
+                            {pack.status}
+                        </Status>
+                    </ListMain>
+
+                    <ListActions>
+                        <DropdownMenu
+                            data={pack}
+                            inPackages
+                            openModalFunction={handleRequestOpen}
+                        />
+                    </ListActions>
+                </List>
+            ))}
 
             <Footer>
                 <button

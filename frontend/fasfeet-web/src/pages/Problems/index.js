@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import ProblemModal from '~/components/ProblemModal';
-
+import formatString from '~/utils/formatString';
 import {
     Title,
     Buttons,
@@ -98,25 +98,27 @@ export default function Problems() {
                 <ListHeader>
                     <span>Ações</span>
                 </ListHeader>
-
-                {problems.map(problem => (
-                    <>
-                        <ListMain key={String(problem.id)}>
-                            <span>#{problem.id}</span>
-                        </ListMain>
-                        <ListMain>
-                            <Description>{problem.description}</Description>
-                        </ListMain>
-                        <ListActions>
-                            <DropdownMenu
-                                inProblems
-                                data={problem}
-                                openModalFunction={handleRequestOpen}
-                            />
-                        </ListActions>
-                    </>
-                ))}
             </List>
+
+            {problems.map(problem => (
+                <List key={String(problem.id)}>
+                    <ListMain>
+                        <span>#{problem.id}</span>
+                    </ListMain>
+                    <ListMain>
+                        <Description>
+                            {formatString(problem.description, 100)}
+                        </Description>
+                    </ListMain>
+                    <ListActions>
+                        <DropdownMenu
+                            inProblems
+                            data={problem}
+                            openModalFunction={handleRequestOpen}
+                        />
+                    </ListActions>
+                </List>
+            ))}
 
             <Footer>
                 <button
