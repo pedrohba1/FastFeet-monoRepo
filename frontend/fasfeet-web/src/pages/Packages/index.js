@@ -63,8 +63,10 @@ export default function Packages() {
         setPackages(response.data);
         setLoading(false);
     }
+
     useEffect(() => {
         searchPackages();
+        // eslint-disable-next-line
     }, [page]);
 
     function handleEnterPress(e) {
@@ -80,7 +82,6 @@ export default function Packages() {
     function handleRequestOpen(pack) {
         setModalOpen(true);
 
-        console.tron.log(pack);
         const { recipient, end_date, start_date, signature } = pack;
 
         const packData = {
@@ -95,7 +96,6 @@ export default function Packages() {
             signatureUrl: signature === null ? null : signature.url,
         };
 
-        console.tron.log(packData);
         setModalContent({ ...packData });
     }
 

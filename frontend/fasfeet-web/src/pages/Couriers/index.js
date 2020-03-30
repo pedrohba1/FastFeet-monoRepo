@@ -48,6 +48,7 @@ export default function Couriers() {
     }
     useEffect(() => {
         searchCouriers();
+        // eslint-disable-next-line
     }, [page]);
 
     function handleEnterPress(e) {

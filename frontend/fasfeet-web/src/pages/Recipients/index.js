@@ -36,7 +36,7 @@ export default function Recipients() {
         setPage(page - 1);
     }
 
-    async function searchPackages() {
+    async function searchRecipients() {
         setLoading(true);
 
         const response = await api.get('recipients', {
@@ -55,12 +55,13 @@ export default function Recipients() {
     }
 
     useEffect(() => {
-        searchPackages();
+        searchRecipients();
+        // eslint-disable-next-line
     }, [page]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchPackages();
+            searchRecipients();
         }
     }
 

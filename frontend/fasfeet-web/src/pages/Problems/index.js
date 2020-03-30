@@ -32,7 +32,7 @@ export default function Problems() {
         setPage(page - 1);
     }
 
-    async function searchPackages() {
+    async function searchProblems() {
         setLoading(true);
         const response = await api.get('problems', {
             params: {
@@ -49,12 +49,13 @@ export default function Problems() {
     }
 
     useEffect(() => {
-        searchPackages();
+        searchProblems();
+        // eslint-disable-next-line
     }, [page]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchPackages();
+            searchProblems();
         }
     }
 
