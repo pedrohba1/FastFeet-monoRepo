@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 import history from '~/services/history';
 import { signInSuccess, signFailure } from './actions';
+import { changeTab } from '~/store/modules/user/actions';
 
 export function* signIn({ payload }) {
     try {
@@ -15,7 +16,7 @@ export function* signIn({ payload }) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
         yield put(signInSuccess(token, user));
-        history.push('/couriers');
+        yield put(changeTab('couriers'));
     } catch (err) {
         toast.error('Falha na autenticação. Verifique seus dados');
         yield put(signFailure());
@@ -30,8 +31,8 @@ export function setToken({ payload }) {
     }
 }
 
-export function signOut() {
-    history.push('/');
+export function* signOut() {
+    yield put(changeTab(''));
 }
 
 export default all([

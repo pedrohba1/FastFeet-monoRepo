@@ -34,6 +34,18 @@ export default function DropdownMenu({
                 visible={visible}
                 onMouseLeave={handleToggleVisible}
             >
+                {(inPackages || inProblems) && (
+                    <Option>
+                        <IoMdEye color="#8E5BE8" />
+                        <button
+                            onClick={() => openModalFunction(data)}
+                            type="button"
+                        >
+                            Visualizar
+                        </button>
+                    </Option>
+                )}
+
                 {!inProblems && (
                     <Option>
                         <MdEdit color="#4D85EE" />
@@ -47,18 +59,6 @@ export default function DropdownMenu({
                         {inProblems ? 'Cancelar encomenda' : 'Excluir'}
                     </button>
                 </Option>
-
-                {(inPackages || inProblems) && (
-                    <Option>
-                        <IoMdEye color="#8E5BE8" />
-                        <button
-                            onClick={() => openModalFunction(data)}
-                            type="button"
-                        >
-                            Visualizar
-                        </button>
-                    </Option>
-                )}
             </OptionList>
         </Container>
     );
