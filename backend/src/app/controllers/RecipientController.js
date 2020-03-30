@@ -18,6 +18,7 @@ class RecipientController {
                 'name',
                 'address',
                 'address_complement',
+                'address_number',
                 'state',
                 'city',
                 'cep',
@@ -48,7 +49,6 @@ class RecipientController {
     }
 
     async update(req, res) {
-        // TODO Você precisa terminar o update de recipient
         const schema = Yup.object().shape({
             name: Yup.string(),
             address: Yup.string(),
@@ -64,8 +64,17 @@ class RecipientController {
                 error: 'validation fail, invalid json',
             });
         }
+        const pk = req.params.id;
 
-        return res.json({ msg: 'teste' });
+        const recipient = await Recipient.findByPk(pk);
+
+        if (!recipient) {
+            return res.status(400).json({ error: 'recipient does not exist' });
+        }
+
+        const response = await recipient.update(req.body);
+
+        return res.json(response);
     }
 }
 
