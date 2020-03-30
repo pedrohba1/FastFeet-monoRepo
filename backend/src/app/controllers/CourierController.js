@@ -50,7 +50,7 @@ class CourierController {
             },
         });
         if (CourierExists) {
-            return res.status(400).json({
+            return res.status(461).json({
                 error: 'user already exists',
             });
         }
