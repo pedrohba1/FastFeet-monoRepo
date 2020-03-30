@@ -81,5 +81,5 @@ DropdownMenu.propTypes = {
     inPackages: PropTypes.bool,
     openModalFunction: PropTypes.func,
     data: PropTypes.object.isRequired,
-    EditFunction: PropTypes.func.isRequired,
+    editFunction: PropTypes.func.isRequired,
 };

@@ -17,7 +17,7 @@ import { List } from './styles';
 
 import DropdownMenu from '~/components/DropdownMenu';
 import { changeTab } from '~/store/modules/user/actions';
-
+import { passEditData } from '~/store/modules/recipient/actions';
 import api from '~/services/api';
 
 export default function Recipients() {
@@ -63,6 +63,11 @@ export default function Recipients() {
         if (e.which === 13 || e.keyCode === 13) {
             searchRecipients();
         }
+    }
+
+    function handleEdit(data) {
+        dispatch(passEditData(data));
+        dispatch(changeTab('edit/recipient'));
     }
 
     return (
@@ -115,6 +120,8 @@ export default function Recipients() {
                         <span>
                             {recipient.address}
                             {', '}
+                            {recipient.address_number}
+                            {', '}
                             {recipient.address_complement}
                             {', '}
                             {recipient.city}
@@ -123,7 +130,10 @@ export default function Recipients() {
                         </span>
                     </ListMain>
                     <ListActions>
-                        <DropdownMenu />
+                        <DropdownMenu
+                            data={recipient}
+                            editFunction={handleEdit}
+                        />
                     </ListActions>
                 </List>
             ))}

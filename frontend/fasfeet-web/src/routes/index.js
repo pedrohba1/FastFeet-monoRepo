@@ -8,8 +8,10 @@ import Packages from '~/pages/Packages';
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
 import RegisterCourier from '~/pages/RegisterCourier';
-import EditCourier from '~/pages/EditCourier';
 import RegisterRecipient from '~/pages/RegisterRecipient';
+
+import EditRecipient from '~/pages/EditRecipient';
+import EditCourier from '~/pages/EditCourier';
 
 export default function Routes() {
     return (
@@ -19,16 +21,19 @@ export default function Routes() {
             <Route path="/packages" isPrivate component={Packages} />
             <Route path="/problems" isPrivate component={Problems} />
             <Route path="/recipients" isPrivate component={Recipients} />
-            <Route
-                path="/register/courier"
-                isPrivate
-                component={RegisterCourier}
-            />
+
             <Route path="/edit/courier" isPrivate component={EditCourier} />
+            <Route path="/edit/recipient" isPrivate component={EditRecipient} />
+
             <Route
                 path="/register/recipient"
                 isPrivate
                 component={RegisterRecipient}
+            />
+            <Route
+                path="/register/courier"
+                isPrivate
+                component={RegisterCourier}
             />
         </Switch>
     );
