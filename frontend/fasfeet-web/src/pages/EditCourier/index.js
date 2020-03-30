@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { RegisterButton, Title } from '~/styles/default';
 import AvatarInput from '~/components/AvatarInput';
+import AvatarEditInput from '~/components/AvatarEditInput';
 
 import {
     Container,
@@ -113,11 +114,18 @@ export default function EditCourier() {
 
             <FormContainer>
                 <form onSubmit={handleSubmit}>
-                    <AvatarInput
-                        handleFileChange={handleFileChange}
-                        preview={preview}
-                        file={file}
-                    />
+                    {file ? (
+                        <AvatarInput
+                            handleFileChange={handleFileChange}
+                            preview={preview}
+                            file={file}
+                        />
+                    ) : (
+                        <AvatarEditInput
+                            handleFileChange={handleFileChange}
+                            name={name}
+                        />
+                    )}
 
                     <TextInputs>
                         <h4>Nome</h4>
