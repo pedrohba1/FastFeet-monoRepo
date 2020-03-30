@@ -61,8 +61,10 @@ export default function EditCourier() {
         const data = {
             name,
             email,
-            avatar_id: file,
         };
+        if (file) {
+            data.avatar_id = file;
+        }
 
         if (!(await schema.isValid(data))) {
             toast.error('formulário inválido, verifique seus dados');
