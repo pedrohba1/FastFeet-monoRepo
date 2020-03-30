@@ -15,6 +15,7 @@ import {
 } from '~/styles/default';
 
 import { changeTab } from '~/store/modules/user/actions';
+import { passEditData } from '~/store/modules/courier/actions';
 
 import { List } from './styles';
 
@@ -67,6 +68,7 @@ export default function Couriers() {
 
     function handleEdit(data) {
         console.tron.log(data);
+        dispatch(passEditData(data));
         dispatch(changeTab('edit/courier'));
     }
 

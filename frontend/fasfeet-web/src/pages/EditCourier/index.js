@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { RegisterButton, Title } from '~/styles/default';
@@ -25,15 +25,33 @@ const schema = Yup.object().shape({
         .required(),
 });
 
-export default function EditCourier({ courier }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [preview, setPreview] = useState('');
-    const [file, setFile] = useState(0);
+export default function EditCourier() {
+    const courierId = useSelector(state => state.courier.data.id);
+
+    const [name, setName] = useState(
+        useSelector(state => state.courier.data.name)
+    );
+    const [email, setEmail] = useState(
+        useSelector(state => state.courier.data.email)
+    );
+    const [preview, setPreview] = useState(
+        useSelector(state => {
+            if (state.courier.data.avatar) {
+                return state.courier.data.avatar.url;
+            }
+            return '';
+        })
+    );
+    const [file, setFile] = useState(
+        useSelector(state => {
+            if (state.courier.data.avatar) {
+                return state.courier.data.avatar.id;
+            }
+            return '';
+        })
+    );
 
     const dispatch = useDispatch();
-
-    useEffect(() => {});
 
     function handleReturn() {
         dispatch(changeTab('couriers'));
@@ -50,9 +68,9 @@ export default function EditCourier({ courier }) {
             toast.error('formulário inválido, verifique seus dados');
             return;
         }
-        api.post('couriers', data)
+        api.put(`couriers/${courierId}`, data)
             .then(() => {
-                toast.success('entregador cadastrado com sucesso!');
+                toast.success('entregador editado com sucesso!');
             })
             .catch(err => {
                 if (err.response.status === 461) {
