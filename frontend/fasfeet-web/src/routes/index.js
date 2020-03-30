@@ -8,6 +8,7 @@ import Packages from '~/pages/Packages';
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
 import RegisterCourier from '~/pages/RegisterCourier';
+import EditCourier from '~/pages/EditCourier';
 import RegisterRecipient from '~/pages/RegisterRecipient';
 
 export default function Routes() {
@@ -23,6 +24,7 @@ export default function Routes() {
                 isPrivate
                 component={RegisterCourier}
             />
+            <Route path="/edit/courier" isPrivate component={EditCourier} />
             <Route
                 path="/register/recipient"
                 isPrivate

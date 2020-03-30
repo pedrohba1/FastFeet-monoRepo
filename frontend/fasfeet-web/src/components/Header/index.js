@@ -49,7 +49,8 @@ export default function Header() {
                         onClick={() => handleTabChange('couriers')}
                         isSelected={
                             currentTab === 'couriers' ||
-                            currentTab === 'register/courier'
+                            currentTab === 'register/courier' ||
+                            currentTab === 'edit/courier'
                         }
                     >
                         <strong>ENTREGADORES</strong>

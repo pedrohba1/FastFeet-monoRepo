@@ -16,6 +16,7 @@ export default function DropdownMenu({
     inProblems,
     openModalFunction,
     data,
+    editFunction,
 }) {
     const [visible, setVisible] = useState(false);
 
@@ -49,7 +50,12 @@ export default function DropdownMenu({
                 {!inProblems && (
                     <Option>
                         <MdEdit color="#4D85EE" />
-                        <button type="button">Editar</button>
+                        <button
+                            onClick={() => editFunction(data)}
+                            type="button"
+                        >
+                            Editar
+                        </button>
                     </Option>
                 )}
 
@@ -75,4 +81,5 @@ DropdownMenu.propTypes = {
     inPackages: PropTypes.bool,
     openModalFunction: PropTypes.func,
     data: PropTypes.object.isRequired,
+    EditFunction: PropTypes.func.isRequired,
 };

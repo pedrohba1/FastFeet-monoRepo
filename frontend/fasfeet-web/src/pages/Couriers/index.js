@@ -65,6 +65,11 @@ export default function Couriers() {
         setPage(page - 1);
     }
 
+    function handleEdit(data) {
+        console.tron.log(data);
+        dispatch(changeTab('edit/courier'));
+    }
+
     return (
         <>
             <Title> Gerenciando entregadores</Title>
@@ -123,7 +128,10 @@ export default function Couriers() {
                         <span>{courier.email}</span>
                     </ListMain>
                     <ListActions>
-                        <DropdownMenu />
+                        <DropdownMenu
+                            editFunction={handleEdit}
+                            data={courier}
+                        />
                     </ListActions>
                 </List>
             ))}

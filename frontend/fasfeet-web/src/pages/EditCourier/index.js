@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -25,13 +25,15 @@ const schema = Yup.object().shape({
         .required(),
 });
 
-export default function RegisterCourier() {
+export default function EditCourier({ courier }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [preview, setPreview] = useState('');
     const [file, setFile] = useState(0);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {});
 
     function handleReturn() {
         dispatch(changeTab('couriers'));
@@ -75,7 +77,7 @@ export default function RegisterCourier() {
     return (
         <Container>
             <Header>
-                <Title>Cadastro de entregadores</Title>
+                <Title>Edição de entregadores</Title>
 
                 <Buttons>
                     <BackButton onClick={handleReturn}>
