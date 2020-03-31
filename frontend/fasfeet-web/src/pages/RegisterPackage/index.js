@@ -69,7 +69,10 @@ export default function RegisterPackage() {
 
         const tempArr = [];
         function makeNewArray(elem) {
-            tempArr.push({ value: elem.id, label: elem.name });
+            tempArr.push({
+                value: elem.id,
+                label: `${elem.name}, (${elem.email})`,
+            });
         }
         response.data.forEach(makeNewArray);
         setCouriers(tempArr);
