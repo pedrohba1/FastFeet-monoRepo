@@ -43,7 +43,8 @@ export default function Header() {
                         onClick={() => handleTabChange('packages')}
                         isSelected={
                             currentTab === 'packages' ||
-                            currentTab === 'register/package'
+                            currentTab === 'register/package' ||
+                            currentTab === 'edit/package'
                         }
                     >
                         <strong>ENCOMENDAS</strong>
