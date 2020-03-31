@@ -19,6 +19,7 @@ import { List, Status, HorizontalContainer } from './styles';
 import Picture from '~/components/Picture';
 import DropdownMenu from '~/components/DropdownMenu';
 import { changeTab } from '~/store/modules/user/actions';
+import { passEditData } from '~/store/modules/package/actions';
 
 export default function Packages() {
     const [packages, setPackages] = useState([]);
@@ -81,6 +82,12 @@ export default function Packages() {
 
     function handleRequestClose() {
         setModalOpen(false);
+    }
+
+    function handleEdit(data) {
+        console.tron.log(data);
+        dispatch(passEditData(data));
+        dispatch(changeTab('edit/package'));
     }
 
     function handleRequestOpen(pack) {
@@ -190,7 +197,9 @@ export default function Packages() {
 
                     <ListActions>
                         <DropdownMenu
-                            data={pack}
+                            dataForView={pack}
+                            dataForEdit={pack}
+                            editFunction={handleEdit}
                             inPackages
                             openModalFunction={handleRequestOpen}
                         />

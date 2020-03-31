@@ -14,6 +14,7 @@ import RegisterRecipient from '~/pages/RegisterRecipient';
 
 import EditRecipient from '~/pages/EditRecipient';
 import EditCourier from '~/pages/EditCourier';
+import EditPackage from '~/pages/editPackage';
 
 export default function Routes() {
     return (
@@ -26,6 +27,7 @@ export default function Routes() {
 
             <Route path="/edit/courier" isPrivate component={EditCourier} />
             <Route path="/edit/recipient" isPrivate component={EditRecipient} />
+            <Route path="/edit/package" isPrivate component={EditPackage} />
 
             <Route
                 path="/register/recipient"
