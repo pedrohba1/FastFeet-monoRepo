@@ -56,11 +56,22 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
                     nada quando as datas estivessem vindo nulas, mas etá mostrando a data do dia */}
                 <Text>
                     <Bold>Retirada: </Bold>
-                    <Moment format="DD/MM/YYYY" date={packData.start_date} />
+                    {packData.start_date ? (
+                        <Moment
+                            format="DD/MM/YYYY"
+                            date={packData.start_date}
+                        />
+                    ) : (
+                        <span>pacote ainda não foi retirado </span>
+                    )}
                 </Text>
                 <Text>
                     <Bold>Entrega: </Bold>
-                    <Moment format="DD/MM/YYYY" date={packData.end_date} />
+                    {packData.end_date ? (
+                        <Moment format="DD/MM/YYYY" date={packData.end_date} />
+                    ) : (
+                        <span>pacote ainda não foi entregue </span>
+                    )}
                 </Text>
             </Container>
 
