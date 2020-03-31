@@ -131,7 +131,7 @@ export default function Recipients() {
                     </ListMain>
                     <ListActions>
                         <DropdownMenu
-                            data={recipient}
+                            dataForEdit={recipient}
                             editFunction={handleEdit}
                         />
                     </ListActions>

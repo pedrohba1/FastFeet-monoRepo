@@ -113,7 +113,7 @@ export default function Problems() {
                     <ListActions>
                         <DropdownMenu
                             inProblems
-                            data={problem}
+                            dataForView={problem}
                             openModalFunction={handleRequestOpen}
                         />
                     </ListActions>

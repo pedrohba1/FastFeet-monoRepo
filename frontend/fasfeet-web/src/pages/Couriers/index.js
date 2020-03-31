@@ -132,7 +132,7 @@ export default function Couriers() {
                     <ListActions>
                         <DropdownMenu
                             editFunction={handleEdit}
-                            data={courier}
+                            dataForEdit={courier}
                         />
                     </ListActions>
                 </List>
