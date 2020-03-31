@@ -7,6 +7,8 @@ import Couriers from '~/pages/Couriers';
 import Packages from '~/pages/Packages';
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
+
+import RegisterPackage from '~/pages/RegisterPackage';
 import RegisterCourier from '~/pages/RegisterCourier';
 import RegisterRecipient from '~/pages/RegisterRecipient';
 
@@ -34,6 +36,11 @@ export default function Routes() {
                 path="/register/courier"
                 isPrivate
                 component={RegisterCourier}
+            />
+            <Route
+                path="/register/package"
+                isPrivate
+                component={RegisterPackage}
             />
         </Switch>
     );

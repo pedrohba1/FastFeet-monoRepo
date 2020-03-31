@@ -41,7 +41,10 @@ export default function Header() {
                     <img src={logo} alt="fastFeet" />
                     <Option
                         onClick={() => handleTabChange('packages')}
-                        isSelected={currentTab === 'packages'}
+                        isSelected={
+                            currentTab === 'packages' ||
+                            currentTab === 'register/package'
+                        }
                     >
                         <strong>ENCOMENDAS</strong>
                     </Option>

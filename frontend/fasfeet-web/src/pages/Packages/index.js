@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import api from '~/services/api';
 import PackageModal from '~/components/PackageModal';
 import {
@@ -17,6 +18,7 @@ import { List, Status, HorizontalContainer } from './styles';
 
 import Picture from '~/components/Picture';
 import DropdownMenu from '~/components/DropdownMenu';
+import { changeTab } from '~/store/modules/user/actions';
 
 export default function Packages() {
     const [packages, setPackages] = useState([]);
@@ -25,6 +27,8 @@ export default function Packages() {
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const dispatch = useDispatch();
 
     function handleAddPage() {
         setPage(page + 1);
@@ -117,7 +121,11 @@ export default function Packages() {
                     placeholder="buscar por entregadores"
                     iconPosition="left"
                 />
-                <RegisterButton>
+                <RegisterButton
+                    onClick={() => {
+                        dispatch(changeTab('register/package'));
+                    }}
+                >
                     <SearchIcon />
                     <span>CADASTRAR</span>
                 </RegisterButton>

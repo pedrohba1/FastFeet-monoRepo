@@ -52,6 +52,8 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
             <Container>
                 <Bold>Datas</Bold>
 
+                {/* TODO: Tem um problema com as datasd aqui, não era pra mostra
+                    nada quando as datas estivessem vindo nulas, mas etá mostrando a data do dia */}
                 <Text>
                     <Bold>Retirada: </Bold>
                     <Moment format="DD/MM/YYYY" date={packData.start_date} />
