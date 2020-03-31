@@ -11,9 +11,6 @@ import { Container, Text, Bold } from './styles';
 export default function PackageModal({ closeFunc, isOpen, packData }) {
     console.tron.log(packData);
 
-    /*     const { timezone } = Intl.DateTimeFormat().resolvedOptions();
-     */
-
     return (
         <ReactModal
             shouldCloseOnOverlayClick

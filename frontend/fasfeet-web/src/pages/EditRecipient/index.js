@@ -85,10 +85,12 @@ export default function EditRecipient() {
         }
         api.put(`recipients/${recipientId}`, data)
             .then(() => {
-                toast.success('recipiente editado com sucesso!');
+                toast.success('recipiente atualizado com sucesso!');
             })
             .catch(() => {
-                toast.error('falha na edição de recipiente, algo deu errado');
+                toast.error(
+                    'falha na atualização de recipiente, algo deu errado'
+                );
             });
     }
     return (

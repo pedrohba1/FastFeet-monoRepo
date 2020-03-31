@@ -14,7 +14,7 @@ import RegisterRecipient from '~/pages/RegisterRecipient';
 
 import EditRecipient from '~/pages/EditRecipient';
 import EditCourier from '~/pages/EditCourier';
-import EditPackage from '~/pages/editPackage';
+import EditPackage from '~/pages/EditPackage';
 
 export default function Routes() {
     return (

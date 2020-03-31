@@ -73,16 +73,12 @@ export default function EditCourier() {
         }
         api.put(`couriers/${courierId}`, data)
             .then(() => {
-                toast.success('entregador editado com sucesso!');
+                toast.success('entregador atualizado com sucesso!');
             })
             .catch(err => {
-                if (err.response.status === 461) {
-                    toast.error('já existe um entregador com este email');
-                } else {
-                    toast.error(
-                        'falha no cadastro de entregador, algo deu errado'
-                    );
-                }
+                toast.error(
+                    'falha na atualização de entregador, algo deu errado'
+                );
             });
     }
 
