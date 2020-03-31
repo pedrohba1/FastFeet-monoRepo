@@ -50,7 +50,7 @@ export default function Packages() {
         });
 
         response.data.map(pack => {
-            pack.id = pack.id < 10 ? `0${pack.id}` : pack.id;
+            pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
 
             if (!pack.start_date) {
                 pack.status = 'PENDENTE';
@@ -86,7 +86,21 @@ export default function Packages() {
 
     function handleEdit(data) {
         console.tron.log(data);
-        dispatch(passEditData(data));
+
+        const obj = {
+            package_id: data.id,
+            selectedCourier: {
+                value: data.courier.id,
+                label: `${data.courier.name}, (${data.courier.email})`,
+            },
+            selectedRecipient: {
+                value: data.recipient.id,
+                label: data.recipient.name,
+            },
+            product: data.product,
+        };
+
+        dispatch(passEditData(obj));
         dispatch(changeTab('edit/package'));
     }
 
@@ -165,7 +179,7 @@ export default function Packages() {
             {packages.map(pack => (
                 <List key={String(pack.id)}>
                     <ListMain>
-                        <span>#{pack.id}</span>
+                        <span>#{pack.idDisplay}</span>
                     </ListMain>
                     <ListMain>
                         <span>{pack.recipient.name}</span>

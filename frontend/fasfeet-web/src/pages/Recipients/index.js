@@ -46,7 +46,7 @@ export default function Recipients() {
             },
         });
         response.data.map(recipient => {
-            recipient.id =
+            recipient.idDisplay =
                 recipient.id < 10 ? `0${recipient.id}` : recipient.id;
             return recipient;
         });
@@ -111,7 +111,7 @@ export default function Recipients() {
             {recipients.map(recipient => (
                 <List key={String(recipient.id)}>
                     <ListMain>
-                        <span>#{recipient.id}</span>
+                        <span>#{recipient.idDisplay}</span>
                     </ListMain>
                     <ListMain>
                         <span>{recipient.name}</span>

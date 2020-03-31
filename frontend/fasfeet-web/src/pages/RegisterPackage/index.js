@@ -95,7 +95,7 @@ export default function RegisterPackage() {
             product,
         })
             .then(() => {
-                toast.success('recipiente cadastrado com sucesso!');
+                toast.success('encomenda cadastrada com sucesso!');
             })
             .catch(() => {
                 toast.error('falha no cadastro de entregador, algo deu errado');

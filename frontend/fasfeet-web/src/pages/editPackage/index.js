@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 
@@ -28,14 +28,36 @@ const SelectorStyles = {
 };
 
 export default function EditPackage() {
+    const packageId = useSelector(state => state.pack.data.package_id);
     const [recipients, setRecipients] = useState([]);
     const [couriers, setCouriers] = useState([]);
     const [recipientInput, setRecipientInput] = useState('');
     const [courierInput, setCourierInput] = useState('');
-    const [product, setProduct] = useState('');
+    const [product, setProduct] = useState(
+        useSelector(state => {
+            if (state.pack) {
+                return state.pack.data.product;
+            }
+            return '';
+        })
+    );
 
-    const [selectedRecipient, setSelectedRecipient] = useState({});
-    const [selectedCourier, setSelectedCourier] = useState({});
+    const [selectedRecipient, setSelectedRecipient] = useState(
+        useSelector(state => {
+            if (state.pack) {
+                return state.pack.data.selectedRecipient;
+            }
+            return {};
+        })
+    );
+    const [selectedCourier, setSelectedCourier] = useState(
+        useSelector(state => {
+            if (state.pack) {
+                return state.pack.data.selectedCourier;
+            }
+            return {};
+        })
+    );
 
     const dispatch = useDispatch();
 
@@ -89,16 +111,21 @@ export default function EditPackage() {
     }
 
     async function handleSubmit() {
-        api.post('packages', {
+        const data = {
             recipient_id: selectedRecipient.value,
             courier_id: selectedCourier.value,
             product,
-        })
+        };
+
+        console.tron.log(data);
+
+        api.put(`packages/${packageId}`, data)
             .then(() => {
-                toast.success('recipiente cadastrado com sucesso!');
+                toast.success('pacote atualizado com sucesso!');
             })
-            .catch(() => {
-                toast.error('falha no cadastro de entregador, algo deu errado');
+            .catch(err => {
+                console.tron.log(err.response);
+                toast.error('falha na atualização de pacote, algo deu errado');
             });
     }
     return (

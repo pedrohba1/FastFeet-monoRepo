@@ -40,9 +40,9 @@ export default function Problems() {
             },
         });
 
-        response.data.map(courier => {
-            courier.id = courier.id < 10 ? `0${courier.id}` : courier.id;
-            return courier;
+        response.data.map(problem => {
+            problem.idDisplay = problem.id < 10 ? `0${problem.id}` : problem.id;
+            return problem;
         });
         setProblems(response.data);
         setLoading(false);
@@ -101,7 +101,7 @@ export default function Problems() {
             </List>
 
             {problems.map(problem => (
-                <List key={String(problem.id)}>
+                <List key={String(problem.idDisplay)}>
                     <ListMain>
                         <span>#{problem.id}</span>
                     </ListMain>

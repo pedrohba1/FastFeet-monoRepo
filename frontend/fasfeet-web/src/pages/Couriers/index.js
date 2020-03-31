@@ -41,7 +41,7 @@ export default function Couriers() {
         });
 
         response.data.map(courier => {
-            courier.id = courier.id < 10 ? `0${courier.id}` : courier.id;
+            courier.idDisplay = courier.id < 10 ? `0${courier.id}` : courier.id;
             return courier;
         });
         setCouriers(response.data);
@@ -115,7 +115,7 @@ export default function Couriers() {
             {couriers.map(courier => (
                 <List key={String(courier.id)}>
                     <ListMain>
-                        <span>#{courier.id}</span>
+                        <span>#{courier.idDisplay}</span>
                     </ListMain>
                     <ListMain>
                         <Picture
