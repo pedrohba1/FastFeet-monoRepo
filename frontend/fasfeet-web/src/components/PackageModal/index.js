@@ -13,6 +13,7 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
 
     return (
         <ReactModal
+            ariaHideApp={false}
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
             isOpen={isOpen}
@@ -74,7 +75,7 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
 
             <Container>
                 <Bold>Assinatura do destinatário</Bold>
-                <img src={packData.signatureUrl} alt="" />
+                <img src={packData.signature_url} alt="" />
             </Container>
         </ReactModal>
     );
@@ -85,12 +86,12 @@ PackageModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     packData: PropTypes.shape({
         address: PropTypes.string,
-        address_number: PropTypes.number,
+        address_number: PropTypes.string,
         city: PropTypes.string,
         state: PropTypes.string,
-        cep: PropTypes.number,
+        cep: PropTypes.string,
         start_date: PropTypes.string,
         end_date: PropTypes.string,
-        signatureUrl: PropTypes.string,
+        signature_url: PropTypes.string,
     }).isRequired,
 };

@@ -101,9 +101,9 @@ export default function Problems() {
             </List>
 
             {problems.map(problem => (
-                <List key={String(problem.idDisplay)}>
+                <List key={String(problem.id)}>
                     <ListMain>
-                        <span>#{problem.id}</span>
+                        <span>#{problem.idDisplay}</span>
                     </ListMain>
                     <ListMain>
                         <Description>

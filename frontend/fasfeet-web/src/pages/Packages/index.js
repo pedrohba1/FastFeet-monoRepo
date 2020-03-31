@@ -118,10 +118,10 @@ export default function Packages() {
             cep: recipient.cep,
             start_date,
             end_date,
-            signatureUrl: signature === null ? null : signature.url,
+            signature_url: signature === null ? null : signature.url,
         };
 
-        setModalContent({ ...packData });
+        setModalContent(packData);
     }
 
     return (

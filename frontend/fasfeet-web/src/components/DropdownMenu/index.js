@@ -14,10 +14,12 @@ import {
 export default function DropdownMenu({
     inPackages,
     inProblems,
+    dataForView,
     openModalFunction,
     dataForEdit,
-    dataForView,
     editFunction,
+    dataForDelete,
+    deleteFunction,
 }) {
     const [visible, setVisible] = useState(false);
 
@@ -74,6 +76,9 @@ export default function DropdownMenu({
 DropdownMenu.defaultProps = {
     inPackages: false,
     inProblems: false,
+    dataForView: null,
+    dataForEdit: null,
+    editFunction: null,
     openModalFunction: null,
 };
 
@@ -81,7 +86,7 @@ DropdownMenu.propTypes = {
     inProblems: PropTypes.bool,
     inPackages: PropTypes.bool,
     openModalFunction: PropTypes.func,
-    dataForView: PropTypes.object.isRequired,
-    dataForEdit: PropTypes.object.isRequired,
-    editFunction: PropTypes.func.isRequired,
+    dataForView: PropTypes.oneOfType([PropTypes.object]),
+    dataForEdit: PropTypes.oneOfType([PropTypes.object]),
+    editFunction: PropTypes.func,
 };

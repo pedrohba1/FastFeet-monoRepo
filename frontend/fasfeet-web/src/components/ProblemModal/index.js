@@ -17,6 +17,7 @@ export default function ProblemModal({ closeFunc, isOpen, problemData }) {
         <ReactModal
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
+            ariaHideApp={false}
             isOpen={isOpen}
             data={problemData}
             onRequestClose={closeFunc}
