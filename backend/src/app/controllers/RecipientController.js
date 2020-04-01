@@ -83,7 +83,7 @@ class RecipientController {
         const recipientExists = await Recipient.findByPk(pk);
 
         if (!recipientExists) {
-            return res.status(400).json({ error: 'courier does not exist' });
+            return res.status(400).json({ error: 'recipient does not exist' });
         }
         const recipientDestroyed = await Recipient.destroy({
             where: { id: pk },
