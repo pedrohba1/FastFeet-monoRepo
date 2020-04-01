@@ -152,7 +152,6 @@ export default function Packages() {
         };
 
         setModalOpen(true);
-
         setModalContent(packData);
     }
 
