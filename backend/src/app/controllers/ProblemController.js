@@ -57,6 +57,11 @@ class ProblemController {
 
         const { package_id } = problem;
         const delivery = await Package.findByPk(package_id);
+
+        if (delivery.canceled_at) {
+            return res.status(400).json('package already has a cancelled date');
+        }
+
         await delivery.update({ canceled_at: new Date() });
 
         return res.json(delivery);
