@@ -47,6 +47,8 @@ class ProblemController {
     }
 
     async destroy(req, res) {
+        // essa rota não é para deletar o problema, e sim para
+        // colocar um data de cancelamento no pacote que tiver esse problema
         const { delivery_problem_id } = req.params;
 
         const problem = await DeliveryProblem.findByPk(delivery_problem_id);

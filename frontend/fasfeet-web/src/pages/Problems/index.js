@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import ProblemModal from '~/components/ProblemModal';
 import formatString from '~/utils/formatString';
+
 import {
     Title,
     Buttons,
@@ -68,6 +70,15 @@ export default function Problems() {
         setModalOpen(false);
     }
 
+    function handleDelete(problemId) {
+        api.delete(`problems/${problemId}`)
+            .then(() => {
+                toast.success('encomenda cancelada com sucesso!');
+            })
+            .catch(() => {
+                toast.error('erro no cancelamento');
+            });
+    }
     return (
         <>
             <ProblemModal
@@ -116,6 +127,8 @@ export default function Problems() {
                             inProblems
                             dataForView={problem}
                             openModalFunction={handleRequestOpen}
+                            dataForDelete={problem.id}
+                            deleteFunction={handleDelete}
                         />
                     </ListActions>
                 </List>
