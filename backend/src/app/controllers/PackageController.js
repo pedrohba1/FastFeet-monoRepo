@@ -21,13 +21,18 @@ class PackageController {
 
         const packages = await Package.findAll({
             where: {
-                canceled_at: null,
                 product: { [Op.like]: `${product}%` },
             },
             order: ['id'],
             limit: 20,
             offset: (page - 1) * 20,
-            attributes: ['id', 'product', 'start_date', 'end_date'],
+            attributes: [
+                'id',
+                'product',
+                'start_date',
+                'end_date',
+                'canceled_at',
+            ],
             include: [
                 {
                     model: Courier,

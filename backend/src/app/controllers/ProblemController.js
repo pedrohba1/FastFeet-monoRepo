@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import DeliveryProblem from '../models/DeliveryProblem';
 import Package from '../models/Package';
 import Courier from '../models/Courier';
@@ -20,11 +21,12 @@ class ProblemController {
     }
 
     async index(req, res) {
-        const { page = 1, list_packages = 'no' } = req.query;
+        const { page = 1, list_packages = 'no', product = '' } = req.query;
 
         if (list_packages === 'yes') {
             const packs = await DeliveryProblem.findAll({
                 order: ['id'],
+
                 limit: 20,
                 attributes: [],
                 offset: (page - 1) * 20,
@@ -32,7 +34,16 @@ class ProblemController {
                     {
                         model: Package,
                         as: 'package',
-                        attributes: ['id', 'product', 'start_date', 'end_date'],
+                        attributes: [
+                            'id',
+                            'product',
+                            'start_date',
+                            'end_date',
+                            'canceled_at',
+                        ],
+                        where: {
+                            product: { [Op.like]: `${product}%` },
+                        },
                         include: [
                             {
                                 model: Courier,
