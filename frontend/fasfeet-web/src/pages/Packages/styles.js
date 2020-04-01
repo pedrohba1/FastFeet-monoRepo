@@ -22,7 +22,7 @@ export const CheckBox = styled.div`
     height: 15px;
     padding: 10px;
 
-    background: ${props => (props.checked ? '#04ed14' : '#fff')};
+    background: ${props => (props.checked ? '#7d40e7' : '#fff')};
     border-radius: 50%;
     transition: all 150ms;
 `;
