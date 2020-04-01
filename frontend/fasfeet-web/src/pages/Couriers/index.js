@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import {
     Title,
@@ -72,6 +73,19 @@ export default function Couriers() {
         dispatch(changeTab('edit/courier'));
     }
 
+    function handleDelete(courierId) {
+        api.delete(`couriers/${courierId}`)
+            .then(() => {
+                toast.success('entregador deletado com sucesso!');
+                searchCouriers();
+            })
+            .catch(() => {
+                toast.error(
+                    'erro na exclusão. Este entregador possui entrega?'
+                );
+            });
+    }
+
     return (
         <>
             <Title> Gerenciando entregadores</Title>
@@ -133,6 +147,8 @@ export default function Couriers() {
                         <DropdownMenu
                             editFunction={handleEdit}
                             dataForEdit={courier}
+                            deleteFunction={handleDelete}
+                            dataForDelete={courier.id}
                         />
                     </ListActions>
                 </List>
