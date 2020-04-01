@@ -3,7 +3,7 @@
  <img src="https://github.com/pedrohba1/bootcamp-gostack-desafio-02/blob/master/readme%20stuff/logo.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Backend da aplicação do fastfeet</h3>
+<h3 align="center">aplicação completa do fastFeet</h3>
 
 <div align="center">
 
@@ -32,7 +32,9 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Esta aplicação é parte do curso GoStack da RocketSeat. Neste projeto, temos o backend na pasta `backend`. O frontend, tanto
+web quanto mobile, estão na pasta `frontend`. Informações para execução de cada parte da aplicação estão nos `README.md` 
+de cada pasta da parte da aplicação.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
