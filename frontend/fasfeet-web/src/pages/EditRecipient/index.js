@@ -4,6 +4,7 @@ import { MdChevronLeft, MdCheck } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import ReactInputMask from 'react-input-mask';
 import { Title, RegisterButton } from '~/styles/default';
 import api from '~/services/api';
 
@@ -76,7 +77,7 @@ export default function EditRecipient() {
             address_complement: addressComplement,
             state,
             city,
-            cep,
+            cep: cep.replace(/\D/g, ''),
         };
 
         if (!(await schema.isValid(data))) {
@@ -176,7 +177,8 @@ export default function EditRecipient() {
 
                     <InputContainer width="100%">
                         <InputLabel>CEP</InputLabel>
-                        <input
+                        <ReactInputMask
+                            mask="99.999-999"
                             value={cep}
                             onChange={e => {
                                 setCep(e.target.value);

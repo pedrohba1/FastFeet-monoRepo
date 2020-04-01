@@ -4,6 +4,7 @@ import { MdChevronLeft, MdCheck } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import ReactInputMask from 'react-input-mask';
 import { Title, RegisterButton } from '~/styles/default';
 import api from '~/services/api';
 
@@ -47,7 +48,7 @@ export default function RegisterRecipient() {
             address_number: addressNumber,
             state,
             city,
-            cep,
+            cep: cep.replace(/\D/g, ''),
         };
 
         if (!(await schema.isValid(data))) {
@@ -62,6 +63,7 @@ export default function RegisterRecipient() {
                 toast.error('falha no cadastro de entregador, algo deu errado');
             });
     }
+
     return (
         <Container>
             <Header>
@@ -145,7 +147,9 @@ export default function RegisterRecipient() {
 
                     <InputContainer width="100%">
                         <InputLabel>CEP</InputLabel>
-                        <input
+
+                        <ReactInputMask
+                            mask="99.999-999"
                             value={cep}
                             onChange={e => {
                                 setCep(e.target.value);
