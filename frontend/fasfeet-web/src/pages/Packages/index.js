@@ -120,7 +120,7 @@ export default function Packages() {
     useEffect(() => {
         searchPackages();
         // eslint-disable-next-line
-    }, [page]);
+    }, [page, onlyWithProblems]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
