@@ -76,6 +76,20 @@ class RecipientController {
 
         return res.json(response);
     }
+
+    async destroy(req, res) {
+        const pk = req.params.id;
+
+        const recipientExists = await Recipient.findByPk(pk);
+
+        if (!recipientExists) {
+            return res.status(400).json({ error: 'courier does not exist' });
+        }
+        const recipientDestroyed = await Recipient.destroy({
+            where: { id: pk },
+        });
+        return res.json(recipientDestroyed);
+    }
 }
 
 export default new RecipientController();
