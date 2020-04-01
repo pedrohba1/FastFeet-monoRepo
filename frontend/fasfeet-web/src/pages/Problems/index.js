@@ -6,8 +6,6 @@ import formatString from '~/utils/formatString';
 
 import {
     Title,
-    Buttons,
-    Search,
     ListHeader,
     ListMain,
     ListActions,
@@ -20,7 +18,6 @@ import api from '~/services/api';
 
 export default function Problems() {
     const [problems, setProblems] = useState([]);
-    const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [modalContent, setModalContent] = useState({});
@@ -55,12 +52,6 @@ export default function Problems() {
         // eslint-disable-next-line
     }, [page]);
 
-    function handleEnterPress(e) {
-        if (e.which === 13 || e.keyCode === 13) {
-            searchProblems();
-        }
-    }
-
     function handleRequestOpen(problem) {
         setModalOpen(true);
         setModalContent({ description: problem.description });
@@ -88,17 +79,6 @@ export default function Problems() {
             />
 
             <Title>Problemas na entrega</Title>
-
-            <Buttons>
-                <Search
-                    loading={loading}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    onKeyUp={handleEnterPress}
-                    placeholder="buscar por problemas"
-                    iconPosition="left"
-                />
-            </Buttons>
 
             <List>
                 <ListHeader>
@@ -143,7 +123,7 @@ export default function Problems() {
                     <MdChevronLeft size={36} color="#444" />
                 </button>
 
-                <span>{page}</span>
+                <span> {loading ? 'carregando...' : page}</span>
 
                 <button type="button" onClick={handleAddPage}>
                     <MdChevronRight size={36} color="#444" />
