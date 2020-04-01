@@ -28,16 +28,32 @@ class DeliveryController {
         const { timezone } = Intl.DateTimeFormat().resolvedOptions();
         req_date = utcToZonedTime(req_date, timezone);
 
-        if (type === 'end' && !signature_id) {
-            return res.status(400).json({
-                error: 'signature id not provided',
-            });
-        }
         if (!delivery) {
             return res.status(400).json({
                 error: 'this package does not exist',
             });
         }
+
+        if (delivery.canceled_at !== null) {
+            return res.status(400).json({
+                error: 'this package was cancelled',
+            });
+        }
+
+        if (type === 'end') {
+            if (delivery.start_date === null) {
+                return res.status(400).json({
+                    error: 'cant deliver a package that has not been taken',
+                });
+            }
+
+            if (!signature_id) {
+                return res.status(400).json({
+                    error: 'signature id not provided',
+                });
+            }
+        }
+
         if (delivery.courier_id !== courier_id) {
             return res.status(400).json({
                 error: `this package doesn't belong to this courier`,
@@ -84,7 +100,7 @@ class DeliveryController {
             await delivery.update({ start_date: req_date });
         }
         if (type === 'end') {
-            await delivery.update({ end_date: req_date });
+            await delivery.update({ end_date: req_date, signature_id });
         }
 
         return res.json(delivery);
