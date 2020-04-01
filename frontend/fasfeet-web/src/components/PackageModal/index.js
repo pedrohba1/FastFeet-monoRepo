@@ -38,13 +38,32 @@ export default function PackageModal({ closeFunc, isOpen, packData }) {
         >
             <Container>
                 <Bold>Informações da encomenda</Bold>
+
                 <Text>
-                    {packData.address}, {packData.address_number}
+                    <Bold>nome do produto: </Bold>
+                    {packData.product}
                 </Text>
+
                 <Text>
-                    {packData.city} - {packData.state}
+                    <Bold>endereço: </Bold>
+                    {packData.address}, {packData.address_number},{' '}
+                    {packData.address_complement}
                 </Text>
-                <Text>{packData.cep}</Text>
+
+                <Text>
+                    <Bold>cidade: </Bold>
+                    {packData.city}
+                </Text>
+
+                <Text>
+                    <Bold>estado: </Bold>
+                    {packData.state}
+                </Text>
+
+                <Text>
+                    <Bold>CEP: </Bold>
+                    {packData.cep}
+                </Text>
             </Container>
 
             <Container>
@@ -85,8 +104,10 @@ PackageModal.propTypes = {
     closeFunc: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
     packData: PropTypes.shape({
+        product: PropTypes.string,
         address: PropTypes.string,
         address_number: PropTypes.string,
+        address_complement: PropTypes.string,
         city: PropTypes.string,
         state: PropTypes.string,
         cep: PropTypes.string,

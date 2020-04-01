@@ -136,11 +136,10 @@ export default function Packages() {
     }
 
     function handleRequestOpen(pack) {
-        setModalOpen(true);
-
-        const { recipient, end_date, start_date, signature } = pack;
+        const { product, recipient, end_date, start_date, signature } = pack;
 
         const packData = {
+            product,
             state: recipient.state,
             city: recipient.city,
             address: recipient.address,
@@ -151,6 +150,8 @@ export default function Packages() {
             end_date,
             signature_url: signature === null ? null : signature.url,
         };
+
+        setModalOpen(true);
 
         setModalContent(packData);
     }
