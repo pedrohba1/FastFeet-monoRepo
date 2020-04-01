@@ -64,7 +64,10 @@ export default function DropdownMenu({
 
                 <Option>
                     <MdDeleteForever color="#DE3B3B" />
-                    <button type="button">
+                    <button
+                        type="button"
+                        onClick={() => deleteFunction(dataForDelete)}
+                    >
                         {inProblems ? 'Cancelar encomenda' : 'Excluir'}
                     </button>
                 </Option>
@@ -80,6 +83,8 @@ DropdownMenu.defaultProps = {
     dataForEdit: null,
     editFunction: null,
     openModalFunction: null,
+    dataForDelete: null,
+    deleteFunction: null,
 };
 
 DropdownMenu.propTypes = {
@@ -89,4 +94,6 @@ DropdownMenu.propTypes = {
     dataForView: PropTypes.oneOfType([PropTypes.object]),
     dataForEdit: PropTypes.oneOfType([PropTypes.object]),
     editFunction: PropTypes.func,
+    dataForDelete: PropTypes.number,
+    deleteFunction: PropTypes.func,
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import {
     Title,
@@ -70,6 +71,20 @@ export default function Recipients() {
         dispatch(changeTab('edit/recipient'));
     }
 
+    async function handleDelete(recipientId) {
+        await api
+            .delete(`recipients/${recipientId}`)
+            .then(() => {
+                toast.success('destinatário deletado com sucesso!');
+                searchRecipients();
+            })
+            .catch(() => {
+                toast.error(
+                    'erro na exclusão. Este destinatário possui entrega?'
+                );
+            });
+    }
+
     return (
         <>
             <Title>Gerenciando destinatários</Title>
@@ -131,8 +146,10 @@ export default function Recipients() {
                     </ListMain>
                     <ListActions>
                         <DropdownMenu
-                            dataForEdit={recipient}
                             editFunction={handleEdit}
+                            dataForEdit={recipient}
+                            deleteFunction={handleDelete}
+                            dataForDelete={recipient.id}
                         />
                     </ListActions>
                 </List>
