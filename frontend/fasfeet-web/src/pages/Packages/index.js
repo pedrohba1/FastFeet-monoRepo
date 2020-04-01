@@ -15,7 +15,13 @@ import {
     ListActions,
     Footer,
 } from '~/styles/default';
-import { List, Status, HorizontalContainer } from './styles';
+import {
+    List,
+    Status,
+    HorizontalContainer,
+    VerticalContainer,
+    CheckBox,
+} from './styles';
 
 import Picture from '~/components/Picture';
 import DropdownMenu from '~/components/DropdownMenu';
@@ -23,6 +29,7 @@ import { changeTab } from '~/store/modules/user/actions';
 import { passEditData } from '~/store/modules/package/actions';
 
 export default function Packages() {
+    const [onlyWithProblems, setOnlyWithProblems] = useState(false);
     const [packages, setPackages] = useState([]);
     const [input, setInput] = useState('');
     const [page, setPage] = useState(1);
@@ -146,14 +153,26 @@ export default function Packages() {
             <Title>Gerenciando encomendas</Title>
 
             <Buttons>
-                <Search
-                    loading={loading}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    onKeyUp={handleEnterPress}
-                    placeholder="buscar por entregadores"
-                    iconPosition="left"
-                />
+                <VerticalContainer>
+                    <Search
+                        loading={loading}
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        onKeyUp={handleEnterPress}
+                        placeholder="buscar por entregadores"
+                        iconPosition="left"
+                    />
+
+                    <HorizontalContainer style={{ marginTop: 10 }}>
+                        <span>buscar apenas encomendas com problemas: </span>
+                        <CheckBox
+                            onClick={() =>
+                                setOnlyWithProblems(!onlyWithProblems)
+                            }
+                            checked={onlyWithProblems}
+                        />
+                    </HorizontalContainer>
+                </VerticalContainer>
                 <RegisterButton
                     onClick={() => {
                         dispatch(changeTab('register/package'));

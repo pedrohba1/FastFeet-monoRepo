@@ -15,6 +15,27 @@ export const HorizontalContainer = styled.div`
     }
 `;
 
+export const CheckBox = styled.div`
+    border: 1px solid #ddd;
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    padding: 10px;
+
+    background: ${props => (props.checked ? '#04ed14' : '#fff')};
+    border-radius: 50%;
+    transition: all 150ms;
+`;
+
+export const VerticalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    span {
+        align-self: center;
+    }
+`;
+
 export const Status = styled.span`
     display: flex;
     font-weight: bold;
