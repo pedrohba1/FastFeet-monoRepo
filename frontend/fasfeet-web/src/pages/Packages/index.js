@@ -172,15 +172,17 @@ export default function Packages() {
         setModalContent(packData);
     }
 
-    function handleDelete(packId) {
-        api.delete(`packages/${packId}`)
-            .then(() => {
-                toast.success('encomenda deletado com sucesso!');
-                searchPackages();
-            })
-            .catch(() => {
-                toast.error('erro na exclusão');
-            });
+    async function handleDelete(packId) {
+        try {
+            const response = await api.delete(`packages/${packId}`);
+            if (response.status === 200) {
+                toast.success('pacote deletado com sucesso');
+            }
+        } catch (error) {
+            if (error.response.status === 461) {
+                toast.error(error.response.data.error, { autoClose: 8000 });
+            }
+        }
     }
 
     return (
@@ -282,12 +284,12 @@ export default function Packages() {
 
                     <ListActions>
                         <DropdownMenu
+                            inPackages
                             dataForView={pack}
                             dataForEdit={pack}
                             editFunction={handleEdit}
                             dataForDelete={pack.id}
                             deleteFunction={handleDelete}
-                            inPackages
                             openModalFunction={handleRequestOpen}
                         />
                     </ListActions>

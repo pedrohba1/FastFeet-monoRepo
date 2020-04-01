@@ -5,6 +5,7 @@ import Recipient from '../models/Recipient';
 import Courier from '../models/Courier';
 import File from '../models/File';
 import Queue from '../../lib/Queue';
+import DeliveryProblem from '../models/DeliveryProblem';
 import newPackageMail from '../jobs/NewPackageMail';
 
 class PackageController {
@@ -172,6 +173,36 @@ class PackageController {
             return res.status(400).json({ error: 'delivery does not exist' });
         }
 
+        const problem = await DeliveryProblem.findOne({
+            where: {
+                package_id: pk,
+            },
+        });
+
+        if (problem) {
+            if (delivery.canceled_at === null) {
+                return res.status(461).json({
+                    error:
+                        'Esse pacote tem um problema e a entrega não foi cancelada, portanto, esse pacote não pode ser deletado',
+                });
+            }
+
+            const problemDestroyed = await DeliveryProblem.destroy({
+                where: {
+                    package_id: pk,
+                },
+            });
+            const packageDestroyed = await Package.destroy({
+                where: {
+                    id: pk,
+                },
+            });
+
+            return res.json({
+                problem: problemDestroyed,
+                package: packageDestroyed,
+            });
+        }
         const packageDestroyed = await Package.destroy({
             where: {
                 id: pk,
