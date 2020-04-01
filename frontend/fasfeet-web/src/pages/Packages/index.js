@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import api from '~/services/api';
 import PackageModal from '~/components/PackageModal';
 import {
@@ -124,6 +125,17 @@ export default function Packages() {
         setModalContent(packData);
     }
 
+    function handleDelete(packId) {
+        api.delete(`packages/${packId}`)
+            .then(() => {
+                toast.success('encomenda deletado com sucesso!');
+                searchPackages();
+            })
+            .catch(() => {
+                toast.error('erro na exclusão');
+            });
+    }
+
     return (
         <>
             <PackageModal
@@ -214,6 +226,8 @@ export default function Packages() {
                             dataForView={pack}
                             dataForEdit={pack}
                             editFunction={handleEdit}
+                            dataForDelete={pack.id}
+                            deleteFunction={handleDelete}
                             inPackages
                             openModalFunction={handleRequestOpen}
                         />

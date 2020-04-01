@@ -67,6 +67,7 @@ export default function Problems() {
     function handleRequestClose() {
         setModalOpen(false);
     }
+
     return (
         <>
             <ProblemModal
