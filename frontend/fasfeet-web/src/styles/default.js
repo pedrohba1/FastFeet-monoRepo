@@ -9,7 +9,10 @@ export const Title = styled.h1`
 
 export const Search = styled(Input).attrs({
     icon: { name: 'search' },
-})``;
+})`
+    display: flex;
+    width: 300px;
+`;
 
 export const SearchIcon = styled(MdAdd).attrs({
     size: 20,

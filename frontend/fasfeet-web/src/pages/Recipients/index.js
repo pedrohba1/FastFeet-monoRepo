@@ -95,7 +95,7 @@ export default function Recipients() {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyUp={handleEnterPress}
-                    placeholder="buscar por destinatários"
+                    placeholder="buscar por nome de destinatário"
                     iconPosition="left"
                 />
                 <RegisterButton

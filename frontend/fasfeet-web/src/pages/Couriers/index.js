@@ -95,7 +95,7 @@ export default function Couriers() {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyUp={handleEnterPress}
-                    placeholder="buscar por entregadores"
+                    placeholder="buscar por nome do entregador"
                     iconPosition="left"
                 />
                 <RegisterButton

@@ -79,6 +79,16 @@ export const Status = styled.span`
                 }
                 `;
 
+            case 'CANCELADA':
+                return `
+                color: #DE3B3B;
+                background: #FAB0B0;
+
+                figure{
+                    background: #DE3B3B;
+                }
+                `;
+
             default:
         }
     }}

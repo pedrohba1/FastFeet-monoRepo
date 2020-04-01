@@ -50,54 +50,33 @@ export default function Packages() {
     async function searchPackages() {
         setLoading(true);
 
+        let problemArray = [];
+
         if (onlyWithProblems) {
             const response = await api.get('problems', {
                 params: {
                     page,
+                    product: input,
                     list_packages: 'yes',
                 },
             });
 
-            const newArr = [];
             response.data.forEach(item => {
-                newArr.push({
+                problemArray.push({
                     ...item.package,
                 });
             });
-
-            newArr.map(pack => {
-                pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
-
-                if (!pack.start_date) {
-                    pack.status = 'PENDENTE';
-                }
-                if (pack.start_date && !pack.end_date) {
-                    pack.status = 'RETIRADA';
-                }
-                if (pack.end_date) {
-                    pack.status = 'ENTREGUE';
-                }
-
-                return pack;
+        } else {
+            const response = await api.get('packages', {
+                params: {
+                    page,
+                    product: input,
+                },
             });
-
-            console.tron.log('com problemas', newArr);
-
-            setPackages(newArr);
-            setLoading(false);
-            return;
+            problemArray = response.data;
         }
 
-        const response = await api.get('packages', {
-            params: {
-                page,
-                product: input,
-            },
-        });
-
-        console.tron.log('sem problemas', response.data);
-
-        response.data.map(pack => {
+        problemArray.map(pack => {
             pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
 
             if (!pack.start_date) {
@@ -110,10 +89,14 @@ export default function Packages() {
                 pack.status = 'ENTREGUE';
             }
 
+            if (pack.canceled_at !== null) {
+                pack.status = 'CANCELADA';
+            }
+
             return pack;
         });
 
-        setPackages(response.data);
+        setPackages(problemArray);
         setLoading(false);
     }
 
@@ -177,6 +160,7 @@ export default function Packages() {
             const response = await api.delete(`packages/${packId}`);
             if (response.status === 200) {
                 toast.success('pacote deletado com sucesso');
+                searchPackages();
             }
         } catch (error) {
             if (error.response.status === 461) {
@@ -201,7 +185,7 @@ export default function Packages() {
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyUp={handleEnterPress}
-                        placeholder="buscar por entregadores"
+                        placeholder="buscar por nome do produto"
                         iconPosition="left"
                     />
 
