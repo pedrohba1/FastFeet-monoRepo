@@ -47,6 +47,45 @@ export default function Packages() {
         setPage(page - 1);
     }
 
+    async function searchPackagesWithProblems() {
+        setLoading(true);
+
+        const response = await api.get('problems', {
+            params: {
+                page,
+                list_packages: 'yes',
+            },
+        });
+
+        const newArr = [];
+        response.data.forEach(item => {
+            newArr.push({
+                ...item.package,
+            });
+        });
+
+        newArr.map(pack => {
+            pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
+
+            if (!pack.start_date) {
+                pack.status = 'PENDENTE';
+            }
+            if (pack.start_date && !pack.end_date) {
+                pack.status = 'RETIRADA';
+            }
+            if (pack.end_date) {
+                pack.status = 'ENTREGUE';
+            }
+
+            return pack;
+        });
+
+        console.tron.log('com problemas', newArr);
+
+        setPackages(newArr);
+        setLoading(false);
+    }
+
     async function searchPackages() {
         setLoading(true);
 
@@ -56,6 +95,8 @@ export default function Packages() {
                 product: input,
             },
         });
+
+        console.tron.log('sem problemas', response.data);
 
         response.data.map(pack => {
             pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
@@ -78,13 +119,21 @@ export default function Packages() {
     }
 
     useEffect(() => {
-        searchPackages();
+        if (onlyWithProblems) {
+            searchPackagesWithProblems();
+        } else {
+            searchPackages();
+        }
         // eslint-disable-next-line
     }, [page]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchPackages();
+            if (onlyWithProblems) {
+                searchPackagesWithProblems();
+            } else {
+                searchPackages();
+            }
         }
     }
 
