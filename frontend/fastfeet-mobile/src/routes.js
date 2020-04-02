@@ -6,9 +6,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import colors from './styles/colors';
 
-import Home from './pages/Home';
-import Cart from './pages/Cart';
-import ShoesHeader from './components/ShoesHeader';
+import Home from '~/pages/Home';
+import Cart from '~/pages/Cart';
+import ShoesHeader from '~/components/ShoesHeader';
 
 const Stack = createStackNavigator();
 
