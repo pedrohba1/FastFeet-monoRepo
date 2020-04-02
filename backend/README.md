@@ -14,7 +14,7 @@
 
 ---
 
-<p align="center"> Essa aplicação é o trabalho final do curso goStack, ofertado pela RocketSeat.
+<p align="center"> Esse é o backend da aplicação é o trabalho final do curso goStack, ofertado pela RocketSeat.
     <br>
 </p>
 
