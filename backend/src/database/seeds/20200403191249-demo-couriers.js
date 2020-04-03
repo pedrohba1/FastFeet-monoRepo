@@ -1,13 +1,13 @@
 const { genCouriers } = require('../../utils/genCouriers');
 
 module.exports = {
-    up: (queryInterface, Sequelize) => {
+    up: (queryInterface) => {
         const couriers = genCouriers(100);
 
         return queryInterface.bulkInsert('couriers', couriers, {});
     },
 
-    down: (queryInterface, Sequelize) => {
+    down: (queryInterface) => {
         return queryInterface.bulkDelete('couriers');
     },
 };

@@ -1,4 +1,4 @@
-export default function genEMail() {
+function genEmails(size) {
     const fstName = [
         'Ovid',
         'Zedan',
@@ -35,7 +35,7 @@ export default function genEMail() {
         '@openmailbox.org',
     ];
     const emailList = [];
-    while (emailList.length < 100) {
+    while (emailList.length < size) {
         const email = `${fstName[Math.floor(Math.random() * 10)]}_${
             sndName[Math.floor(Math.random() * 5)]
         }_${trdName[Math.floor(Math.random() * 10)]}${
@@ -46,3 +46,5 @@ export default function genEMail() {
 
     return emailList;
 }
+
+exports.genEmails = genEmails;

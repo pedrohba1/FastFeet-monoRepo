@@ -1,4 +1,4 @@
-export default function genName() {
+function genNames(size) {
     const fstName = [
         'Ovid',
         'Zedan',
@@ -29,7 +29,7 @@ export default function genName() {
 
     const nameList = [];
 
-    while (nameList.length < 100) {
+    while (nameList.length < size) {
         const name = `${fstName[Math.floor(Math.random() * 10)]} ${
             sndName[Math.floor(Math.random() * 5)]
         } ${trdName[Math.floor(Math.random() * 10)]}`;
@@ -38,3 +38,5 @@ export default function genName() {
 
     return nameList;
 }
+
+exports.genNames = genNames;

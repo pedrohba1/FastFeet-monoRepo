@@ -9,7 +9,6 @@
         "dev": "nodemon src/server.js",
         "dev:debug": "nodemon --inspect src/server.js",
         "queue": "nodemon src/queue.js",
-        "seed": "nodemon src/seed.js"
     },
     "dependencies": {
         "@sentry/node": "5.14.1",
