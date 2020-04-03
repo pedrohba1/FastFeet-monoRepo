@@ -50,7 +50,7 @@ Veja que no windows eu tive que mudar a porta de listening para 5433.
 
 Se você já fez esse container antes, você pode startar ele com `docker start fastFeetDatabase`
 
-OBS: Eu recomendo usar o postbird para visualizar o postgres, só precisa colocar o usuário como postgres e a senha que foi definida como docker no comando acima. Depois de conectado, crie uma database com o nome `fastfeet`
+OBS: Eu recomendo usar o postbird para visualizar o postgres, só precisa colocar o usuário como postgres e a senha que foi definida como docker no comando acima que cria o container do postgres.
 
 O postbird não precisa ser usado para criar tabelas. Isso é lidado pela própria aplicação usando o sequelize.
 
@@ -59,6 +59,10 @@ O arquivo .sequelizerc tem os caminhos de todos os diretórios importantes para 
 Depois que você criar as tabelas com `yarn sequelize migration:create --name=create-recipient` você pode acrescentar elas to container com `yarn sequelize db:migrate`.
 Também é possível remover migrations com `yarn db:migrate:undo:all`
 Depois de feitas as migrations, é preciso adicionar as seeds, com `yarn sequelize db:seed:all`
+
+Fique atento, porque eu apenas criei as seeds de entregadores (couriers) e de destinatários (recipients).
+Se você quer algum pacote, ou problema, você vai ter que gerar eles pelo insomnia. Eu deixei um arquivo no projeto
+do Insomnia, com as rotas para isso, se você quiser usar.
 
 ## 🔧 Debugging <a name = "debugging"></a>
 
