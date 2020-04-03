@@ -289,7 +289,7 @@ export default function Packages() {
                     <MdChevronLeft size={36} color="#444" />
                 </button>
 
-                <span>{page}</span>
+                <span>{loading ? 'carregando...' : page}</span>
 
                 <button type="button" onClick={handleAddPage}>
                     <MdChevronRight size={36} color="#444" />
