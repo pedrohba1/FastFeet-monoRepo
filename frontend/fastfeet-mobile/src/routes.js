@@ -3,7 +3,6 @@ import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -78,6 +77,8 @@ function HomeTabs() {
 }
 
 function Routes() {
+    // TODO: criar o reducer de auth para colocar ele aqui usando o
+    // useSelector
     const signed = false;
 
     return (
