@@ -6,6 +6,20 @@ import Courier from '../models/Courier';
 import File from '../models/File';
 
 class CourierController {
+    async show(req, res) {
+        const { id } = req.params;
+
+        const courier = await Courier.findOne({
+            where: { id },
+        });
+
+        if (!courier) {
+            return res.status(400).json({ error: 'Entregador não existe' });
+        }
+
+        return res.json(courier);
+    }
+
     async index(req, res) {
         const { page = 1, name = '' } = req.query;
 

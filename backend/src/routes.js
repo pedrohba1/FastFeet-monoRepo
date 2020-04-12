@@ -32,6 +32,8 @@ routes.get('/problems', ProblemController.index);
 routes.post('/problems', ProblemController.store);
 routes.delete('/problems/:delivery_problem_id', ProblemController.destroy);
 
+routes.get('/couriers/:id', CourierController.show);
+
 routes.use(authMiddleware);
 
 routes.get('/recipients', RecipientController.index);
