@@ -10,10 +10,8 @@ export default function SignIn() {
         <Background>
             <Container>
                 <Image source={logo} />
-
                 <Form>
                     <FormInput placeholder="Informe seu ID de cadastro" />
-
                     <SubmitButton>Entrar no sistema</SubmitButton>
                 </Form>
             </Container>
