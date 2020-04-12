@@ -22,6 +22,11 @@ export const FormInput = styled(Input)`
     margin-bottom: 10px;
 `;
 
+export const Background = styled.SafeAreaView`
+    background: #7d40e7;
+    flex: 1;
+`;
+
 export const SubmitButton = styled(Button)`
     margin-top: 5px;
 `;

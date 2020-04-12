@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -56,22 +57,22 @@ function HomeTabs() {
                         <Icon
                             name={iconName}
                             size={20}
-                            color={focused ? '#fff' : 'rgba(255,255,255,0.6)'}
+                            color={focused ? '#7D40E7' : '#999999'}
                         />
                     );
                 },
             })}
             tabBarOptions={{
                 keyboardHidesTabBar: true,
-                activeTintColor: '#fff',
-                inactiveTintColor: 'rgba(255,255,255,0.6)',
+                activeTintColor: '#7D40E7',
+                inactiveTintColor: '#999999',
                 style: {
-                    backgroundColor: '#8d41a8',
+                    backgroundColor: '#FFFFFF',
                 },
             }}
         >
             <Tab.Screen name="Dashboard" component={Dashboard} />
-            ] <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
     );
 }
@@ -79,7 +80,7 @@ function HomeTabs() {
 function Routes() {
     // TODO: criar o reducer de auth para colocar ele aqui usando o
     // useSelector
-    const signed = false;
+    const signed = useSelector(state => state.auth.signed);
 
     return (
         <NavigationContainer>
