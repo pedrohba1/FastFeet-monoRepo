@@ -8,7 +8,7 @@ export default reducers => {
             storage: AsyncStorage,
             // os reducers que precisarem de informação persistente precisam
             // estar escritos aqui.
-            whitelist: ['user'],
+            whitelist: ['auth', 'user'],
         },
         reducers
     );
