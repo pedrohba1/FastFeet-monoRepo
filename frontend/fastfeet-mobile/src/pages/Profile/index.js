@@ -1,6 +1,11 @@
 import React from 'react';
-import Background from '~/components/Background';
+import { StatusBar } from 'react-native';
+import { Background } from './styles';
 
 export default function Profile() {
-    return <Background />;
+    return (
+        <Background>
+            <StatusBar barStyle="light-content" backgroundColor="#ffffff" />
+        </Background>
+    );
 }
