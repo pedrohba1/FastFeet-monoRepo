@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
     Background,
@@ -9,6 +9,7 @@ import {
     Name,
     WelcomeMessage,
     Button,
+    CourierContainer,
 } from './styles';
 
 import Picture from '~/components/Picture';
@@ -26,13 +27,15 @@ export default function Dashboard() {
     return (
         <Background>
             <Header>
-                <Picture>{profile.name}</Picture>
-                <MsgContainer>
-                    <WelcomeMessage>Bem vindo de volta,</WelcomeMessage>
-                    <Name>{profile.name}</Name>
-                </MsgContainer>
+                <CourierContainer>
+                    <Picture>{profile.name}</Picture>
+                    <MsgContainer>
+                        <WelcomeMessage>Bem vindo de volta,</WelcomeMessage>
+                        <Name>{profile.name}</Name>
+                    </MsgContainer>
+                </CourierContainer>
                 <Button onPress={handleLogout}>
-                    <Icon name="logout-variant" size={30} color="#E74040" />
+                    <Icon name="exit-to-app" size={30} color="#E74040" />
                 </Button>
             </Header>
         </Background>

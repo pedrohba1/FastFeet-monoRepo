@@ -46,7 +46,7 @@ function HomeTabs() {
                             break;
                         }
                         case 'Dashboard': {
-                            iconName = 'event';
+                            iconName = 'view-headline';
                             break;
                         }
 

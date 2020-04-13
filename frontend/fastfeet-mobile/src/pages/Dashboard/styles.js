@@ -3,17 +3,23 @@ import styled from 'styled-components/native';
 export const Background = styled.SafeAreaView`
     background: #ffffff;
     flex: 1;
+    padding: 10px;
 `;
 
 export const Header = styled.View`
     align-self: stretch;
-    margin-top: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-direction: row;
+`;
+
+export const CourierContainer = styled.View`
+    display: flex;
     flex-direction: row;
 `;
 
 export const MsgContainer = styled.View`
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
