@@ -90,15 +90,9 @@ function Routes() {
                 }}
             >
                 {signed ? (
-                    <RootStack.Screen
-                        name="Home"
-                        component={HomeTabs}
-                    ></RootStack.Screen>
+                    <RootStack.Screen name="Home" component={HomeTabs} />
                 ) : (
-                    <RootStack.Screen
-                        name="Login"
-                        component={LoginTabs}
-                    ></RootStack.Screen>
+                    <RootStack.Screen name="Login" component={LoginTabs} />
                 )}
             </RootStack.Navigator>
         </NavigationContainer>
