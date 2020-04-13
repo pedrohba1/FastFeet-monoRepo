@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // eslint-disable-next-line camelcase
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { Alert } from 'react-native';

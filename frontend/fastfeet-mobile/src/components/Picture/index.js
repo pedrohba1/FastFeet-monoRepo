@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Img, Name } from './styles';
 
-export default function Picture({ src, name }) {
+export default function Picture({ src, children }) {
     function getInitials(string) {
         const names = string.split(' ');
         let initials = names[0].substring(0, 1).toUpperCase();
@@ -22,7 +22,7 @@ export default function Picture({ src, name }) {
                     }}
                 />
             ) : (
-                <Name>{getInitials(name)}</Name>
+                <Name>{getInitials(children)}</Name>
             )}
         </Container>
     );
@@ -30,9 +30,11 @@ export default function Picture({ src, name }) {
 
 Picture.defaultProps = {
     src: '',
+    children: '',
 };
 
 Picture.propTypes = {
     src: PropTypes.string,
     name: PropTypes.string.isRequired,
+    children: PropTypes.string,
 };
