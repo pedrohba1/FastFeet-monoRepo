@@ -66,3 +66,5 @@ export const SearchType = styled.Text`
     color: ${props => (props.selected ? '#7D40E7' : '#999999')};
     text-decoration: ${props => (props.selected ? 'underline' : 'none')};
 `;
+
+export const List = styled.FlatList``;

@@ -14,9 +14,11 @@ import {
     DText,
     StatusContainer,
     SearchType,
+    List,
 } from './styles';
 
 import Picture from '~/components/Picture';
+import Pack from '~/components/Pack';
 import api from '~/services/api';
 import { SignOut } from '~/store/modules/auth/actions';
 
@@ -40,9 +42,8 @@ export default function Dashboard() {
             });
             setPackages(response.data);
         }
-
         loadPackages();
-    }, []);
+    }, [profile.id]);
 
     function handleChange(currentButton) {
         if (currentButton === 'pending') {
@@ -80,6 +81,14 @@ export default function Dashboard() {
                     </TouchableOpacity>
                 </StatusContainer>
             </HContainer>
+
+            <List
+                data={packages}
+                renderItem={({ item }) => (
+                    <Pack onCancel={() => {}} data={item} />
+                )}
+                keyExtractor={item => String(item.id)}
+            />
         </Background>
     );
 }
