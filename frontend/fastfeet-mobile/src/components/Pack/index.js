@@ -41,11 +41,11 @@ export default function Pack({ data }) {
             </Header>
 
             <ProgressBar>
-                <Ball />
+                <Ball checked />
                 <Line />
-                <Ball />
+                <Ball checked={data.start_date !== null} />
                 <Line />
-                <Ball />
+                <Ball checked={data.end_date !== null} />
             </ProgressBar>
             <BallLabelContainer>
                 <BallLabel>Aguardando{'\n'} Retirada</BallLabel>

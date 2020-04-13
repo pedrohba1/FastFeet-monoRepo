@@ -55,6 +55,7 @@ export const Details = styled.Text`
 `;
 
 export const ProgressBar = styled.View`
+    margin: 0 20px;
     align-self: stretch;
     display: flex;
     justify-content: space-between;
@@ -73,7 +74,10 @@ export const Ball = styled.View`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background: #7d40e7;
+    ${props =>
+        props.checked ? 'background: #7d40e7;' : 'border: 1px solid #7d40e7;'}
+'}
+
 `;
 export const BallContainer = styled.View`
     display: flex;
