@@ -17,6 +17,7 @@ class PackageController {
             product = '',
             courier_name = '',
             recipient_name = '',
+            courier_id,
         } = req.query;
 
         const packages = await Package.findAll({
@@ -46,6 +47,9 @@ class PackageController {
                         },
                     ],
                     where: {
+                        id: courier_id || {
+                            [Op.gt]: 0,
+                        },
                         name: { [Op.like]: `${courier_name}%` },
                     },
                 },
