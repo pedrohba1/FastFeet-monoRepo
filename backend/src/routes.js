@@ -33,6 +33,9 @@ routes.post('/problems', ProblemController.store);
 routes.delete('/problems/:delivery_problem_id', ProblemController.destroy);
 
 routes.get('/couriers/:id', CourierController.show);
+
+routes.get('/packages', PackageController.index);
+
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.use(authMiddleware);
@@ -47,7 +50,6 @@ routes.post('/couriers', CourierController.store);
 routes.put('/couriers/:id', CourierController.update);
 routes.delete('/couriers/:id', CourierController.destroy);
 
-routes.get('/packages', PackageController.index);
 routes.post('/packages', PackageController.store);
 routes.put('/packages/:id', PackageController.update);
 routes.delete('/packages/:id', PackageController.destroy);
