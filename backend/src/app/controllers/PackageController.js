@@ -32,6 +32,7 @@ class PackageController {
                 'product',
                 'start_date',
                 'end_date',
+                'updated_at',
                 'canceled_at',
             ],
             include: [
