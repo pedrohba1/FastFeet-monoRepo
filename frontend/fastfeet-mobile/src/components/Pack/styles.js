@@ -54,6 +54,13 @@ export const Details = styled.Text`
     color: #7d40e7;
 `;
 
+export const Progress = styled.View`
+    margin: 20px 0;
+
+    display: flex;
+    flex-direction: column;
+`;
+
 export const ProgressBar = styled.View`
     margin: 0 20px;
     align-self: stretch;

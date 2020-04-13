@@ -17,7 +17,7 @@ import {
     ProgressBar,
     Line,
     Ball,
-    BallContainer,
+    Progress,
     BallLabel,
     BallLabelContainer,
 } from './styles';
@@ -39,20 +39,20 @@ export default function Pack({ data }) {
                 <Icon name="truck" size={20} color="#7D40E7" />
                 <PackId>Encomenda {formatId(data.id)}</PackId>
             </Header>
-
-            <ProgressBar>
-                <Ball checked />
-                <Line />
-                <Ball checked={data.start_date !== null} />
-                <Line />
-                <Ball checked={data.end_date !== null} />
-            </ProgressBar>
-            <BallLabelContainer>
-                <BallLabel>Aguardando{'\n'} Retirada</BallLabel>
-                <BallLabel>Retirada</BallLabel>
-                <BallLabel>Entregue</BallLabel>
-            </BallLabelContainer>
-
+            <Progress>
+                <ProgressBar>
+                    <Ball checked />
+                    <Line />
+                    <Ball checked={data.start_date !== null} />
+                    <Line />
+                    <Ball checked={data.end_date !== null} />
+                </ProgressBar>
+                <BallLabelContainer>
+                    <BallLabel>Aguardando{'\n'} Retirada</BallLabel>
+                    <BallLabel>Retirada</BallLabel>
+                    <BallLabel>Entregue</BallLabel>
+                </BallLabelContainer>
+            </Progress>
             <DeliveryInfo>
                 <Info>
                     <Label>Data</Label>
