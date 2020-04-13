@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
@@ -17,17 +17,32 @@ import {
 } from './styles';
 
 import Picture from '~/components/Picture';
-
+import api from '~/services/api';
 import { SignOut } from '~/store/modules/auth/actions';
 
 export default function Dashboard() {
     const profile = useSelector(state => state.user.profile || { name: '' });
+    const [packages, setPackages] = useState([]);
+
     const dispatch = useDispatch();
     const [pending, setPending] = useState(true);
     const [delivered, setDelivered] = useState(false);
     function handleLogout() {
         dispatch(SignOut());
     }
+
+    useEffect(() => {
+        async function loadPackages() {
+            const response = await api.get('packages', {
+                params: {
+                    courier_id: profile.id,
+                },
+            });
+            setPackages(response.data);
+        }
+
+        loadPackages();
+    }, []);
 
     function handleChange(currentButton) {
         if (currentButton === 'pending') {
