@@ -71,8 +71,16 @@ function HomeTabs() {
                 },
             }}
         >
-            <Tab.Screen name="Dashboard" component={Dashboard} />
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen
+                options={{ tabBarLabel: 'Entregas' }}
+                name="Dashboard"
+                component={Dashboard}
+            />
+            <Tab.Screen
+                options={{ tabBarLabel: 'Meu Perfil' }}
+                name="Profile"
+                component={Profile}
+            />
         </Tab.Navigator>
     );
 }
