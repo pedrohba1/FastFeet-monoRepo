@@ -16,9 +16,10 @@ import {
     InfoData,
     ProgressBar,
     Line,
-    PendingBall,
-    DeliveredBall,
-    TakenBall,
+    Ball,
+    BallContainer,
+    BallLabel,
+    BallLabelContainer,
 } from './styles';
 
 export default function Pack({ data }) {
@@ -40,9 +41,17 @@ export default function Pack({ data }) {
             </Header>
 
             <ProgressBar>
-                <PendingBall />
+                <Ball />
                 <Line />
+                <Ball />
+                <Line />
+                <Ball />
             </ProgressBar>
+            <BallLabelContainer>
+                <BallLabel>Aguardando{'\n'} Retirada</BallLabel>
+                <BallLabel>Retirada</BallLabel>
+                <BallLabel>Entregue</BallLabel>
+            </BallLabelContainer>
 
             <DeliveryInfo>
                 <Info>

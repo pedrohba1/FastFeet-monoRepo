@@ -57,22 +57,39 @@ export const Details = styled.Text`
 export const ProgressBar = styled.View`
     align-self: stretch;
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 `;
 
 export const Line = styled.View`
     display: flex;
+    flex: 1;
+    align-self: center;
     border-bottom-color: #7d40e7;
     border-bottom-width: 1px;
 `;
-export const PendingBall = styled.View`
+export const Ball = styled.View`
     display: flex;
     width: 10px;
     height: 10px;
     border-radius: 5px;
     background: #7d40e7;
 `;
+export const BallContainer = styled.View`
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+`;
 
-export const TakenBall = styled.View``;
+export const BallLabelContainer = styled.View`
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+`;
 
-export const DeliveredBall = styled.View``;
+export const BallLabel = styled.Text`
+    color: #999999;
+    font-size: 12px;
+    align-self: center;
+`;
