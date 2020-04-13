@@ -63,7 +63,6 @@ export const SearchType = styled.Text`
     font-weight: bold;
     display: flex;
     align-self: center;
-
-    color: ${props => (props.highlight ? '#7D40E7' : '#999999')};
-    text-decoration: ${props => (props.highlight ? 'underline' : 'none')};
+    color: ${props => (props.selected ? '#7D40E7' : '#999999')};
+    text-decoration: ${props => (props.selected ? 'underline' : 'none')};
 `;

@@ -23,10 +23,20 @@ import { SignOut } from '~/store/modules/auth/actions';
 export default function Dashboard() {
     const profile = useSelector(state => state.user.profile || { name: '' });
     const dispatch = useDispatch();
-    const status = useState('delivered');
-
+    const [pending, setPending] = useState(true);
+    const [delivered, setDelivered] = useState(false);
     function handleLogout() {
         dispatch(SignOut());
+    }
+
+    function handleChange(currentButton) {
+        if (currentButton === 'pending') {
+            setPending(true);
+            setDelivered(false);
+        } else {
+            setPending(false);
+            setDelivered(true);
+        }
     }
 
     return (
@@ -47,11 +57,11 @@ export default function Dashboard() {
             <HContainer>
                 <DText>Entregas</DText>
                 <StatusContainer>
-                    <TouchableOpacity>
-                        <SearchType highlight>Pendentes</SearchType>
+                    <TouchableOpacity onPress={() => handleChange('pending')}>
+                        <SearchType selected={pending}>Pendentes</SearchType>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <SearchType>Entregues</SearchType>
+                    <TouchableOpacity onPress={() => handleChange('delivered')}>
+                        <SearchType selected={delivered}>Entregues</SearchType>
                     </TouchableOpacity>
                 </StatusContainer>
             </HContainer>
