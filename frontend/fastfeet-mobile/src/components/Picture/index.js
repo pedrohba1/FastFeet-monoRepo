@@ -35,6 +35,5 @@ Picture.defaultProps = {
 
 Picture.propTypes = {
     src: PropTypes.string,
-    name: PropTypes.string.isRequired,
     children: PropTypes.string,
 };
