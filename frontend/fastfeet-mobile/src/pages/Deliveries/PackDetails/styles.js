@@ -35,7 +35,6 @@ export const Container = styled.View`
 
 export const Buttons = styled.View`
     align-self: center;
-
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
