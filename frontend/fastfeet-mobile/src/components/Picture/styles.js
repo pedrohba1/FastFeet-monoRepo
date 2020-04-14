@@ -11,9 +11,9 @@ export const Container = styled.View`
 `;
 
 export const Img = styled.Image`
-    border-radius: 15px;
-    width: 30px;
-    height: 30px;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
 `;
 
 export const Name = styled.Text`

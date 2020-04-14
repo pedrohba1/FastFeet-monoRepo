@@ -24,6 +24,8 @@ import { SignOut } from '~/store/modules/auth/actions';
 
 export default function Dashboard() {
     const profile = useSelector(state => state.user.profile || { name: '' });
+
+    console.tron.log(profile);
     const [packages, setPackages] = useState([]);
 
     const dispatch = useDispatch();
@@ -38,12 +40,14 @@ export default function Dashboard() {
             const response = await api.get('packages', {
                 params: {
                     courier_id: profile.id,
+                    pending_only: pending ? 'yes' : 'no',
+                    delivered_only: delivered ? 'yes' : 'no',
                 },
             });
             setPackages(response.data);
         }
         loadPackages();
-    }, [profile.id]);
+    }, [profile.id, pending, delivered]);
 
     function handleChange(currentButton) {
         if (currentButton === 'pending') {
@@ -59,7 +63,9 @@ export default function Dashboard() {
         <Background>
             <Header>
                 <CourierContainer>
-                    <Picture>{profile.name}</Picture>
+                    <Picture src={profile.avatar && profile.avatar.url}>
+                        {profile.name}
+                    </Picture>
                     <MsgContainer>
                         <WelcomeMessage>Bem vindo de volta,</WelcomeMessage>
                         <Name>{profile.name}</Name>

@@ -10,11 +10,12 @@ export function* SignIn({ payload }) {
     try {
         const { id: userId } = payload;
         const response = yield call(api.get, `/couriers/${userId}`);
-        const { id, name, email } = response.data;
+        const { id, name, email, avatar } = response.data;
         const user = {
             id,
             name,
             email,
+            avatar,
         };
         yield put(signInSuccess(user));
     } catch (err) {

@@ -83,8 +83,6 @@ export const Ball = styled.View`
     border-radius: 5px;
     ${props =>
         props.checked ? 'background: #7d40e7;' : 'border: 1px solid #7d40e7;'}
-'}
-
 `;
 export const BallContainer = styled.View`
     display: flex;
@@ -93,6 +91,7 @@ export const BallContainer = styled.View`
 `;
 
 export const BallLabelContainer = styled.View`
+    margin: 0 20px;
     align-self: stretch;
     display: flex;
     justify-content: space-between;
