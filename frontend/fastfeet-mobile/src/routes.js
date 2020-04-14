@@ -9,7 +9,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SignIn from '~/pages/SignIn';
+
 import Dashboard from '~/pages/Deliveries/Dashboard';
+import PackDetails from '~/pages/Deliveries/PackDetails';
+
 import Profile from '~/pages/Profile';
 
 const Stack = createStackNavigator();
@@ -35,21 +38,17 @@ function Deliveries() {
                 headerShown: false,
             }}
         >
+            <Stack.Screen name="Dashboard" component={Dashboard} />
             <Stack.Screen
-                name="SelectProvider"
-                component={Dashboard}
-                options={{ title: 'Selecione o prestador' }}
+                name="PackDetails"
+                component={PackDetails}
+                options={{
+                    title: 'Detalhes da encomenda',
+                    headerShown: true,
+                    headerTintColor: '#fff',
+                    headerStyle: { backgroundColor: '#7D40E7' },
+                }}
             />
-            {/*    <Stack.Screen
-                name="SelectDateTime"
-                component={SelectDateTime}
-                options={{ title: 'Selecione o horário' }}
-            />
-            <Stack.Screen
-                name="Confirm"
-                component={Confirm}
-                options={{ title: 'Confirmar o agendamento' }}
-            /> */}
         </Stack.Navigator>
     );
 }

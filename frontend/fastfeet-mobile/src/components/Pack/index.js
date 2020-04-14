@@ -22,9 +22,7 @@ import {
     BallLabelContainer,
 } from './styles';
 
-export default function Pack({ data }) {
-    console.tron.log(data);
-
+export default function Pack({ data, onCheckDetails }) {
     const dateFormatted = useMemo(() => {
         return data.updated_at !== null
             ? format(parseISO(data.updated_at), 'dd/MM/yyyy', {
@@ -65,7 +63,7 @@ export default function Pack({ data }) {
                 </Info>
 
                 <Info>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => onCheckDetails(data)}>
                         <Details>Ver detalhes</Details>
                     </TouchableOpacity>
                 </Info>

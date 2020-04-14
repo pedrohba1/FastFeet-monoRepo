@@ -22,7 +22,7 @@ import Pack from '~/components/Pack';
 import api from '~/services/api';
 import { SignOut } from '~/store/modules/auth/actions';
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
     const profile = useSelector(state => state.user.profile || { name: '' });
 
     console.tron.log(profile);
@@ -59,6 +59,10 @@ export default function Dashboard() {
         }
     }
 
+    function handleCheckDetails(data) {
+        navigation.navigate('PackDetails', { data });
+    }
+
     return (
         <Background>
             <Header>
@@ -91,7 +95,7 @@ export default function Dashboard() {
             <List
                 data={packages}
                 renderItem={({ item }) => (
-                    <Pack onCancel={() => {}} data={item} />
+                    <Pack onCheckDetails={handleCheckDetails} data={item} />
                 )}
                 keyExtractor={item => String(item.id)}
             />
