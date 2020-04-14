@@ -22,7 +22,6 @@
 
 -   [About](#about)
 -   [Getting Started](#getting_started)
--   [Usage](#usage)
 -   [Built Using](#built_using)
 
 ## 🧐 About <a name = "about"></a>
@@ -32,12 +31,7 @@ Esse projeto é o backend da aplicação do fastFeet, aqui contém todas as inst
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 Apenas `yarn install`para instalar todas as dependências do projeto assim que cloná-lo.
-
 Em seguida, você só precisa rodar o `yarn start`.
-
-## 🎈 Usage <a name="usage"></a>
-
-Você pode usar o arquivo do insomnia que eu deixei na pasta backend para conseguir testar algumas rotas.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
