@@ -61,7 +61,14 @@ export const ContentText = styled.Text`
     color: #666666;
 `;
 
+export const ButtonText = styled.Text`
+    color: #666666;
+    text-align: center;
+`;
+
 export const Button = styled.TouchableOpacity`
+    text-align: center;
+    align-self: center;
     align-items: center;
     display: flex;
     align-self: stretch;

@@ -15,6 +15,7 @@ import {
     HTextContainer,
     Buttons,
     Button,
+    ButtonText,
 } from './styles';
 
 export default function PackDetails({ navigation, route }) {
@@ -119,33 +120,33 @@ export default function PackDetails({ navigation, route }) {
 
             <Buttons>
                 <Container>
-                    <Button>
-                        <Icon
-                            name="close-circle-outline"
-                            size={40}
-                            color="#E74040"
-                        />
-                        <ContentText>Informar{'\n'}Problema</ContentText>
-                    </Button>
-                </Container>
-                <Container>
                     <Button
                         onPress={() => {
                             navigation.navigate('InformProblem', { data });
                         }}
                     >
                         <Icon
+                            name="close-circle-outline"
+                            size={40}
+                            color="#E74040"
+                        />
+                        <ButtonText>Informar{'\n'}Problema</ButtonText>
+                    </Button>
+                </Container>
+                <Container>
+                    <Button>
+                        <Icon
                             name="information-outline"
                             size={40}
                             color="#E7BA40"
                         />
-                        <ContentText>Informar{'\n'}Problema</ContentText>
+                        <ButtonText>Visualizar{'\n'}Problemas</ButtonText>
                     </Button>
                 </Container>
                 <Container>
                     <Button>
                         <Icon name="check-circle" size={40} color="#7D40E7" />
-                        <ContentText>Informar{'\n'}Problema</ContentText>
+                        <ButtonText>Confirmar{'\n'}Entrega</ButtonText>
                     </Button>
                 </Container>
             </Buttons>

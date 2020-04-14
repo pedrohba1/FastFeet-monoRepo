@@ -20,7 +20,7 @@ export default function InfoProblem({ navigation, route }) {
                 </TouchableOpacity>
             ),
         });
-    }, []);
+    }, [navigation]);
 
     return (
         <Background>
