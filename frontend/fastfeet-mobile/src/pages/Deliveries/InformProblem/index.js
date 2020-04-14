@@ -1,11 +1,11 @@
 import React, { useLayoutEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
-import { Container } from './styles';
+import { Container, ProblemInput, Button, BText, Background } from './styles';
 
 export default function InfoProblem({ navigation, route }) {
-    /*     const { data } = route.params;
-     */
+    const { data } = route.params;
+
     console.tron.log(data);
 
     useLayoutEffect(() => {
@@ -22,5 +22,14 @@ export default function InfoProblem({ navigation, route }) {
         });
     }, []);
 
-    return <Container />;
+    return (
+        <Background>
+            <Container>
+                <ProblemInput multiline placeholder="informe o problema aqui" />
+            </Container>
+            <Button>
+                <BText>Enviar</BText>
+            </Button>
+        </Background>
+    );
 }
