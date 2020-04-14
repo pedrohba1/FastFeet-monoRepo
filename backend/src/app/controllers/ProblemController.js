@@ -100,9 +100,6 @@ class ProblemController {
             });
         }
 
-        if (await DeliveryProblem.findOne({ where: { package_id } })) {
-            return res.json({ error: 'this package already has a problem' });
-        }
         const problem = await DeliveryProblem.create({
             package_id,
             description,
