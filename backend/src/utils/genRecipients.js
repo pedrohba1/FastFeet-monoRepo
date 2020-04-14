@@ -1,3 +1,9 @@
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function genName() {
     const fstName = [
         'Ovid',
@@ -32,7 +38,7 @@ function genName() {
     } ${trdName[Math.floor(Math.random() * 10)]}`;
 }
 
-function genEF(index) {
+function genEF() {
     const estados = [
         'AC',
         'AL',
@@ -63,10 +69,10 @@ function genEF(index) {
         'TO',
     ];
 
-    return estados[index];
+    return estados[getRandomInt(0, estados.length - 1)];
 }
 
-function genCidade(index) {
+function genCidade() {
     const cidade = [
         'Rio Branco',
         'Maceió',
@@ -97,7 +103,7 @@ function genCidade(index) {
         'Palmas',
     ];
 
-    return cidade[index];
+    return cidade[getRandomInt(0, cidade.length - 1)];
 }
 
 function genCEP(cidade) {
@@ -148,7 +154,6 @@ function genRecipients(size) {
     const complemento = ['nenhum', 'apartamento '];
     const comp = Math.floor(Math.random() * 2);
     const num = ['', Math.floor(Math.random() * 100 + 1)];
-    const index = Math.floor(Math.random() * 27);
 
     const recipientList = [];
     let i = 0;
@@ -158,9 +163,9 @@ function genRecipients(size) {
             name: genName(),
             address: genAddress(),
             address_number: Math.floor(Math.random() * 1000 + 1),
-            state: genEF(index),
-            city: genCidade(index),
-            cep: genCEP(genCidade(index)),
+            state: genEF(),
+            city: genCidade(),
+            cep: genCEP(genCidade()),
             address_complement: complemento[comp] + num[comp],
             created_at: new Date(),
             updated_at: new Date(),
@@ -170,4 +175,7 @@ function genRecipients(size) {
 
     return recipientList;
 }
+
+console.log(genRecipients(100));
+
 exports.genRecipients = genRecipients;
