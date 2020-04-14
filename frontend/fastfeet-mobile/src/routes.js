@@ -12,6 +12,9 @@ import SignIn from '~/pages/SignIn';
 
 import Dashboard from '~/pages/Deliveries/Dashboard';
 import PackDetails from '~/pages/Deliveries/PackDetails';
+import InformProblem from '~/pages/Deliveries/InformProblem';
+import ConfirmDeliver from '~/pages/Deliveries/ConfirmDeliver';
+import ViewProblem from '~/pages/Deliveries/ViewProblem';
 
 import Profile from '~/pages/Profile';
 
@@ -49,6 +52,36 @@ function Deliveries() {
                     headerStyle: { backgroundColor: '#7D40E7' },
                 }}
             />
+            <Stack.Screen
+                name="InformProblem"
+                component={InformProblem}
+                options={{
+                    title: 'Informar problema',
+                    headerShown: true,
+                    headerTintColor: '#fff',
+                    headerStyle: { backgroundColor: '#7D40E7' },
+                }}
+            />
+            <Stack.Screen
+                name="ViewProblem"
+                component={ViewProblem}
+                options={{
+                    title: 'Visualizar problemas',
+                    headerShown: true,
+                    headerTintColor: '#fff',
+                    headerStyle: { backgroundColor: '#7D40E7' },
+                }}
+            />
+            <Stack.Screen
+                name="ConfirmDeliver"
+                component={ConfirmDeliver}
+                options={{
+                    title: 'Confirmar entrega',
+                    headerShown: true,
+                    headerTintColor: '#fff',
+                    headerStyle: { backgroundColor: '#7D40E7' },
+                }}
+            />
         </Stack.Navigator>
     );
 }
@@ -70,7 +103,7 @@ function HomeTabs() {
                             iconName = 'person';
                             break;
                         }
-                        case 'Dashboard': {
+                        case 'Deliveries': {
                             iconName = 'view-headline';
                             break;
                         }
@@ -98,7 +131,7 @@ function HomeTabs() {
         >
             <Tab.Screen
                 options={{ tabBarLabel: 'Entregas' }}
-                name="Dashboard"
+                name="Deliveries"
                 component={Deliveries}
             />
             <Tab.Screen
