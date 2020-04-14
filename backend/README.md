@@ -22,9 +22,7 @@
 
 -   [About](#about)
 -   [Getting Started](#getting_started)
--   [Debugging](#debugging)
 -   [Usage](#usage)
--   [Deployment](#deployment)
 -   [Built Using](#built_using)
 
 ## 🧐 About <a name = "about"></a>
@@ -60,11 +58,7 @@ Depois que você criar as tabelas com `yarn sequelize migration:create --name=cr
 Também é possível remover migrations com `yarn db:migrate:undo:all`
 Depois de feitas as migrations, é preciso adicionar as seeds, com `yarn sequelize db:seed:all`
 
-Fique atento, porque eu apenas criei as seeds de entregadores (couriers) e de destinatários (recipients).
-Se você quer algum pacote, ou problema, você vai ter que gerar eles pelo insomnia. Eu deixei um arquivo no projeto
-do Insomnia, com as rotas para isso, se você quiser usar.
-
-## 🔧 Debugging <a name = "debugging"></a>
+As seesds são de entregadores, pacotes e recipientes. Tem 100 de cada um, gerados aleatoriamente, exceto no caso de pacotes, que foram gerados 400. Cada Entregador ficou responsável nesse caso por 4 pacotes.
 
 Existe arquivo de debug na pasta .vscode
 Para utilizar opção de debug, execute o comando:
@@ -76,10 +70,6 @@ yarn dev:debug
 ## 🎈 Usage <a name="usage"></a>
 
 Você pode usar o arquivo do insomnia que eu deixei na pasta backend para conseguir testar algumas rotas.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
