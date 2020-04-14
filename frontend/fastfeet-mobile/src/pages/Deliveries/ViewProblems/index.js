@@ -24,7 +24,11 @@ export default function ViewProblems({ navigation, route }) {
 
     useEffect(() => {
         async function loadProblems() {
-            const response = await api.get('problems');
+            const response = await api.get('problems', {
+                params: {
+                    package_id: data.id,
+                },
+            });
             setProblems(response.data);
         }
         loadProblems();
