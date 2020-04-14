@@ -21,7 +21,6 @@
 ## 📝 Table of Contents
 
 -   [About](#about)
--   [Deployment](#deployment)
 -   [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
@@ -29,12 +28,6 @@
 Esta aplicação é parte do curso GoStack da RocketSeat. Neste projeto, temos o backend na pasta `backend`. O frontend, tanto
 web quanto mobile, estão na pasta `frontend`. Informações para execução de cada parte da aplicação estão nos `README.md` 
 de cada pasta da parte da aplicação.
-
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
