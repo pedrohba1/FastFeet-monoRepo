@@ -7,16 +7,10 @@
 
 <div align="center">
 
-
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-
 </div>
 
----
 
-<p align="center"> Esse é o frontend web da aplicação é o trabalho final do curso goStack, ofertado pela RocketSeat.
-    <br>
-</p>
 
 ## 📝 Table of Contents
 
