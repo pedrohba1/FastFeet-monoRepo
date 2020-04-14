@@ -21,7 +21,12 @@ class ProblemController {
     }
 
     async index(req, res) {
-        const { page = 1, list_packages = 'no', product = '' } = req.query;
+        const {
+            page = 1,
+            list_packages = 'no',
+            product = '',
+            package_id = null,
+        } = req.query;
 
         if (list_packages === 'yes') {
             const packs = await DeliveryProblem.findAll({
@@ -84,11 +89,22 @@ class ProblemController {
             return res.json(packs);
         }
 
+        const whereClausePackage =
+            package_id !== null
+                ? {
+                      package_id,
+                  }
+                : {
+                      id: { [Op.gt]: 0 },
+                  };
+
         const problems = await DeliveryProblem.findAll({
             order: ['id'],
             limit: 20,
             offset: (page - 1) * 20,
+            where: whereClausePackage,
         });
+
         return res.json(problems);
     }
 
