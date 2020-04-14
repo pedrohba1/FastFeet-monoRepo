@@ -3,7 +3,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
 import { Container } from './styles';
 
-export default function PackDetails({ navigation }) {
+export default function PackDetails({ navigation, route }) {
+    const { data } = route.params;
+
+    console.tron.log(data);
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
