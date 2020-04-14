@@ -20,7 +20,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Esse projeto é o frontend da aplicação do fastFeet, aqui contém todas as instruções de como iniciar o projeto.
+Esse projeto é o frontend web da aplicação do fastFeet, aqui contém todas as instruções de como iniciar o projeto.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
