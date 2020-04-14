@@ -151,22 +151,24 @@ function genAddress() {
 }
 
 function genRecipients(size) {
-    const complemento = ['nenhum', 'apartamento '];
-    const comp = Math.floor(Math.random() * 2);
-    const num = ['', Math.floor(Math.random() * 100 + 1)];
-
     const recipientList = [];
     let i = 0;
 
+    let complement;
     while (i < size) {
+        complement = [
+            'nenhum',
+            `apartamento ${getRandomInt(1, 8)}0${getRandomInt(0, 9)}`,
+        ];
+
         recipientList.push({
             name: genName(),
             address: genAddress(),
-            address_number: Math.floor(Math.random() * 1000 + 1),
+            address_number: getRandomInt(10, 1001),
             state: genEF(),
             city: genCidade(),
             cep: genCEP(genCidade()),
-            address_complement: complemento[comp] + num[comp],
+            address_complement: complement[getRandomInt(0, 1)],
             created_at: new Date(),
             updated_at: new Date(),
         });
