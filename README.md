@@ -29,6 +29,8 @@ Esta aplicação é parte do curso GoStack da RocketSeat. Neste projeto, temos o
 web quanto mobile, estão na pasta `frontend`. Informações para execução de cada parte da aplicação estão nos `README.md` 
 de cada pasta da parte da aplicação.
 
+Lembrando que o frontend mobile foi feito apenas para rodar no Android.
+
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 -   Eu agradeço à RocketSeat por disponibilizar o curso GoStack, aos seus professores e aos alunos que me ajudaram.
