@@ -18,12 +18,31 @@ class PackageController {
             courier_name = '',
             recipient_name = '',
             courier_id,
+            pending_only = 'no',
+            delivered_only = 'no',
         } = req.query;
 
-        const packages = await Package.findAll({
-            where: {
+        function SelectTypeOfSearch() {
+            if (pending_only === 'yes') {
+                return {
+                    product: { [Op.like]: `${product}%` },
+                    end_date: { [Op.is]: null },
+                };
+            }
+            if (delivered_only === 'yes') {
+                return {
+                    product: { [Op.like]: `${product}%` },
+                    end_date: { [Op.not]: null },
+                };
+            }
+
+            return {
                 product: { [Op.like]: `${product}%` },
-            },
+            };
+        }
+
+        const packages = await Package.findAll({
+            where: SelectTypeOfSearch(),
             order: ['id'],
             limit: 20,
             offset: (page - 1) * 20,
