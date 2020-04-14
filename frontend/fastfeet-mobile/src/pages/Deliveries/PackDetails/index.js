@@ -134,7 +134,11 @@ export default function PackDetails({ navigation, route }) {
                     </Button>
                 </Container>
                 <Container>
-                    <Button>
+                    <Button
+                        onPress={() => {
+                            navigation.navigate('ViewProblems', { data });
+                        }}
+                    >
                         <Icon
                             name="information-outline"
                             size={40}

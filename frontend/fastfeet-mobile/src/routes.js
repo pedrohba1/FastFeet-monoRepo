@@ -14,7 +14,7 @@ import Dashboard from '~/pages/Deliveries/Dashboard';
 import PackDetails from '~/pages/Deliveries/PackDetails';
 import InformProblem from '~/pages/Deliveries/InformProblem';
 import ConfirmDeliver from '~/pages/Deliveries/ConfirmDeliver';
-import ViewProblem from '~/pages/Deliveries/ViewProblem';
+import ViewProblems from '~/pages/Deliveries/ViewProblems';
 
 import Profile from '~/pages/Profile';
 
@@ -63,8 +63,8 @@ function Deliveries() {
                 }}
             />
             <Stack.Screen
-                name="ViewProblem"
-                component={ViewProblem}
+                name="ViewProblems"
+                component={ViewProblems}
                 options={{
                     title: 'Visualizar problemas',
                     headerShown: true,
