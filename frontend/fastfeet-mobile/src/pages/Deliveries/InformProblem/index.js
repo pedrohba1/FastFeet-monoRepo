@@ -1,10 +1,13 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Alert } from 'react-native';
 import { Container, ProblemInput, Button, BText, Background } from './styles';
+
+import api from '~/services/api';
 
 export default function InfoProblem({ navigation, route }) {
     const { data } = route.params;
+    const [description, setDescription] = useState('');
 
     console.tron.log(data);
 
@@ -22,12 +25,31 @@ export default function InfoProblem({ navigation, route }) {
         });
     }, [navigation]);
 
+    async function handleSubmit() {
+        try {
+            const response = await api.post('problems', {
+                package_id: data.id,
+                description,
+            });
+
+            Alert.alert('Sucesso', 'Problema registrado com sucesso');
+        } catch (err) {
+            console.tron.log(err);
+            Alert.alert('Falhou', 'Houve algum erro ao registrar o problema');
+        }
+    }
+
     return (
         <Background>
             <Container>
-                <ProblemInput multiline placeholder="informe o problema aqui" />
+                <ProblemInput
+                    value={description}
+                    onChangeText={setDescription}
+                    multiline
+                    placeholder="informe o problema aqui"
+                />
             </Container>
-            <Button>
+            <Button onPress={() => handleSubmit()}>
                 <BText>Enviar</BText>
             </Button>
         </Background>
