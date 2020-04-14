@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { Container, ProblemInput, Button, BText, Background } from './styles';
 
 import api from '~/services/api';
@@ -8,7 +8,7 @@ import api from '~/services/api';
 export default function InfoProblem({ navigation, route }) {
     const { data } = route.params;
     const [description, setDescription] = useState('');
-
+    const [loading, setLoading] = useState(false);
     console.tron.log(data);
 
     useLayoutEffect(() => {
@@ -26,17 +26,17 @@ export default function InfoProblem({ navigation, route }) {
     }, [navigation]);
 
     async function handleSubmit() {
+        setLoading(true);
         try {
-            const response = await api.post('problems', {
+            await api.post('problems', {
                 package_id: data.id,
                 description,
             });
-
             Alert.alert('Sucesso', 'Problema registrado com sucesso');
         } catch (err) {
-            console.tron.log(err);
             Alert.alert('Falhou', 'Houve algum erro ao registrar o problema');
         }
+        setLoading(false);
     }
 
     return (
@@ -50,7 +50,11 @@ export default function InfoProblem({ navigation, route }) {
                 />
             </Container>
             <Button onPress={() => handleSubmit()}>
-                <BText>Enviar</BText>
+                {loading ? (
+                    <ActivityIndicator size="small" color="#fff" />
+                ) : (
+                    <BText>Enviar</BText>
+                )}
             </Button>
         </Background>
     );
