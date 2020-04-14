@@ -7,7 +7,11 @@ import {
     ProblemContainer,
     ProblemDescription,
     ProblemDate,
+    HorizontalContainer,
+    HText,
 } from './styles';
+
+import formatId from '~/utils/formatId';
 
 import api from '~/services/api';
 
@@ -42,6 +46,10 @@ export default function ViewProblems({ navigation, route }) {
 
     return (
         <Background>
+            <HorizontalContainer>
+                <HText>Encomenda {formatId(data.id)}</HText>
+            </HorizontalContainer>
+
             <List
                 data={problems}
                 renderItem={({ item }) => <Problem item={item} />}

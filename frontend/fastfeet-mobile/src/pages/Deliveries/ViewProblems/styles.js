@@ -5,3 +5,17 @@ export const Background = styled.View``;
 export const List = styled.FlatList.attrs({
     showVerticalScrollIndicator: false,
 })``;
+
+export const HorizontalContainer = styled.View`
+    padding: 8px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+`;
+
+export const HText = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    color: #7d40e7;
+`;
