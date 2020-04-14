@@ -28,7 +28,7 @@ Esse projeto é o frontend mobile da aplicação do fastFeet, aqui contém todas
 
 Apenas `yarn install` para instalar todas as dependências do projeto assim que cloná-lo.
 Em seguida, você só precisa rodar o `yarn android`. Eu deixei um script chamado `listen-emulator` que
-serve para o Reactotron e a API conseguirem se comunicar com o aplicativo que estiver rodando no emulador
+serve para o Reactotron e a API conseguirem se comunicar com o aplicativo quando ele estiver rodando no emulador
 ou no dispositivo conectado ao computador.
 
 
