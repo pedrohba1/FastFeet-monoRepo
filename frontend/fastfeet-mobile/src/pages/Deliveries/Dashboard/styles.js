@@ -67,4 +67,6 @@ export const SearchType = styled.Text`
     text-decoration: ${props => (props.selected ? 'underline' : 'none')};
 `;
 
-export const List = styled.FlatList``;
+export const List = styled.FlatList.attrs({
+    showVerticalScrollIndicator: false,
+})``;

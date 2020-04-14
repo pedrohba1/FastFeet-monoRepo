@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SignIn from '~/pages/SignIn';
-import Dashboard from '~/pages/Dashboard';
+import Dashboard from '~/pages/Deliveries/Dashboard';
 import Profile from '~/pages/Profile';
 
 const Stack = createStackNavigator();
@@ -24,6 +24,32 @@ function LoginTabs() {
             }}
         >
             <Stack.Screen name="signIn" component={SignIn} />
+        </Stack.Navigator>
+    );
+}
+
+function Deliveries() {
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Stack.Screen
+                name="SelectProvider"
+                component={Dashboard}
+                options={{ title: 'Selecione o prestador' }}
+            />
+            {/*    <Stack.Screen
+                name="SelectDateTime"
+                component={SelectDateTime}
+                options={{ title: 'Selecione o horário' }}
+            />
+            <Stack.Screen
+                name="Confirm"
+                component={Confirm}
+                options={{ title: 'Confirmar o agendamento' }}
+            /> */}
         </Stack.Navigator>
     );
 }
@@ -74,7 +100,7 @@ function HomeTabs() {
             <Tab.Screen
                 options={{ tabBarLabel: 'Entregas' }}
                 name="Dashboard"
-                component={Dashboard}
+                component={Deliveries}
             />
             <Tab.Screen
                 options={{ tabBarLabel: 'Meu Perfil' }}
