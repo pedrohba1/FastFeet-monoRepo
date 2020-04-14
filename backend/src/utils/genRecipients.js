@@ -176,6 +176,4 @@ function genRecipients(size) {
     return recipientList;
 }
 
-console.log(genRecipients(100));
-
 exports.genRecipients = genRecipients;
