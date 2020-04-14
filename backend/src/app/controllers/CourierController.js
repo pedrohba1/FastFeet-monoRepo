@@ -11,6 +11,13 @@ class CourierController {
 
         const courier = await Courier.findOne({
             where: { id },
+            include: [
+                {
+                    model: File,
+                    as: 'avatar',
+                    attributes: ['url', 'path', 'id'],
+                },
+            ],
         });
 
         if (!courier) {
