@@ -148,7 +148,11 @@ export default function PackDetails({ navigation, route }) {
                     </Button>
                 </Container>
                 <Container>
-                    <Button>
+                    <Button
+                        onPress={() => {
+                            navigation.navigate('ConfirmDeliver', { data });
+                        }}
+                    >
                         <Icon name="check-circle" size={40} color="#7D40E7" />
                         <ButtonText>Confirmar{'\n'}Entrega</ButtonText>
                     </Button>
