@@ -7,7 +7,6 @@ class NewPackageMail {
 
     async handle({ data }) {
         const { courier, recipient } = data;
-        console.log('a fila executou');
         await Mail.sendMail({
             to: `${courier.name} <${courier.email}>`,
             subject: 'Você tem uma nova encomenda',
