@@ -23,14 +23,13 @@ import api from '~/services/api';
 import { SignOut } from '~/store/modules/auth/actions';
 
 export default function Dashboard({ navigation }) {
+    const dispatch = useDispatch();
     const profile = useSelector(state => state.user.profile || { name: '' });
 
-    console.tron.log(profile);
     const [packages, setPackages] = useState([]);
-
-    const dispatch = useDispatch();
     const [pending, setPending] = useState(true);
     const [delivered, setDelivered] = useState(false);
+
     function handleLogout() {
         dispatch(SignOut());
     }
