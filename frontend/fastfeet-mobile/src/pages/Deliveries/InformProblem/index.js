@@ -5,7 +5,7 @@ import { Container, ProblemInput, Button, BText, Background } from './styles';
 
 import api from '~/services/api';
 
-export default function InfoProblem({ navigation, route }) {
+export default function InformProblem({ navigation, route }) {
     const { data } = route.params;
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);

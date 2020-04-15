@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const ProblemContainer = styled.View`
     background: #fff;
-    padding: 8px;
+    padding: 6px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -12,12 +12,13 @@ export const ProblemContainer = styled.View`
     border-color: #ddd;
     border-bottom-width: 0;
     shadow-color: #000;
-    shadow-opacity: 0.8;
-    shadow-radius: 1px;
-    elevation: 0.2;
+    shadow-opacity: 0.5;
+    shadow-radius: 4px;
+    elevation: 1;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 10px;
+    margin-bottom: 2px;
 `;
 
 export const ProblemDescription = styled.Text.attrs({

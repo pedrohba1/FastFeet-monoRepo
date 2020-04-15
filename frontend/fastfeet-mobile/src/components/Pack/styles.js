@@ -1,19 +1,22 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-    padding: 5px;
+    background: #fff;
+    padding: 8px;
+    display: flex;
     align-self: stretch;
     border-width: 0.5px;
-    border-radius: 0.5px;
+    border-radius: 4px;
     border-color: #ddd;
     border-bottom-width: 0;
     shadow-color: #000;
-    shadow-opacity: 0.8;
-    shadow-radius: 1px;
-    elevation: 0.2;
+    shadow-opacity: 0.5;
+    shadow-radius: 4px;
+    elevation: 1;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 10px;
+    margin-bottom: 2px;
 `;
 
 export const Header = styled.View`

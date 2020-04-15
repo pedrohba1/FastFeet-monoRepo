@@ -5,6 +5,7 @@ export const ProblemInput = styled.TextInput``;
 
 export const Background = styled.View`
     flex: 1;
+    background: #fff;
     padding: 0 8px;
 `;
 
@@ -19,9 +20,9 @@ export const Container = styled.View`
     border-color: #ddd;
     border-bottom-width: 0;
     shadow-color: #000;
-    shadow-opacity: 0.8;
-    shadow-radius: 1px;
-    elevation: 0.2;
+    shadow-opacity: 0.5;
+    shadow-radius: 4px;
+    elevation: 1;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 10px;
