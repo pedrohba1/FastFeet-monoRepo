@@ -1,12 +1,4 @@
-import {
-    parseISO,
-    isEqual,
-    setHours,
-    setMinutes,
-    setSeconds,
-    setMilliseconds,
-} from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { parseISO, isSameDay, getHours } from 'date-fns';
 
 import PackageLimit from '../schemas/PackageLimit';
 import Package from '../models/Package';
@@ -18,15 +10,19 @@ class DeliveryController {
         const delivery = await Package.findByPk(package_id);
         let { req_date } = req.body;
 
-        // Se o carteiro não colocar uma data no dispositivo, ele usa a data
-        // do dia
+        // Se a data não for dada na requisição, a data do dia atual é utilizada
         req_date = req_date ? parseISO(req_date) : new Date();
-        req_date = setMilliseconds(
-            setSeconds(setMinutes(setHours(req_date, 0), 0), 0),
-            0.0
-        );
-        const { timezone } = Intl.DateTimeFormat().resolvedOptions();
-        req_date = utcToZonedTime(req_date, timezone);
+
+        const startHours = getHours(req_date);
+
+        // A data de início deve ser cadastrada assim que for feita a retirada do produto pelo entregador,
+        // e as retiradas só podem ser feitas entre as 08:00 e 18:00h.
+        // Não converti os horários para UTC, estão nas horas locais do sistema mesmo.
+        if (startHours < 8 || startHours > 18) {
+            return res.status(400).json({
+                error: `Esse horário não é permitido para retirar entregas, você está no horário ${startHours}:00 (local), os horários permitidos são entre 8:00 e 18:00 (local)`,
+            });
+        }
 
         if (!delivery) {
             return res.status(400).json({
@@ -71,6 +67,7 @@ class DeliveryController {
             });
         }
 
+        // TODO: preciso fazer alguma coisa para o mongo checar se o dia é igual
         let limiter = await PackageLimit.findOne({
             courierId: courier_id,
             takenDate: req_date,
@@ -84,10 +81,11 @@ class DeliveryController {
             });
         }
 
-        if (isEqual(limiter.takenDate, req_date)) {
+        if (isSameDay(limiter.takenDate, req_date)) {
             if (limiter.packagesTaken.length === 5) {
                 return res.json({
-                    error: 'Este entragador está tentando exceder o limite',
+                    error:
+                        'Este entregador está tentando exceder o limite diário de retiradas',
                 });
             }
             const takenList = limiter.packagesTaken;
