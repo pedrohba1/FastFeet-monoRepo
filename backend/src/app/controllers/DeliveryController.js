@@ -43,7 +43,8 @@ class DeliveryController {
         if (type === 'end') {
             if (delivery.start_date === null) {
                 return res.status(400).json({
-                    error: 'cant deliver a package that has not been taken',
+                    error:
+                        'Não é possível entregar uma encomenda que não tenha sido retirada',
                 });
             }
 
