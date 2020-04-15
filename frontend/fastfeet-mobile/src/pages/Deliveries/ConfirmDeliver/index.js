@@ -48,9 +48,9 @@ export default function ConfirmDeliver({ navigation, route }) {
     }, []);
 
     async function takePicture() {
-        if (this.camera) {
+        if (camera) {
             const options = { quality: 0.5, base64: true };
-            const camData = await this.camera.takePictureAsync(options);
+            const camData = await camera.takePictureAsync(options);
             console.log(camData.uri);
         }
     }

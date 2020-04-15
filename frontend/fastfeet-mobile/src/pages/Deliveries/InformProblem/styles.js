@@ -9,6 +9,7 @@ export const Background = styled.View`
 `;
 
 export const Container = styled.View`
+    background: #fff;
     min-height: 60%;
     padding: 8px;
     display: flex;

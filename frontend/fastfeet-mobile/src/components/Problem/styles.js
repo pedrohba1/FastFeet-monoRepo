@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 export const ProblemContainer = styled.View`
+    background: #fff;
     padding: 8px;
     display: flex;
     justify-content: space-between;
