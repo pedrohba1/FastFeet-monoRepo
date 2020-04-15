@@ -4,7 +4,6 @@ import multerConfig from './config/multer';
 
 import UserController from './app/controllers/UserController';
 import RecipientController from './app/controllers/RecipientController';
-import CepController from './app/controllers/CepController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import CourierController from './app/controllers/CourierController';

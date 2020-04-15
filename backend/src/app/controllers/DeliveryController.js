@@ -30,13 +30,13 @@ class DeliveryController {
 
         if (!delivery) {
             return res.status(400).json({
-                error: 'this package does not exist',
+                error: 'Esse pacote não existe',
             });
         }
 
         if (delivery.canceled_at !== null) {
             return res.status(400).json({
-                error: 'this package was cancelled',
+                error: 'Esse pacote foi cancelado',
             });
         }
 
@@ -50,24 +50,24 @@ class DeliveryController {
 
             if (!signature_id) {
                 return res.status(400).json({
-                    error: 'signature id not provided',
+                    error: 'signature_id não provida',
                 });
             }
         }
 
         if (delivery.courier_id !== courier_id) {
             return res.status(400).json({
-                error: `this package doesn't belong to this courier`,
+                error: `Esse pacote não pertence à este entregador`,
             });
         }
         if (delivery.start_date !== null && type === 'start') {
             return res.status(400).json({
-                error: 'this delivery already has a start date',
+                error: 'esse pacote já tem uma data de início',
             });
         }
         if (delivery.end_date !== null) {
             return res.status(400).json({
-                error: 'this package has already been delivered',
+                error: 'Esse pacote já foi entregue',
             });
         }
 
@@ -87,7 +87,7 @@ class DeliveryController {
         if (isEqual(limiter.takenDate, req_date)) {
             if (limiter.packagesTaken.length === 5) {
                 return res.json({
-                    error: 'this courier is trying to exceed the limit',
+                    error: 'Este entragador está tentando exceder o limite',
                 });
             }
             const takenList = limiter.packagesTaken;
