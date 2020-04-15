@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { Container } from './styles';
+import api from '~/services/api';
 
 const styles = StyleSheet.create({
     container: {
@@ -45,13 +45,39 @@ export default function ConfirmDeliver({ navigation, route }) {
                 </TouchableOpacity>
             ),
         });
-    }, []);
+    }, [navigation]);
+
+    async function ConfirmDelivery(camUri) {
+        try {
+            const apiData = new FormData();
+            apiData.append('file', {
+                uri: camUri,
+                name: 'teste.png',
+                type: 'image/jpg',
+            });
+
+            const response = await api.post('files', apiData);
+            const { id } = response.data;
+            const deliverResponse = await api.post('courier/end', {
+                signature_id: id,
+                package_id: data.id,
+                courier_id: data.courier.id,
+            });
+
+            Alert.alert('Sucesso', 'entrega registrada com sucesso!');
+            console.tron.log(response);
+        } catch (err) {
+            Alert.alert('Erro', err.response.data.error);
+            console.tron.log('erro', err.response);
+        }
+    }
 
     async function takePicture() {
         if (camera) {
             const options = { quality: 0.5, base64: true };
             const camData = await camera.takePictureAsync(options);
-            console.log(camData.uri);
+            console.tron.log(camData.uri);
+            ConfirmDelivery(camData.uri);
         }
     }
 
