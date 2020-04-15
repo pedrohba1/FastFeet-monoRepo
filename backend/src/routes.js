@@ -21,8 +21,6 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.put('/users', UserController.update);
 
-routes.get('/cep', CepController.show);
-
 routes.post('/sessions', SessionController.store);
 
 routes.post('/courier/:type', courierExists, DeliveryController.store);
