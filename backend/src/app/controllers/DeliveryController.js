@@ -1,4 +1,12 @@
-import { parseISO, isSameDay, getHours } from 'date-fns';
+import {
+    parseISO,
+    isSameDay,
+    getHours,
+    setHours,
+    setMilliseconds,
+    setSeconds,
+    setMinutes,
+} from 'date-fns';
 
 import PackageLimit from '../schemas/PackageLimit';
 import Package from '../models/Package';
@@ -67,30 +75,34 @@ class DeliveryController {
             });
         }
 
-        // TODO: preciso fazer alguma coisa para o mongo checar se o dia é igual
+        const limiterDate = setMilliseconds(
+            setSeconds(setMinutes(setHours(req_date, 0), 0), 0),
+            0
+        );
+
         let limiter = await PackageLimit.findOne({
             courierId: courier_id,
-            takenDate: req_date,
+            takenDate: limiterDate,
         });
 
         if (!limiter) {
             limiter = await PackageLimit.create({
                 courierId: courier_id,
                 packagesTaken: [],
-                takenDate: req_date,
+                takenDate: limiterDate,
             });
         }
 
         if (isSameDay(limiter.takenDate, req_date)) {
             if (limiter.packagesTaken.length === 5) {
-                return res.json({
+                return res.status(400).json({
                     error:
                         'Este entregador está tentando exceder o limite diário de retiradas',
                 });
             }
             const takenList = limiter.packagesTaken;
             takenList.push(package_id);
-            await limiter.update({
+            await limiter.updateOne({
                 packagesTaken: takenList,
             });
         }
