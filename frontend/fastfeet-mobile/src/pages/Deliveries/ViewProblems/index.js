@@ -11,20 +11,21 @@ import api from '~/services/api';
 import Problem from '~/components/Problem';
 
 export default function ViewProblems({ navigation, route }) {
-    const { data } = route.params;
+    const { pack } = route.params;
     const [problems, setProblems] = useState([]);
+    console.tron.log(pack);
 
     useEffect(() => {
         async function loadProblems() {
             const response = await api.get('problems', {
                 params: {
-                    package_id: data.id,
+                    package_id: pack.id,
                 },
             });
             setProblems(response.data);
         }
         loadProblems();
-    }, [data.id]);
+    }, [pack.id]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -43,7 +44,7 @@ export default function ViewProblems({ navigation, route }) {
     return (
         <Background>
             <HorizontalContainer>
-                <HText>Encomenda {formatId(data.id)}</HText>
+                <HText>Encomenda {formatId(pack.id)}</HText>
             </HorizontalContainer>
 
             <List

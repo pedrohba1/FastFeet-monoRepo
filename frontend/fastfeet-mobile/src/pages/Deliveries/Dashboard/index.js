@@ -58,8 +58,8 @@ export default function Dashboard({ navigation }) {
         }
     }
 
-    function handleCheckDetails(data) {
-        navigation.navigate('PackDetails', { data });
+    function handleCheckDetails(pack) {
+        navigation.navigate('PackDetails', { pack });
     }
 
     return (
@@ -94,7 +94,7 @@ export default function Dashboard({ navigation }) {
             <List
                 data={packages}
                 renderItem={({ item }) => (
-                    <Pack onCheckDetails={handleCheckDetails} data={item} />
+                    <Pack onCheckDetails={handleCheckDetails} item={item} />
                 )}
                 keyExtractor={item => String(item.id)}
             />

@@ -6,10 +6,10 @@ import { Container, ProblemInput, Button, BText, Background } from './styles';
 import api from '~/services/api';
 
 export default function InformProblem({ navigation, route }) {
-    const { data } = route.params;
+    const { pack } = route.params;
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
-    console.tron.log(data);
+    console.tron.log(pack);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -29,7 +29,7 @@ export default function InformProblem({ navigation, route }) {
         setLoading(true);
         try {
             await api.post('problems', {
-                package_id: data.id,
+                package_id: pack.id,
                 description,
             });
             Alert.alert('Sucesso', 'Problema registrado com sucesso');

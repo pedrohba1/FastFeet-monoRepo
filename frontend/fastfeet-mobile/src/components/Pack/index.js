@@ -23,28 +23,28 @@ import {
     BallLabelContainer,
 } from './styles';
 
-export default function Pack({ data, onCheckDetails }) {
+export default function Pack({ item, onCheckDetails }) {
     const dateFormatted = useMemo(() => {
-        return data.updated_at !== null
-            ? format(parseISO(data.updated_at), 'dd/MM/yyyy', {
+        return item.updated_at !== null
+            ? format(parseISO(item.updated_at), 'dd/MM/yyyy', {
                   locale: pt,
               })
             : 'não retirado';
-    }, [data.updated_at]);
+    }, [item.updated_at]);
 
     return (
         <Container>
             <Header>
                 <Icon name="truck" size={20} color="#7D40E7" />
-                <PackId>Encomenda {formatId(data.id)}</PackId>
+                <PackId>Encomenda {formatId(item.id)}</PackId>
             </Header>
             <Progress>
                 <ProgressBar>
                     <Ball checked />
                     <Line />
-                    <Ball checked={data.start_date !== null} />
+                    <Ball checked={item.start_date !== null} />
                     <Line />
-                    <Ball checked={data.end_date !== null} />
+                    <Ball checked={item.end_date !== null} />
                 </ProgressBar>
                 <BallLabelContainer>
                     <BallLabel>Aguardando{'\n'} Retirada</BallLabel>
@@ -60,11 +60,11 @@ export default function Pack({ data, onCheckDetails }) {
 
                 <Info>
                     <Label>Cidade</Label>
-                    <InfoData>{data.recipient.city}</InfoData>
+                    <InfoData>{item.recipient.city}</InfoData>
                 </Info>
 
                 <Info>
-                    <TouchableOpacity onPress={() => onCheckDetails(data)}>
+                    <TouchableOpacity onPress={() => onCheckDetails(item)}>
                         <Details>Ver detalhes</Details>
                     </TouchableOpacity>
                 </Info>
@@ -74,7 +74,8 @@ export default function Pack({ data, onCheckDetails }) {
 }
 
 Pack.propTypes = {
-    data: PropTypes.shape({
+    item: PropTypes.shape({
+        id: PropTypes.number,
         updated_at: PropTypes.string,
         end_date: PropTypes.string,
         start_date: PropTypes.string,

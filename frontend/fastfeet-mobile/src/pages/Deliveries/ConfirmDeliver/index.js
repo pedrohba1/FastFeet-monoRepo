@@ -16,7 +16,7 @@ import {
 import Button from '~/components/Button';
 
 export default function ConfirmDeliver({ navigation, route }) {
-    const { data: pack } = route.params;
+    const { pack } = route.params;
 
     console.tron.log(pack);
     const [picture, setPicture] = useState(
@@ -40,14 +40,14 @@ export default function ConfirmDeliver({ navigation, route }) {
 
     async function ConfirmDelivery() {
         try {
-            const apiData = new FormData();
-            apiData.append('file', {
+            const data = new FormData();
+            data.append('file', {
                 uri: picture,
                 name: 'confirmed_delivery.png',
                 type: 'image/jpg',
             });
 
-            const response = await api.post('files', apiData);
+            const response = await api.post('files', data);
             const { id } = response.data;
             await api.post('courier/end', {
                 signature_id: id,

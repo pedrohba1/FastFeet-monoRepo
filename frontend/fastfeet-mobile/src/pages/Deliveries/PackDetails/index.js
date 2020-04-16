@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import PropTypes from 'prop-types';
 import {
     Container,
     HorizontalContainer,
@@ -19,37 +20,37 @@ import {
 } from './styles';
 
 export default function PackDetails({ navigation, route }) {
-    const { data } = route.params;
+    const { pack } = route.params;
 
-    console.tron.log(data);
+    console.tron.log(pack);
 
     const startDateFormatted = useMemo(() => {
-        return data.start_date !== null
-            ? format(parseISO(data.start_date), 'dd/MM/yyyy', {
+        return pack.start_date !== null
+            ? format(parseISO(pack.start_date), 'dd/MM/yyyy', {
                   locale: pt,
               })
             : '--/--/--';
-    }, [data.start_date]);
+    }, [pack.start_date]);
 
     const endDateFormatted = useMemo(() => {
-        return data.end_date !== null
-            ? format(parseISO(data.end_date), 'dd/MM/yyyy', {
+        return pack.end_date !== null
+            ? format(parseISO(pack.end_date), 'dd/MM/yyyy', {
                   locale: pt,
               })
             : '--/--/--';
-    }, [data.end_date]);
+    }, [pack.end_date]);
 
     const status = useMemo(() => {
-        if (data.start_date === null) {
+        if (pack.start_date === null) {
             return 'não retirado';
         }
-        if (data.start_date !== null) {
+        if (pack.start_date !== null) {
             return 'pendente';
         }
-        if (data.end_date !== null) {
+        if (pack.end_date !== null) {
             return 'entregue';
         }
-    }, [data.start_udate, data.start_date, data.end_date]);
+    }, [pack.start_udate, pack.start_date, pack.end_date]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -75,23 +76,23 @@ export default function PackDetails({ navigation, route }) {
 
                 <TextContainer>
                     <LabelText>DESTINATÁRIO</LabelText>
-                    <ContentText>{data.recipient.name}</ContentText>
+                    <ContentText>{pack.recipient.name}</ContentText>
                 </TextContainer>
 
                 <TextContainer>
                     <LabelText>ENDEREÇO DE ENTREGA</LabelText>
                     <ContentText>
-                        {data.recipient.address},{' '}
-                        {data.recipient.address_number},{' '}
-                        {data.recipient.address_complement},{' '}
-                        {data.recipient.city} - {data.recipient.state},{' '}
-                        {data.recipient.cep}
+                        {pack.recipient.address},{' '}
+                        {pack.recipient.address_number},{' '}
+                        {pack.recipient.address_complement},{' '}
+                        {pack.recipient.city} - {pack.recipient.state},{' '}
+                        {pack.recipient.cep}
                     </ContentText>
                 </TextContainer>
 
                 <TextContainer>
                     <LabelText>PRODUTO</LabelText>
-                    <ContentText>{data.product}</ContentText>
+                    <ContentText>{pack.product}</ContentText>
                 </TextContainer>
             </Container>
 
@@ -122,7 +123,7 @@ export default function PackDetails({ navigation, route }) {
                 <Container>
                     <Button
                         onPress={() => {
-                            navigation.navigate('InformProblem', { data });
+                            navigation.navigate('InformProblem', { pack });
                         }}
                     >
                         <Icon
@@ -136,7 +137,7 @@ export default function PackDetails({ navigation, route }) {
                 <Container>
                     <Button
                         onPress={() => {
-                            navigation.navigate('ViewProblems', { data });
+                            navigation.navigate('ViewProblems', { pack });
                         }}
                     >
                         <Icon
@@ -150,7 +151,7 @@ export default function PackDetails({ navigation, route }) {
                 <Container>
                     <Button
                         onPress={() => {
-                            navigation.navigate('ConfirmDeliver', { data });
+                            navigation.navigate('ConfirmDeliver', { pack });
                         }}
                     >
                         <Icon name="check-circle" size={40} color="#7D40E7" />
@@ -161,3 +162,5 @@ export default function PackDetails({ navigation, route }) {
         </Background>
     );
 }
+
+PackDetails.propTypes = {};
