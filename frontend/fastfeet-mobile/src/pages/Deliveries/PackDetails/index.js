@@ -63,7 +63,7 @@ export default function PackDetails({ navigation, route }) {
                 </TouchableOpacity>
             ),
         });
-    }, []);
+    }, [navigation]);
 
     return (
         <Background>

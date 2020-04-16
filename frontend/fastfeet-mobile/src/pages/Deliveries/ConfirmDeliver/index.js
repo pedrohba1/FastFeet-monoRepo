@@ -1,36 +1,24 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity, StyleSheet, View, Text, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import api from '~/services/api';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'black',
-    },
-    preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20,
-    },
-});
+import {
+    CameraButton,
+    ButtonContainer,
+    CameraContainer,
+    Background,
+    Camera,
+    Img,
+} from './styles';
+
+import Button from '~/components/Button';
 
 export default function ConfirmDeliver({ navigation, route }) {
-    const { data } = route.params;
+    const { data: pack } = route.params;
 
-    console.tron.log(data);
-
+    const [picture, setPicture] = useState('');
     let camera;
 
     useLayoutEffect(() => {
@@ -47,79 +35,80 @@ export default function ConfirmDeliver({ navigation, route }) {
         });
     }, [navigation]);
 
-    async function ConfirmDelivery(camUri) {
+    async function ConfirmDelivery() {
         try {
             const apiData = new FormData();
             apiData.append('file', {
-                uri: camUri,
-                name: 'teste.png',
+                uri: picture,
+                name: 'confirmed_delivery.png',
                 type: 'image/jpg',
             });
 
             const response = await api.post('files', apiData);
             const { id } = response.data;
-            const deliverResponse = await api.post('courier/end', {
+            await api.post('courier/end', {
                 signature_id: id,
-                package_id: data.id,
-                courier_id: data.courier.id,
+                package_id: pack.id,
+                courier_id: pack.courier.id,
             });
 
-            Alert.alert('Sucesso', 'entrega registrada com sucesso!');
-            console.tron.log(response);
+            Alert.alert('Sucesso!', 'entrega registrada com sucesso!');
         } catch (err) {
-            Alert.alert('Erro', err.response.data.error);
-            console.tron.log('erro', err.response);
+            if (err.response) {
+                Alert.alert('Erro', err.response.data.error);
+            } else if (!picture) {
+                Alert.alert('Erro', 'você não retirou uma foto ainda');
+            }
         }
     }
 
     async function takePicture() {
-        if (camera) {
-            const options = { quality: 0.5, base64: true };
-            const camData = await camera.takePictureAsync(options);
-            console.tron.log(camData.uri);
-            ConfirmDelivery(camData.uri);
+        try {
+            if (camera) {
+                const options = { quality: 0.5, base64: true };
+                const camData = await camera.takePictureAsync(options);
+                setPicture(camData.uri);
+            }
+        } catch (err) {
+            Alert.alert('Erro', 'erro ao registrar imagem');
         }
     }
 
     return (
-        <View style={styles.container}>
-            <RNCamera
-                ref={ref => {
-                    camera = ref;
-                }}
-                style={styles.preview}
-                type={RNCamera.Constants.Type.back}
-                flashMode={RNCamera.Constants.FlashMode.on}
-                androidCameraPermissionOptions={{
-                    title: 'Permission to use camera',
-                    message: 'We need your permission to use your camera',
-                    buttonPositive: 'Ok',
-                    buttonNegative: 'Cancel',
-                }}
-                androidRecordAudioPermissionOptions={{
-                    title: 'Permission to use audio recording',
-                    message: 'We need your permission to use your audio',
-                    buttonPositive: 'Ok',
-                    buttonNegative: 'Cancel',
-                }}
-                onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                    console.tron.log(barcodes);
-                }}
-            />
-            <View
-                style={{
-                    flex: 0,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                }}
-            >
-                <TouchableOpacity
-                    onPress={() => takePicture()}
-                    style={styles.capture}
-                >
-                    <Text style={{ fontSize: 14 }}> SNAP </Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        <Background>
+            <CameraContainer>
+                {picture ? (
+                    <Img
+                        source={{
+                            uri: picture,
+                        }}
+                    />
+                ) : (
+                    <Camera
+                        ref={ref => {
+                            camera = ref;
+                        }}
+                        type={RNCamera.Constants.Type.back}
+                        flashMode={RNCamera.Constants.FlashMode.on}
+                        androidCameraPermissionOptions={{
+                            title: 'Permissão para usar a câmera',
+                            message:
+                                'Nós precisamos da sua permissão para tirar a foto',
+                            buttonPositive: 'Ok',
+                            buttonNegative: 'Cancelar',
+                        }}
+                    >
+                        <CameraButton onPress={() => takePicture()}>
+                            <Icon name="camera-alt" size={30} color="#fff" />
+                        </CameraButton>
+                    </Camera>
+                )}
+            </CameraContainer>
+            <ButtonContainer>
+                <Button onPress={() => ConfirmDelivery()} color="#7D40E7">
+                    Enviar
+                </Button>
+            </ButtonContainer>
+        </Background>
     );
 }

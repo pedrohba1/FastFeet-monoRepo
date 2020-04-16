@@ -1,15 +1,8 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
-import {
-    Background,
-    List,
-    ProblemContainer,
-    ProblemDescription,
-    ProblemDate,
-    HorizontalContainer,
-    HText,
-} from './styles';
+import PropTypes from 'prop-types';
+import { Background, List, HorizontalContainer, HText } from './styles';
 
 import formatId from '~/utils/formatId';
 
@@ -20,7 +13,6 @@ import Problem from '~/components/Problem';
 export default function ViewProblems({ navigation, route }) {
     const { data } = route.params;
     const [problems, setProblems] = useState([]);
-    console.tron.log(data);
 
     useEffect(() => {
         async function loadProblems() {
@@ -32,7 +24,7 @@ export default function ViewProblems({ navigation, route }) {
             setProblems(response.data);
         }
         loadProblems();
-    }, []);
+    }, [data.id]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
