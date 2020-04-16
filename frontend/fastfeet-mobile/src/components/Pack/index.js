@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 import formatId from '~/utils/formatId';
 
 import {
@@ -71,3 +72,15 @@ export default function Pack({ data, onCheckDetails }) {
         </Container>
     );
 }
+
+Pack.propTypes = {
+    data: PropTypes.shape({
+        updated_at: PropTypes.string,
+        end_date: PropTypes.string,
+        start_date: PropTypes.string,
+        courier: PropTypes.object,
+        recipient: PropTypes.object,
+        signature: PropTypes.object,
+    }).isRequired,
+    onCheckDetails: PropTypes.func.isRequired,
+};
