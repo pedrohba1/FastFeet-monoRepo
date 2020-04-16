@@ -27,6 +27,7 @@ export const Camera = styled(RNCamera)`
     background: black;
     display: flex;
     flex: 1;
+    align-self: center;
     justify-content: flex-end;
 `;
 

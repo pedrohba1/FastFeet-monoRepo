@@ -18,7 +18,10 @@ import Button from '~/components/Button';
 export default function ConfirmDeliver({ navigation, route }) {
     const { data: pack } = route.params;
 
-    const [picture, setPicture] = useState('');
+    console.tron.log(pack);
+    const [picture, setPicture] = useState(
+        pack.signature ? pack.signature.url : ''
+    );
     let camera;
 
     useLayoutEffect(() => {
@@ -104,11 +107,14 @@ export default function ConfirmDeliver({ navigation, route }) {
                     </Camera>
                 )}
             </CameraContainer>
-            <ButtonContainer>
-                <Button onPress={() => ConfirmDelivery()} color="#7D40E7">
-                    Enviar
-                </Button>
-            </ButtonContainer>
+
+            {!pack.signature && (
+                <ButtonContainer>
+                    <Button onPress={() => ConfirmDelivery()} color="#7D40E7">
+                        Enviar
+                    </Button>
+                </ButtonContainer>
+            )}
         </Background>
     );
 }

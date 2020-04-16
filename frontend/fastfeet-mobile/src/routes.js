@@ -79,7 +79,9 @@ function Deliveries() {
                     title: 'Confirmar entrega',
                     headerShown: true,
                     headerTintColor: '#fff',
-                    headerStyle: { backgroundColor: '#7D40E7' },
+                    headerStyle: {
+                        backgroundColor: '#7D40E7',
+                    },
                 }}
             />
         </Stack.Navigator>
