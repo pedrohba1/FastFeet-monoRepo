@@ -93,21 +93,20 @@ class DeliveryController {
             });
         }
 
-        if (isSameDay(limiter.takenDate, req_date)) {
-            if (limiter.packagesTaken.length === 5) {
-                return res.status(400).json({
-                    error:
-                        'Este entregador está tentando exceder o limite diário de retiradas',
+        if (type === 'start') {
+            if (isSameDay(limiter.takenDate, req_date)) {
+                if (limiter.packagesTaken.length === 5) {
+                    return res.status(400).json({
+                        error:
+                            'Este entregador está tentando exceder o limite diário de retiradas',
+                    });
+                }
+                const takenList = limiter.packagesTaken;
+                takenList.push(package_id);
+                await limiter.updateOne({
+                    packagesTaken: takenList,
                 });
             }
-            const takenList = limiter.packagesTaken;
-            takenList.push(package_id);
-            await limiter.updateOne({
-                packagesTaken: takenList,
-            });
-        }
-
-        if (type === 'start') {
             await delivery.update({ start_date: req_date });
         }
         if (type === 'end') {
