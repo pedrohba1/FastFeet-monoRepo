@@ -1,7 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity, StyleSheet, View, Text, Alert } from 'react-native';
+import { TouchableOpacity, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import PropTypes from 'prop-types';
 import api from '~/services/api';
 
 import {
@@ -18,10 +19,10 @@ import Button from '~/components/Button';
 export default function ConfirmDeliver({ navigation, route }) {
     const { pack } = route.params;
 
-    console.tron.log(pack);
     const [picture, setPicture] = useState(
         pack.signature ? pack.signature.url : ''
     );
+
     let camera;
 
     useLayoutEffect(() => {
@@ -118,3 +119,14 @@ export default function ConfirmDeliver({ navigation, route }) {
         </Background>
     );
 }
+
+ConfirmDeliver.propTypes = {
+    navigation: PropTypes.shape({
+        goBack: PropTypes.func,
+        setOptions: PropTypes.func,
+        navigate: PropTypes.func,
+    }).isRequired,
+    route: PropTypes.shape({
+        params: PropTypes.object,
+    }).isRequired,
+};

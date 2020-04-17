@@ -9,6 +9,7 @@ module.exports = {
     'prettier/react'
   ],
   globals: {
+    "FormData": true,
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },

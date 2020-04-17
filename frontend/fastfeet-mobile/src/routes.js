@@ -1,5 +1,6 @@
 // In App.js in a new project
 import 'react-native-gesture-handler';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import * as React from 'react';
@@ -93,6 +94,7 @@ function HomeTabs() {
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarVisible: route.name !== 'Agendar',
+                // eslint-disable-next-line react/prop-types
                 tabBarIcon: ({ focused }) => {
                     let iconName;
 

@@ -13,7 +13,6 @@ import Problem from '~/components/Problem';
 export default function ViewProblems({ navigation, route }) {
     const { pack } = route.params;
     const [problems, setProblems] = useState([]);
-    console.tron.log(pack);
 
     useEffect(() => {
         async function loadProblems() {
@@ -55,3 +54,13 @@ export default function ViewProblems({ navigation, route }) {
         </Background>
     );
 }
+ViewProblems.propTypes = {
+    navigation: PropTypes.shape({
+        goBack: PropTypes.func,
+        setOptions: PropTypes.func,
+        navigate: PropTypes.func,
+    }).isRequired,
+    route: PropTypes.shape({
+        params: PropTypes.object,
+    }).isRequired,
+};

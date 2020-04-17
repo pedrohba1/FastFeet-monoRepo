@@ -22,8 +22,6 @@ import {
 export default function PackDetails({ navigation, route }) {
     const { pack } = route.params;
 
-    console.tron.log(pack);
-
     const startDateFormatted = useMemo(() => {
         return pack.start_date !== null
             ? format(parseISO(pack.start_date), 'dd/MM/yyyy', {
@@ -41,15 +39,17 @@ export default function PackDetails({ navigation, route }) {
     }, [pack.end_date]);
 
     const status = useMemo(() => {
-        if (pack.start_date === null) {
-            return 'não retirado';
+        let statusToReturn;
+        if (pack.start_date === null && pack.end_date === null) {
+            statusToReturn = 'não retirado';
         }
-        if (pack.start_date !== null) {
-            return 'pendente';
+        if (pack.start_date !== null && pack.end_date === null) {
+            statusToReturn = 'pendente';
         }
-        if (pack.end_date !== null) {
-            return 'entregue';
+        if (pack.end_date !== null && pack.end_date !== null) {
+            statusToReturn = 'entregue';
         }
+        return statusToReturn;
     }, [pack.start_date, pack.end_date]);
 
     useLayoutEffect(() => {
@@ -163,4 +163,13 @@ export default function PackDetails({ navigation, route }) {
     );
 }
 
-PackDetails.propTypes = {};
+PackDetails.propTypes = {
+    navigation: PropTypes.shape({
+        goBack: PropTypes.func,
+        setOptions: PropTypes.func,
+        navigate: PropTypes.func,
+    }).isRequired,
+    route: PropTypes.shape({
+        params: PropTypes.object,
+    }).isRequired,
+};

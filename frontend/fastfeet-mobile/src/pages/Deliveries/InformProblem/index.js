@@ -1,15 +1,14 @@
 import React, { useLayoutEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 import { Container, ProblemInput, Button, BText, Background } from './styles';
-
 import api from '~/services/api';
 
 export default function InformProblem({ navigation, route }) {
     const { pack } = route.params;
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
-    console.tron.log(pack);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -59,3 +58,14 @@ export default function InformProblem({ navigation, route }) {
         </Background>
     );
 }
+
+InformProblem.propTypes = {
+    navigation: PropTypes.shape({
+        goBack: PropTypes.func,
+        setOptions: PropTypes.func,
+        navigate: PropTypes.func,
+    }).isRequired,
+    route: PropTypes.shape({
+        params: PropTypes.object,
+    }).isRequired,
+};
