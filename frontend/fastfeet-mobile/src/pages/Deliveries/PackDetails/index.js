@@ -50,7 +50,7 @@ export default function PackDetails({ navigation, route }) {
         if (pack.end_date !== null) {
             return 'entregue';
         }
-    }, [pack.start_udate, pack.start_date, pack.end_date]);
+    }, [pack.start_date, pack.end_date]);
 
     useLayoutEffect(() => {
         navigation.setOptions({

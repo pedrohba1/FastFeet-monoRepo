@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import {
     Background,
     Header,
@@ -24,11 +24,14 @@ import { SignOut } from '~/store/modules/auth/actions';
 
 export default function Dashboard({ navigation }) {
     const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
+    const [reload, setReload] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [changeLoading, setChangeLoading] = useState(false);
     const profile = useSelector(state => state.user.profile || { name: '' });
 
     const [packages, setPackages] = useState([]);
-    const [pending, setPending] = useState(true);
-    const [delivered, setDelivered] = useState(false);
+    const [currentButton, setCurrentButton] = useState('pending');
 
     function handleLogout() {
         dispatch(SignOut());
@@ -36,28 +39,37 @@ export default function Dashboard({ navigation }) {
 
     useEffect(() => {
         async function loadPackages() {
+            setLoading(true);
             const response = await api.get('packages', {
                 params: {
+                    page,
                     courier_id: profile.id,
-                    pending_only: pending ? 'yes' : 'no',
-                    delivered_only: delivered ? 'yes' : 'no',
+                    pending_only: currentButton === 'pending' ? 'yes' : 'no',
+                    delivered_only:
+                        currentButton === 'delivered' ? 'yes' : 'no',
+                    per_page: 5,
                 },
             });
+
             setPackages(response.data);
+            setLoading(false);
+            setChangeLoading(false);
         }
+
         loadPackages();
-    }, [profile.id, pending, delivered]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentButton, reload]);
 
-    function handleChange(currentButton) {
-        if (currentButton === 'pending') {
-            setPending(true);
-            setDelivered(false);
-        } else {
-            setPending(false);
-            setDelivered(true);
+    async function loadMore() {}
+
+    function handleChange(toButton) {
+        if (toButton === currentButton) {
+            setReload(!reload);
         }
-    }
 
+        setCurrentButton(toButton);
+        setChangeLoading(true);
+    }
     function handleCheckDetails(pack) {
         navigation.navigate('PackDetails', { pack });
     }
@@ -83,21 +95,36 @@ export default function Dashboard({ navigation }) {
                 <DText>Entregas</DText>
                 <StatusContainer>
                     <TouchableOpacity onPress={() => handleChange('pending')}>
-                        <SearchType selected={pending}>Pendentes</SearchType>
+                        <SearchType selected={currentButton === 'pending'}>
+                            Pendentes
+                        </SearchType>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleChange('delivered')}>
-                        <SearchType selected={delivered}>Entregues</SearchType>
+                        <SearchType selected={currentButton === 'delivered'}>
+                            Entregues
+                        </SearchType>
                     </TouchableOpacity>
                 </StatusContainer>
             </HContainer>
 
-            <List
-                data={packages}
-                renderItem={({ item }) => (
-                    <Pack onCheckDetails={handleCheckDetails} item={item} />
-                )}
-                keyExtractor={item => String(item.id)}
-            />
+            {changeLoading ? (
+                <ActivityIndicator size="large" color="#7D40E7" />
+            ) : (
+                <List
+                    data={packages}
+                    renderItem={({ item }) => (
+                        <Pack onCheckDetails={handleCheckDetails} item={item} />
+                    )}
+                    onEndReached={() => loadMore()}
+                    onEndReachedThreshold={5}
+                    keyExtractor={item => String(item.id)}
+                    ListFooterComponent={
+                        loading && (
+                            <ActivityIndicator size="large" color="#7D40E7" />
+                        )
+                    }
+                />
+            )}
         </Background>
     );
 }

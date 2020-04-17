@@ -54,8 +54,8 @@ export default function ConfirmDeliver({ navigation, route }) {
                 package_id: pack.id,
                 courier_id: pack.courier.id,
             });
-
-            Alert.alert('Sucesso!', 'entrega registrada com sucesso!');
+            await Alert.alert('Sucesso!', 'entrega registrada com sucesso!');
+            navigation.navigate('Dashboard');
         } catch (err) {
             if (err.response) {
                 Alert.alert('Erro', err.response.data.error);

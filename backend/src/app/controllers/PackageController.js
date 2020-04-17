@@ -13,6 +13,7 @@ class PackageController {
     // query param para pegar só os packages que foram entregues
     async index(req, res) {
         const {
+            per_page = 20,
             page = 1,
             product = '',
             courier_name = '',
@@ -44,8 +45,8 @@ class PackageController {
         const packages = await Package.findAll({
             where: SelectTypeOfSearch(),
             order: ['id'],
-            limit: 20,
-            offset: (page - 1) * 20,
+            limit: per_page,
+            offset: (page - 1) * per_page,
             attributes: [
                 'id',
                 'product',
