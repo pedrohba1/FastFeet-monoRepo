@@ -75,7 +75,7 @@ export default function EditCourier() {
             .then(() => {
                 toast.success('entregador atualizado com sucesso!');
             })
-            .catch(err => {
+            .catch(() => {
                 toast.error(
                     'falha na atualização de entregador, algo deu errado'
                 );

@@ -116,8 +116,6 @@ export default function Packages() {
     }
 
     function handleEdit(data) {
-        console.tron.log(data);
-
         const obj = {
             package_id: data.id,
             selectedCourier: {

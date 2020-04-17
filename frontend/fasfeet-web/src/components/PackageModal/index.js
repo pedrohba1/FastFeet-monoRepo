@@ -9,8 +9,6 @@ import ReactModal from 'react-modal';
 import { Container, Text, Bold } from './styles';
 
 export default function PackageModal({ closeFunc, isOpen, packData }) {
-    console.tron.log(packData);
-
     return (
         <ReactModal
             ariaHideApp={false}

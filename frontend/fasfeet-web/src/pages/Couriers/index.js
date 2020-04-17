@@ -68,7 +68,6 @@ export default function Couriers() {
     }
 
     function handleEdit(data) {
-        console.tron.log(data);
         dispatch(passEditData(data));
         dispatch(changeTab('edit/courier'));
     }

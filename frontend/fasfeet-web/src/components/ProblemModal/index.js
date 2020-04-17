@@ -8,11 +8,6 @@ import ReactModal from 'react-modal';
 import { Container, Text, Bold } from './styles';
 
 export default function ProblemModal({ closeFunc, isOpen, problemData }) {
-    console.tron.log(problemData);
-
-    /*     const { timezone } = Intl.DateTimeFormat().resolvedOptions();
-     */
-
     return (
         <ReactModal
             shouldCloseOnOverlayClick

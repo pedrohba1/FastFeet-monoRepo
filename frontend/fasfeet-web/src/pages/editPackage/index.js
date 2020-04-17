@@ -117,14 +117,11 @@ export default function EditPackage() {
             product,
         };
 
-        console.tron.log(data);
-
         api.put(`packages/${packageId}`, data)
             .then(() => {
                 toast.success('pacote atualizado com sucesso!');
             })
-            .catch(err => {
-                console.tron.log(err.response);
+            .catch(() => {
                 toast.error('falha na atualização de pacote, algo deu errado');
             });
     }
