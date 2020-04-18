@@ -36,29 +36,8 @@ export default function Recipients() {
     function handleSubtractPage() {
         setPage(page - 1);
     }
-
-    useEffect(() => {
-        async function searchRecipients() {
-            setLoading(true);
-            const response = await api.get('recipients', {
-                params: {
-                    page,
-                },
-            });
-            response.data.map(recipient => {
-                recipient.idDisplay =
-                    recipient.id < 10 ? `0${recipient.id}` : recipient.id;
-                return recipient;
-            });
-            setRecipients(response.data);
-            setLoading(false);
-        }
-        searchRecipients();
-    }, [page]);
-
-    async function searchFromInput() {
+    async function searchRecipients() {
         setLoading(true);
-
         const response = await api.get('recipients', {
             params: {
                 page,
@@ -73,10 +52,14 @@ export default function Recipients() {
         setRecipients(response.data);
         setLoading(false);
     }
+    useEffect(() => {
+        searchRecipients();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchFromInput();
+            searchRecipients();
         }
     }
 
@@ -90,7 +73,7 @@ export default function Recipients() {
             .delete(`recipients/${recipientId}`)
             .then(() => {
                 toast.success('destinatário deletado com sucesso!');
-                searchFromInput();
+                searchRecipients();
             })
             .catch(() => {
                 toast.error(

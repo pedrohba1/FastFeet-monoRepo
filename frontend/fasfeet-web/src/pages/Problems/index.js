@@ -52,6 +52,7 @@ export default function Problems() {
             setLoading(false);
         }
         searchProblems();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     function handleRequestOpen(problem) {

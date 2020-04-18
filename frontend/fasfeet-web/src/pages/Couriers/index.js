@@ -31,7 +31,6 @@ export default function Couriers() {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
-
     async function searchCouriers() {
         setLoading(true);
         const response = await api.get('couriers', {
@@ -50,7 +49,7 @@ export default function Couriers() {
     }
     useEffect(() => {
         searchCouriers();
-        // eslint-disable-next-line
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     function handleEnterPress(e) {
