@@ -92,8 +92,10 @@ export default function Recipients() {
                 toast.success('destinatário deletado com sucesso!');
                 searchFromInput();
             })
-            .catch(err => {
-                toast.error(err.response.data.error);
+            .catch(() => {
+                toast.error(
+                    'Não foi foi possível deletar destinatário. ELe tem alguma encomenda?'
+                );
             });
     }
 
