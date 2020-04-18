@@ -74,14 +74,9 @@ Você pode usar o arquivo do insomnia que eu deixei na pasta backend para conseg
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
--   [Sucrase](qqwe) - Builder de desenvolvimento
 -   [Postgres](https://www.postgresql.org) - Banco de dados
 -   [Express](https://expressjs.com/) - framework de servidor
 -   [NodeJs](https://nodejs.org/en/) - Ambiente de servidor
--   [Nodemon](qeqwe) - Ambiente de servidor só que para desenvolvimento
--   [Docker](a) - Cria containers para o backend.
--   [Sequelize](b) - ORM para Nodejs.
--   [Eslint](c) - define o padrão para código.
--   [Prettier](d) - deixa o código mais bonitão.
-
+-   [Docker](https://www.docker.com/) - Cria containers para o backend.
+-   [MongoDB](https://www.mongodb.com/) - Banco de dados não relacional
 
