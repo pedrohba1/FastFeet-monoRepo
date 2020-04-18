@@ -37,7 +37,26 @@ export default function Recipients() {
         setPage(page - 1);
     }
 
-    async function searchRecipients() {
+    useEffect(() => {
+        async function searchRecipients() {
+            setLoading(true);
+            const response = await api.get('recipients', {
+                params: {
+                    page,
+                },
+            });
+            response.data.map(recipient => {
+                recipient.idDisplay =
+                    recipient.id < 10 ? `0${recipient.id}` : recipient.id;
+                return recipient;
+            });
+            setRecipients(response.data);
+            setLoading(false);
+        }
+        searchRecipients();
+    }, [page]);
+
+    async function searchFromInput() {
         setLoading(true);
 
         const response = await api.get('recipients', {
@@ -55,14 +74,9 @@ export default function Recipients() {
         setLoading(false);
     }
 
-    useEffect(() => {
-        searchRecipients();
-        // eslint-disable-next-line
-    }, [page]);
-
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchRecipients();
+            searchFromInput();
         }
     }
 
@@ -76,12 +90,10 @@ export default function Recipients() {
             .delete(`recipients/${recipientId}`)
             .then(() => {
                 toast.success('destinatário deletado com sucesso!');
-                searchRecipients();
+                searchFromInput();
             })
-            .catch(() => {
-                toast.error(
-                    'erro na exclusão. Este destinatário possui entrega?'
-                );
+            .catch(err => {
+                toast.error(err.response.data.error);
             });
     }
 
