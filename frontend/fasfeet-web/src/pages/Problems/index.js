@@ -31,25 +31,24 @@ export default function Problems() {
         setPage(page - 1);
     }
 
-    async function searchProblems() {
-        setLoading(true);
-        const response = await api.get('problems', {
-            params: {
-                page,
-            },
-        });
-
-        response.data.map(problem => {
-            problem.idDisplay = problem.id < 10 ? `0${problem.id}` : problem.id;
-            return problem;
-        });
-        setProblems(response.data);
-        setLoading(false);
-    }
-
     useEffect(() => {
+        async function searchProblems() {
+            setLoading(true);
+            const response = await api.get('problems', {
+                params: {
+                    page,
+                },
+            });
+
+            response.data.map(problem => {
+                problem.idDisplay =
+                    problem.id < 10 ? `0${problem.id}` : problem.id;
+                return problem;
+            });
+            setProblems(response.data);
+            setLoading(false);
+        }
         searchProblems();
-        // eslint-disable-next-line
     }, [page]);
 
     function handleRequestOpen(problem) {
