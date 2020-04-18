@@ -66,8 +66,8 @@ export default function Problems() {
             .then(() => {
                 toast.success('encomenda cancelada com sucesso!');
             })
-            .catch(() => {
-                toast.error('erro no cancelamento');
+            .catch(err => {
+                toast.error(err.response.data.error);
             });
     }
     return (
