@@ -14,7 +14,7 @@ class ProblemController {
         });
 
         if (!problem) {
-            return res.json({ error: 'package does not have a problem' });
+            return res.json({ error: 'encomenda não tem um problema' });
         }
 
         return res.json(problem);
@@ -112,7 +112,7 @@ class ProblemController {
         const { package_id, description } = req.body;
         if (!(await Package.findByPk(package_id))) {
             return res.status(400).json({
-                error: 'package does not exist',
+                error: 'encomenda não existe',
             });
         }
 
@@ -132,14 +132,16 @@ class ProblemController {
         const problem = await DeliveryProblem.findByPk(delivery_problem_id);
 
         if (!problem) {
-            return res.json({ error: 'package does not have a problem' });
+            return res.json({ error: 'encomenda não tem um problema' });
         }
 
         const { package_id } = problem;
         const delivery = await Package.findByPk(package_id);
 
         if (delivery.canceled_at) {
-            return res.status(400).json('package already has a cancelled date');
+            return res
+                .status(400)
+                .json({ error: 'encomenda já tem uma data de cancelamento' });
         }
 
         await delivery.update({ canceled_at: new Date() });
