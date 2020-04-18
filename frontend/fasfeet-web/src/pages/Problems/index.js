@@ -41,10 +41,13 @@ export default function Problems() {
             });
 
             response.data.map(problem => {
-                problem.idDisplay =
-                    problem.id < 10 ? `0${problem.id}` : problem.id;
+                problem.packageIdDisplay =
+                    problem.package_id < 10
+                        ? `0${problem.package_id}`
+                        : problem.package_id;
                 return problem;
             });
+
             setProblems(response.data);
             setLoading(false);
         }
@@ -60,8 +63,8 @@ export default function Problems() {
         setModalOpen(false);
     }
 
-    function handleDelete(problemId) {
-        api.delete(`problems/${problemId}`)
+    function handleDelete(problemPackageId) {
+        api.delete(`problems/${problemPackageId}`)
             .then(() => {
                 toast.success('encomenda cancelada com sucesso!');
             })
@@ -94,7 +97,7 @@ export default function Problems() {
             {problems.map(problem => (
                 <List key={String(problem.id)}>
                     <ListMain>
-                        <span>#{problem.idDisplay}</span>
+                        <span>#{problem.packageIdDisplay}</span>
                     </ListMain>
                     <ListMain>
                         <Description>
