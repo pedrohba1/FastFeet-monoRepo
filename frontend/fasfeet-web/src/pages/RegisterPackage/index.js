@@ -101,6 +101,7 @@ export default function RegisterPackage() {
                 toast.error('falha no cadastro de entregador, algo deu errado');
             });
     }
+
     return (
         <Container>
             <Header>
@@ -141,7 +142,6 @@ export default function RegisterPackage() {
                         />
                     </InputContainer>
                 </Row>
-
                 <Row>
                     <InputContainer width="100%">
                         <InputLabel>Nome do produto</InputLabel>

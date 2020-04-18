@@ -24,6 +24,7 @@ module.exports = {
   plugins: [
     'react',
     'prettier',
+    'react-hooks'
   ],
   rules: {
       'camelcase': 'off',
@@ -36,7 +37,10 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign':'off',
     'no-return-assign': 'off',
-    'consistent-return':'off'
+    'consistent-return':'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
+
 },
 settings:{
     'import/resolver':{

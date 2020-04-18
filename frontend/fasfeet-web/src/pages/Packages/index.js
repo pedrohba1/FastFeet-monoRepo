@@ -47,7 +47,7 @@ export default function Packages() {
         setPage(page - 1);
     }
 
-    async function searchPackages() {
+    async function searchFromInput() {
         setLoading(true);
 
         let problemArray = [];
@@ -101,13 +101,62 @@ export default function Packages() {
     }
 
     useEffect(() => {
+        async function searchPackages() {
+            setLoading(true);
+
+            let problemArray = [];
+
+            if (onlyWithProblems) {
+                const response = await api.get('problems', {
+                    params: {
+                        page,
+                        list_packages: 'yes',
+                    },
+                });
+
+                response.data.forEach(item => {
+                    problemArray.push({
+                        ...item.package,
+                    });
+                });
+            } else {
+                const response = await api.get('packages', {
+                    params: {
+                        page,
+                    },
+                });
+                problemArray = response.data;
+            }
+
+            problemArray.map(pack => {
+                pack.idDisplay = pack.id < 10 ? `0${pack.id}` : pack.id;
+
+                if (!pack.start_date) {
+                    pack.status = 'PENDENTE';
+                }
+                if (pack.start_date && !pack.end_date) {
+                    pack.status = 'RETIRADA';
+                }
+                if (pack.end_date) {
+                    pack.status = 'ENTREGUE';
+                }
+
+                if (pack.canceled_at !== null) {
+                    pack.status = 'CANCELADA';
+                }
+
+                return pack;
+            });
+
+            setPackages(problemArray);
+            setLoading(false);
+        }
         searchPackages();
-        // eslint-disable-next-line
     }, [page, onlyWithProblems]);
 
     function handleEnterPress(e) {
         if (e.which === 13 || e.keyCode === 13) {
-            searchPackages();
+            searchFromInput();
         }
     }
 
@@ -158,7 +207,7 @@ export default function Packages() {
             const response = await api.delete(`packages/${packId}`);
             if (response.status === 200) {
                 toast.success('pacote deletado com sucesso');
-                searchPackages();
+                searchFromInput();
             }
         } catch (error) {
             if (error.response.status === 461) {
