@@ -67,7 +67,7 @@ Para utilizar opção de debug, execute o comando:
 yarn dev:debug
 ```
 
-Também tem um comando que deve ser executado caso você queira testar o envio de emails. Depoois de configurar o mailtrap.io no ´.env´, execute o comando ´yarn queue´ para permitir a execução da rotinha que ficará responsável pelo envio de emails.
+Também tem um comando que deve ser executado caso você queira testar o envio de emails. Depoois de configurar o mailtrap.io no `.env`, execute o comando `yarn queue` para permitir a execução da rotinha que ficará responsável pelo envio de emails.
 
 ## 🎈 Usage <a name="usage"></a>
 
